@@ -1,36 +1,57 @@
-#---------
-#
-# CppUTest Examples Makefile
-#
-#----------
+CC = g++
 
-#Set this to @ to keep the makefile quiet
-ifndef SILENCE
-	SILENCE = @
-endif
+# List command line functions
+RM = rm -fr
 
-#--- Inputs ----#
-COMPONENT_NAME = CppUTestExamples
-CPPUTEST_HOME = ..
+# List all default C defines here, like -D_DEBUG=1
+WARNINGS = -Wall -Wextra
+DDEFS = -g3 $(WARNINGS)
 
-CPPUTEST_USE_EXTENSIONS = Y
-CPP_PLATFORM = Gcc
+# Define project name here
+PROJECT = RunAllTests
 
-# This line is overriding the default new macros.  This is helpful
-# when using std library includes like <list> and other containers
-# so that memory leak detection does not conflict with stl.
-CPPUTEST_MEMLEAK_DETECTOR_NEW_MACRO_FILE = -include ApplicationLib/ExamplesNewOverrides.h
-SRC_DIRS = \
-	ApplicationLib
+# Define CppUTest home
+CPPUTEST_HOME = ../../CppUTest
 
-TEST_SRC_DIRS = \
-	AllTests
+# List all user C define here, like -D_DEBUG=1
+UDEFS =
 
-INCLUDE_DIRS =\
-  .\
-  ApplicationLib\
-  $(CPPUTEST_HOME)/include\
+# List Application source files here
+SRC  = \
+	RunAllTests.cpp \
 
-include $(CPPUTEST_HOME)/build/MakefileWorker.mk
+# List Test source files here
+TSRC  = \
+	TestTemplate.cpp
 
+# List all user directories here
+UINCDIR = \
+	. \
+	${CPPUTEST_HOME}/include/CppUTest
+
+# List the user directory to look for the libraries here
+ULIBDIR = ${CPPUTEST_HOME}/lib
+
+# List all user libraries here
+ULIBS = CppUTest
+
+# Define optimization level here -O0 -O1 -O2 -Os -03
+OPT = -O0
+
+INCDIR  = $(patsubst %,-I%,$(DINCDIR) $(UINCDIR))
+LIBDIR  = $(patsubst %,-L%,$(DLIBDIR) $(ULIBDIR))
+DEFS    = $(DDEFS) $(UDEFS)
+OBJS    = $(SRC:.cpp=.o) $(TSRC:.cpp=.o)
+LIBS    = $(patsubst %,-l%,$(ULIBS))
+
+CPFLAGS = $(OPT) -fno-rtti -fno-exceptions -fmessage-length=0 -fomit-frame-pointer $(DEFS)
+
+all:
+	$(CC) $(SRC) $(TSRC) $(LIBDIR) $(LIBS) $(CPFLAGS) $(INCDIR) -o $(PROJECT).sh
+	./RunAllTests.sh
+
+.PHONY: clean
+clean:
+	$(RM) $(OBJS)
+	$(RM) $(PROJECT).sh
 

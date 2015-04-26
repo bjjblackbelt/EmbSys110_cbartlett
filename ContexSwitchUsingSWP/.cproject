@@ -36,12 +36,12 @@
 								<option id="gnu.cpp.compiler.option.debugging.level.494348873" name="Debug Level" superClass="gnu.cpp.compiler.option.debugging.level" useByScannerDiscovery="false" value="gnu.cpp.compiler.debugging.level.max" valueType="enumerated"/>
 								<option id="gnu.cpp.compiler.option.include.paths.2029269754" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="/opt/arm-none-eabi/arm-none-eabi/include"/>
+									<listOptionValue builtIn="false" value="/opt/arm-none-eabi/lib/gcc/arm-none-eabi/4.8.1/include"/>
 									<listOptionValue builtIn="false" value="/opt/arm-none-eabi/lib/gcc/arm-none-eabi/4.9.3/include"/>
 									<listOptionValue builtIn="false" value="../bsp"/>
 									<listOptionValue builtIn="false" value="../dbg"/>
 									<listOptionValue builtIn="false" value="../inc"/>
 									<listOptionValue builtIn="false" value="../main"/>
-									<listOptionValue builtIn="false" value="../prj"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.562839757" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 							</tool>
@@ -103,6 +103,7 @@
 									<listOptionValue builtIn="false" value="../dbg"/>
 									<listOptionValue builtIn="false" value="../main"/>
 									<listOptionValue builtIn="false" value="../prj"/>
+									<listOptionValue builtIn="false" value="/opt/arm-none-eabi/lib/gcc/arm-none-eabi/4.8.1/include"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.253411967" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 							</tool>
