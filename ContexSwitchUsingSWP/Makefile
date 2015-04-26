@@ -123,6 +123,7 @@ CPFLAGS += -MMD -MP -MF .dep/$(@F).d
 #
 
 all: $(OBJS) $(PROJECT).elf $(PROJECT).hex $(PROJECT).bin $(PROJECT).lst
+	$(MAKE) -C tests all
 
 %.o : %.cpp
 	$(CC) -c $(CPFLAGS) -I . $(INCDIR) $< -o $@

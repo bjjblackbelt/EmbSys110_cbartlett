@@ -27,6 +27,7 @@
 								<option id="gnu.c.compiler.option.include.paths.1428745040" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="../inc"/>
 									<listOptionValue builtIn="false" value="/opt/arm-none-eabi/arm-none-eabi/include"/>
+									<listOptionValue builtIn="false" value="/opt/arm-none-eabi/lib/gcc/arm-none-eabi/4.8.1/include"/>
 									<listOptionValue builtIn="false" value="/opt/arm-none-eabi/lib/gcc/arm-none-eabi/4.9.3/include"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.928101402" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
@@ -38,6 +39,7 @@
 									<listOptionValue builtIn="false" value="/opt/arm-none-eabi/arm-none-eabi/include"/>
 									<listOptionValue builtIn="false" value="/opt/arm-none-eabi/lib/gcc/arm-none-eabi/4.8.1/include"/>
 									<listOptionValue builtIn="false" value="/opt/arm-none-eabi/lib/gcc/arm-none-eabi/4.9.3/include"/>
+									<listOptionValue builtIn="false" value="../../CppUTest/include/CppUTest"/>
 									<listOptionValue builtIn="false" value="../bsp"/>
 									<listOptionValue builtIn="false" value="../dbg"/>
 									<listOptionValue builtIn="false" value="../inc"/>
@@ -89,6 +91,7 @@
 									<listOptionValue builtIn="false" value="../inc"/>
 									<listOptionValue builtIn="false" value="/opt/arm-none-eabi/arm-none-eabi/include"/>
 									<listOptionValue builtIn="false" value="/opt/arm-none-eabi/lib/gcc/arm-none-eabi/4.9.3/include"/>
+									<listOptionValue builtIn="false" value="/opt/arm-none-eabi/lib/gcc/arm-none-eabi/4.8.1/include"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1356684529" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 							</tool>
@@ -104,6 +107,7 @@
 									<listOptionValue builtIn="false" value="../main"/>
 									<listOptionValue builtIn="false" value="../prj"/>
 									<listOptionValue builtIn="false" value="/opt/arm-none-eabi/lib/gcc/arm-none-eabi/4.8.1/include"/>
+									<listOptionValue builtIn="false" value="../../CppUTest/include/CppUTest"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.253411967" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 							</tool>

@@ -7,7 +7,7 @@ RM = rm -fr
 WARNINGS = -Wall -Wextra
 DDEFS = -g3 $(WARNINGS)
 
-# Define project name here
+# Define project name
 PROJECT = RunAllTests
 
 # Define CppUTest home
@@ -48,10 +48,5 @@ CPFLAGS = $(OPT) -fno-rtti -fno-exceptions -fmessage-length=0 -fomit-frame-point
 
 all:
 	$(CC) $(SRC) $(TSRC) $(LIBDIR) $(LIBS) $(CPFLAGS) $(INCDIR) -o $(PROJECT).sh
-	./RunAllTests.sh
-
-.PHONY: clean
-clean:
-	$(RM) $(OBJS)
-	$(RM) $(PROJECT).sh
-
+	./$(PROJECT).sh
+	
