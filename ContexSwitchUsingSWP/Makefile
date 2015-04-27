@@ -148,6 +148,7 @@ all: $(OBJS) $(PROJECT).elf $(PROJECT).hex $(PROJECT).bin $(PROJECT).lst
 
 .PHONY: clean
 clean:
+	$(RM) tests/RunAllTests.sh
 	$(RM) $(OBJS)
 	$(RM) $(PROJECT).elf
 	$(RM) $(PROJECT).map

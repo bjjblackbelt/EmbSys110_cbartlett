@@ -18,16 +18,19 @@ UDEFS =
 
 # List Application source files here
 SRC  = \
-	RunAllTests.cpp \
+	../prj/CriticalSection.cpp
 
 # List Test source files here
 TSRC  = \
-	TestTemplate.cpp
+	RunAllTests.cpp \
+	TestTemplate.cpp \
+	TestCriticalSectionAPI.cpp
 
 # List all user directories here
 UINCDIR = \
 	. \
-	${CPPUTEST_HOME}/include/CppUTest
+	${CPPUTEST_HOME}/include/CppUTest \
+	../prj
 
 # List the user directory to look for the libraries here
 ULIBDIR = ${CPPUTEST_HOME}/lib
@@ -49,4 +52,4 @@ CPFLAGS = $(OPT) -fno-rtti -fno-exceptions -fmessage-length=0 -fomit-frame-point
 all:
 	$(CC) $(SRC) $(TSRC) $(LIBDIR) $(LIBS) $(CPFLAGS) $(INCDIR) -o $(PROJECT).sh
 	./$(PROJECT).sh
-	
+
