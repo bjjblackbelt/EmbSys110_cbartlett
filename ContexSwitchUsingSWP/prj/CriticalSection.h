@@ -30,6 +30,8 @@ class CriticalSection
   private:
     void ResetDataMembers();
 
+    static const int THREAD_ID_RESET = -1;
+
     volatile CSStatus_t m_lockedState;
     volatile int m_nLocks;
     volatile int m_currThreadID;

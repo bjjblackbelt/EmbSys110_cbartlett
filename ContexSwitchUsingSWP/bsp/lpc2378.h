@@ -38,9 +38,9 @@
 
 #define BIT(a)  (1<<a)
 
-#define VOLATILE32(addr) (*(volatile uint32_t *)(addr)) 
-#define VOLATILE16(addr) (*(volatile uint16_t *)(addr)) 
-#define VOLATILE8(addr)  (*(volatile uint8_t *)(addr))  
+#define VOLATILE32(addr) (*(volatile uint32_t *)(addr))
+#define VOLATILE16(addr) (*(volatile uint16_t *)(addr))
+#define VOLATILE8(addr)  (*(volatile uint8_t *)(addr))
 
 /*
  * REGISTER MAPPINGS
@@ -110,8 +110,8 @@
 
 #define PCON           0xE01FC0C0
 #define PCONP          0xE01FC0C4
-	
-#define SCS            0xE01FC1A0	
+
+#define SCS            0xE01FC1A0
 #define CCLKCFG        0xE01FC104
 #define USBCLKCFG      0xE01FC108
 #define CLKSRCSEL      0xE01FC10C
@@ -120,7 +120,7 @@
 
 /*
  * Timer0
- */ 
+ */
 
 #define T0IR            0xE0004000
 #define T0TCR           0xE0004004
@@ -172,8 +172,8 @@
 #define SCS_OSCSTAT        (1<<6)
 
 #define FCCO               (FOSC*PLL_MUL*2/PLL_DIV) 
-#define PLLCON_PLLE        (1<<0)         
-#define PLLCON_PLLC        (1<<1)  
+#define PLLCON_PLLE        (1<<0)
+#define PLLCON_PLLC        (1<<1)
 
 
 #define LED1_SET           FIO0SET
@@ -250,15 +250,15 @@
 #define UIER_THRE          (1<<1)
 #define UART_BAUD(baud)    (uint16_t)((PCLK/((baud)*16.0))+0.5)
 #define HOST_BAUD_U0       (38400)
-#define UART_8N1           (uint8_t)(3<<0)        
-#define UART_FIFO_OFF      (0x00)       
+#define UART_8N1           (uint8_t)(3<<0)
+#define UART_FIFO_OFF      (0x00)
 #define PUTC(c)              while(!(VOLATILE32(U0LSR) & ULSR_THRE)) continue; \
 	                       VOLATILE32(U0THR) = (uint8_t) c
 
 #define FOSC               (12000000)          
 #define PLL_MUL            (12)              
 #define PLL_DIV            (1)         	     
-#define CCLK_DIV           (6)        		 
+#define CCLK_DIV           (6)
 #define CCLK               (FCCO/CCLK_DIV)   
 #define CCLKCFG_VALUE      (CCLK_DIV-1)
 #define PBSD               1                 

@@ -14,7 +14,7 @@
 CriticalSection::CriticalSection()
     : m_lockedState(UNLOCKED_STATE),
       m_nLocks(0),
-      m_currThreadID(-1)
+      m_currThreadID(THREAD_ID_RESET)
 {
 }
 
@@ -26,13 +26,13 @@ CriticalSection::~CriticalSection()
 }
 
 /**
- * Destructor
+ * Reset data members
  */
 void CriticalSection::ResetDataMembers()
 {
 	m_lockedState = UNLOCKED_STATE;
 	m_nLocks = 0;
-	m_currThreadID = -1;
+	m_currThreadID = THREAD_ID_RESET;
 }
 
 /**
@@ -46,9 +46,68 @@ void CriticalSection::ResetDataMembers()
 * @param threadID - ID of currently running thread
 *
 * @return SUCCESS - Critical section was taken
-* @return BUSY - Critcial section is held by another thread
+* @return BUSY - Critical section is held by another thread
 */
 CriticalSection::Status_t CriticalSection::Enter(int threadID)
+{
+	// Block indefinitely
+	CriticalSection::Status_t status = BUSY;
+
+	do
+	{
+		status = Query(threadID);
+	} while(status == BUSY);
+
+	return status;
+}
+
+/**
+* Release the critical section for this thread.
+*
+* @param threadID - ID of currently running thread
+* @return SUCCESS - Critical section was released
+* @return RESOURCES - No critical sections held for any threads
+* @return BUSY - Critical section is held by another thread
+*/
+CriticalSection::Status_t CriticalSection::Leave(int threadID)
+{
+    CriticalSection::Status_t status = BUSY;
+
+    if (m_currThreadID == threadID)
+	{
+    	if (m_nLocks > 0)
+    	{
+    		status = SUCCESS;
+    		m_nLocks--;
+
+    	}
+
+		if (m_nLocks == 0)
+		{
+    		ResetDataMembers();
+		}
+	}
+    else if (m_currThreadID == THREAD_ID_RESET)
+    {
+    	status = RESOURCES;
+    }
+    else
+    {
+    	status = BUSY;
+    }
+
+    return status;
+}
+
+/**
+* Take the critical section for this thread if it is available. The call will
+* return immediately if critical section is unavailable.
+*
+* @param threadID - ID of currently running thread
+* @return SUCCESS - Critical section was taken
+* @return BUSY - Critical section is held by another thread
+*/
+CriticalSection::Status_t CriticalSection::Query(int threadID)
 {
     CriticalSection::Status_t status = BUSY;
     int state = static_cast<int>(m_lockedState);
@@ -71,49 +130,5 @@ CriticalSection::Status_t CriticalSection::Enter(int threadID)
     }
 
     return status;
-}
-
-/**
-* Release the critical section for this thread.
-*
-* @param threadID - ID of currently running thread
-* @return SUCCESS - Critical section was released
-* @return BUSY - Critcial section is held by another thread
-*/
-CriticalSection::Status_t CriticalSection::Leave(int threadID)
-{
-    CriticalSection::Status_t status = BUSY;
-
-    if (m_currThreadID == threadID)
-	{
-    	if (m_nLocks > 0)
-    	{
-    		status = SUCCESS;
-    		m_nLocks--;
-
-    	}
-
-		if (m_nLocks == 0)
-		{
-    		ResetDataMembers();
-		}
-	}
-
-    return status;
-}
-
-/**
-* Take the critical section for this thread if it is available. The call will
-* return immediately if critical section is unavailable.
-*
-* @param threadID - ID of currently running thread
-* @return SUCCESS - Critical section was taken
-* @return BUSY - Critcial section is held by another thread
-* @return non-zero An error code
-*/
-CriticalSection::Status_t CriticalSection::Query(int threadID)
-{
-    CriticalSection::Status_t status;
-    return BUSY;
 }
 

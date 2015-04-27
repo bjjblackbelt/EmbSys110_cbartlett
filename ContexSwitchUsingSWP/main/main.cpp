@@ -46,6 +46,7 @@
 #include "lpc2378.h"
 #include "init.h"
 #include "print.h"
+#include "bsp.h"
 //#include "uarts.h"
 
 
@@ -129,6 +130,9 @@ int main(void)
 #if ENABLE_GPIO_READ
     gpio_init();
 #endif
+
+    int temp = 0;
+    BSP_CSLock(temp);
 
     printString("\033[2J"); /* Clear entire screen */
     printString("\nChad Bartlett's HW 08: Prefetch Abort Exceptions");

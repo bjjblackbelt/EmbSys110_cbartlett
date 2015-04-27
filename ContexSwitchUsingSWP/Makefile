@@ -80,13 +80,24 @@ UDEFS =
 UADEFS =
 
 # List C source files here
-SRC  = ./main/main.cpp ./main/init.cpp ./dbg/print.cpp ./dbg/debugger.cpp ./main/mini_cpp.cpp
+SRC  = \
+	./main/main.cpp \
+	./main/init.cpp \
+	./dbg/print.cpp \
+	./dbg/debugger.cpp \
+	./main/mini_cpp.cpp \
+	./bsp/bsp.cpp
 
 # List ASM source files here
 ASRC = ./bsp/startup.S
 
 # List all user directories here
-UINCDIR = ./inc ./main ./dbg ./bsp ./prj
+UINCDIR = \
+	./inc \
+	./main \
+	./dbg \
+	./bsp \
+	./prj
 
 # List the user directory to look for the libraries here
 ULIBDIR =
