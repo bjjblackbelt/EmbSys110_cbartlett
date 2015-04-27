@@ -21,13 +21,14 @@ class CriticalSection
         RESOURCES
     } Status_t;
 
-    Status_t Enter();
-    Status_t Leave();
-    Status_t Query();
+    Status_t Enter(int threadID);
+    Status_t Leave(int threadID);
+    Status_t Query(int threadID);
 
   private:
-    bool m_locked;
+    int m_locked;
     int m_nLocks;
+    int m_threadID;
 };
 
 #endif // #ifndef CRITICAL_SECTION_H

@@ -145,16 +145,24 @@ INT32U  BSP_CPU_PclkFreq (INT8U  pclk)
 * Return(s)   : none.
 *********************************************************************************************************
 */
-
 void  BSP_IntDisAll (void)
 {
     WRITEREG32(VICINTENCLEAR, 0xFFFFFFFFL);                                /* Disable ALL interrupts                                   */
 }
 
 
-
-
-
-
-
-
+/*
+*********************************************************************************************************
+*                                           BSP_IntDisAll()
+*
+* Description : Disable ALL interrupts.
+*
+* Argument(s) : none.
+*
+* Return(s)   : none.
+*********************************************************************************************************
+*/
+CSStatus_t BSP_CSLock(int& lock)
+{
+    return LOCKED_STATE;
+}

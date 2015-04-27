@@ -19,6 +19,30 @@ TEST_GROUP(TestCriticalSectionAPI)
 
 TEST(TestCriticalSectionAPI, Initialize)
 {
-    CHECK(true == true);
-    CHECK_EQUAL(1,1);
+    CHECK(m_pCS != NULL);
+}
+
+TEST(TestCriticalSectionAPI, ASingleThreadCanTakeMultipleCriticalSections)
+{
+    int nCriticalSections = 10;
+    for (int i = 0; i < nCriticalSections; ++i)
+    {
+        int threadID_1 = 0xC0DE;
+        CriticalSection::Status_t status = m_pCS->Enter(threadID_1);
+
+        CHECK_EQUAL(CriticalSection::SUCCESS, status);
+    }
+}
+
+TEST(TestCriticalSectionAPI, ASecondThreadCannotTakeTheCriticalSection)
+{
+    CriticalSection::Status_t status = CriticalSection::BUSY;
+
+    int threadID_1 = 0xC0DE;
+    status = m_pCS->Enter(threadID_1);
+    CHECK_EQUAL(CriticalSection::SUCCESS, status);
+
+    int threadID_2 = 0xCAFE;
+    status = m_pCS->Enter(threadID_2);
+    CHECK_EQUAL(CriticalSection::SUCCESS, status);
 }

@@ -6,11 +6,15 @@
  *******************************************************************************
  */
 #include "CriticalSection.h"
+#include "bsp.h"
 
 /**
  * Constructor
  */
 CriticalSection::CriticalSection()
+    : m_locked(0),
+      m_nLocks(0),
+      m_threadID(-1)
 {
 }
 
@@ -32,9 +36,27 @@ CriticalSection::~CriticalSection()
 * @return SUCCESS - Critical section was taken
 * @return non-zero - An error code
 */
-CriticalSection::Status_t CriticalSection::Enter()
+CriticalSection::Status_t CriticalSection::Enter(int threadID)
 {
-    return SUCCESS;
+    CriticalSection::Status_t status = BUSY;
+
+    if (BSP_CSLock(m_locked) != LOCKED_STATE)
+    {
+        m_threadID = threadID;
+        m_nLocks++;
+        status = SUCCESS;
+    }
+    else if ((m_threadID == threadID))
+    {
+        m_nLocks++;
+        status = SUCCESS;
+    }
+    else
+    {
+        status = BUSY;
+    }
+
+    return status;
 }
 
 /**
@@ -43,9 +65,10 @@ CriticalSection::Status_t CriticalSection::Enter()
 * @return SUCCESS - Critical section was released
 * @return non-zero An error code
 */
-CriticalSection::Status_t CriticalSection::Leave()
+CriticalSection::Status_t CriticalSection::Leave(int threadID)
 {
-    return SUCCESS;
+    CriticalSection::Status_t status;
+    return BUSY;
 }
 
 /**
@@ -57,8 +80,9 @@ CriticalSection::Status_t CriticalSection::Leave()
 * @return BUSY - Critcial section is held by another thread
 * @return non-zero An error code
 */
-CriticalSection::Status_t CriticalSection::Query()
+CriticalSection::Status_t CriticalSection::Query(int threadID)
 {
-    return SUCCESS;
+    CriticalSection::Status_t status;
+    return BUSY;
 }
 

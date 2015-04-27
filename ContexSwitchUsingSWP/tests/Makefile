@@ -23,13 +23,14 @@ SRC  = \
 # List Test source files here
 TSRC  = \
 	RunAllTests.cpp \
-	TestTemplate.cpp \
 	TestCriticalSectionAPI.cpp
+	# TestTemplate.cpp \
 
 # List all user directories here
 UINCDIR = \
 	. \
 	${CPPUTEST_HOME}/include/CppUTest \
+	../bsp \
 	../prj
 
 # List the user directory to look for the libraries here
