@@ -5,8 +5,12 @@
  *  @author     Chad Bartlett   <cbartlet@uw.edu>
  *******************************************************************************
  */
+#include "bsp.h"
 
 CSStatus_t BSP_CSLock(int& lock)
 {
-    return LOCKED_STATE;
+	CSStatus_t temp = static_cast<CSStatus_t>(lock);
+	lock = LOCKED_STATE;
+
+    return temp;
 }

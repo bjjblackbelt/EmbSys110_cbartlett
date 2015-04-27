@@ -23,7 +23,8 @@ SRC  = \
 # List Test source files here
 TSRC  = \
 	RunAllTests.cpp \
-	TestCriticalSectionAPI.cpp
+	TestCriticalSectionAPI.cpp \
+	stubs/StubBsp.cpp
 	# TestTemplate.cpp \
 
 # List all user directories here
@@ -31,7 +32,8 @@ UINCDIR = \
 	. \
 	${CPPUTEST_HOME}/include/CppUTest \
 	../bsp \
-	../prj
+	../prj \
+	stubs
 
 # List the user directory to look for the libraries here
 ULIBDIR = ${CPPUTEST_HOME}/lib

@@ -11,7 +11,7 @@ monitor flash erase_sector 0 0 26
 monitor reset init
 monitor wait_halt
 monitor poll
-monitor flash write_image erase /home/ubu/Projects/uw_embedded_sys_cert/ContexSwitchUsingSWP/ContexSwitchUsingSWP.hex 0 ihex
+monitor flash write_image erase /home/ubu/Projects/EmbSys110_cbartlett/ContexSwitchUsingSWP/ContexSwitchUsingSWP.hex 0 ihex
 symbol-file ContexSwitchUsingSWP.elf
 monitor soft_reset_halt
 set remotetimeout 10

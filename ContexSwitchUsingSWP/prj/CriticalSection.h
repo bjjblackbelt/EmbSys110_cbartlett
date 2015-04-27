@@ -8,6 +8,8 @@
 #ifndef CRITICAL_SECTION_H
 #define CRITICAL_SECTION_H
 
+#include "bsp.h"
+
 class CriticalSection
 {
   public:
@@ -26,9 +28,11 @@ class CriticalSection
     Status_t Query(int threadID);
 
   private:
-    int m_locked;
-    int m_nLocks;
-    int m_threadID;
+    void ResetDataMembers();
+
+    volatile CSStatus_t m_lockedState;
+    volatile int m_nLocks;
+    volatile int m_currThreadID;
 };
 
 #endif // #ifndef CRITICAL_SECTION_H
