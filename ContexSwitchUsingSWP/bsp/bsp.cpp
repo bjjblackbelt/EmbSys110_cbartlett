@@ -1,6 +1,10 @@
-
-#include "lpc2378.h"
-#include <stdint.h>
+/**
+ *******************************************************************************
+ *  @filename   bsp.cpp
+ *  @brief      Implements board specific functions
+ *  @author     Chad Bartlett   <cbartlet@uw.edu>
+ *******************************************************************************
+ */
 #include "bsp.h"
 
 /*
@@ -13,14 +17,15 @@
 */
 CSStatus_t BSP_CSLock(int& lock)
 {
-	int lockStatus;
+	CSStatus_t lockStatus;
 
 	asm volatile ("MOV r1, %2;"
-				  "LDR r2, [%1];"
-				  "SWP %0, r1, [r2]"
-			      : "=r" (lockStatus) 					/* Outputs */
-				  : "r" (lock), "r" (LOCKED_STATE)    	/* Inputs */
+				  "MOV r2, %1;"
+				  "SWP %0, r1, [r2];"
+			      : "=r" (lockStatus) 					/* Outputs: %0     */
+				  : "r" (&lock), "I" (LOCKED_STATE)    	/* Inputs:  %1, %2 */
+                  : "r1", "r2"                          /* Clobbered Regs  */
 				  );
 
-    return (static_cast<CSStatus_t>(lockStatus));
+    return lockStatus;
 }
