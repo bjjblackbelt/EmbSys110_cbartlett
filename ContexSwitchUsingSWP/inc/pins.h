@@ -2,12 +2,12 @@
  * MODULE:
  *
  *  pins.h
- * 
+ *
  * DESCRIPTION:
  *
  *  Provides the PIN configuration for LPC2378 part
  *  LPC2378 pin configured for UART0 TX and RX.
- *  
+ *
  * PLATFORM:
  *
  *  Olimex LPC-2378-STK
@@ -19,7 +19,7 @@
  * HISTORY:
  *
  * 2007-10-01 DMI cleaned up mcuPins initializer with explicit brackets
- * 
+ *
  *  - started creating the header file
  *
  * NOTES:
@@ -27,7 +27,7 @@
  *  n/a
  *
  */
- 
+
 #ifndef PINS_LPC2378
 #define PINS_LPC2378
 
@@ -42,25 +42,25 @@
 
 /*
  * TYPES
- */ 
+ */
 
 typedef struct
 {
-    uint8_t position; 
+    uint8_t position;
     uint8_t multiplex;
 } pinStr;
 
-typedef struct 
+typedef struct
 {
     uint32_t pinSelect;
     pinStr pin[16];
-} pinConfiguratorStr;
+} BSP_PinConfiguratorStr;
 
 /*
  * STRUCTURES
  */
 
-pinConfiguratorStr mcuPins[] =
+BSP_PinConfiguratorStr mcuPins[] =
 {
     /* PORT0 */
     {PINSEL0, { { 0, PRIMARY}, /* P0.0  */
@@ -163,7 +163,7 @@ pinConfiguratorStr mcuPins[] =
                 {13, PRIMARY}, /* P2.29 */
                 {14, PRIMARY}, /* P2.30 */
                 {15, PRIMARY}  /* P2.31 */ } },
- 
+
     /* PORT3 */
     {PINSEL6, { { 0, PRIMARY}, /* P3.0  */
                 { 1, PRIMARY}, /* P3.1  */

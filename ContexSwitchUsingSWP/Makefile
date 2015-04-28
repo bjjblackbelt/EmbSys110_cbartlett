@@ -82,7 +82,6 @@ UADEFS =
 # List C source files here
 SRC  = \
 	./main/main.cpp \
-	./main/init.cpp \
 	./dbg/print.cpp \
 	./dbg/debugger.cpp \
 	./main/mini_cpp.cpp \

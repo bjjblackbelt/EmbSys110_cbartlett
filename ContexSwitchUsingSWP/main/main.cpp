@@ -44,7 +44,6 @@
 #include <stdint.h>
 #include <stddef.h>
 #include "lpc2378.h"
-#include "init.h"
 #include "print.h"
 #include "bsp.h"
 //#include "uarts.h"
@@ -125,7 +124,7 @@ extern void delayMS(uint32_t ms);
 int main(void)
 {
     /* initialize */
-    initHardware();
+    BSP_InitHardware();
 
 #if ENABLE_GPIO_READ
     gpio_init();
