@@ -40,19 +40,17 @@
 ****************************************************************************/
 #define __MAIN_C__
 
-//#include <stdio.h>
 #include <stdint.h>
 #include <stddef.h>
 #include "lpc2378.h"
 #include "print.h"
 #include "bsp.h"
-//#include "uarts.h"
 
 
 /*=========================================================================*/
 /*  DEFINE: All Structures and Common Constants                            */
 /*=========================================================================*/
-#define ENABLE_GPIO_READ 0
+#define ENABLE_GPIO_READ 1
 
 #if ENABLE_GPIO_READ
 typedef enum {
@@ -67,18 +65,22 @@ typedef enum {
     TOTAL_BTNS  = 8,
 } USER;
 
-char* msgTemplate = {"\nButton pressed: "};
-char* id[TOTAL_BTNS] = {"NONE", "BUT1", "BUT2", "CENTER", "UP", "DOWN", "LEFT", "RIGHT"};
+const char* msgTemplate = {"\nButton pressed: "};
+const char* id[TOTAL_BTNS] = {"NONE", "BUT1", "BUT2", "CENTER", "UP", "DOWN", "LEFT", "RIGHT"};
 #endif
 
 /*=========================================================================*/
 /*  DEFINE: Prototypes                                                     */
 /*=========================================================================*/
-//extern void InitXa( int X[], int N, int V);
 #if ENABLE_GPIO_READ
+extern "C"
+{
 extern void gpio_init(void);
 extern int gpio_read(void);
+extern void led_set(void);
+extern void led_clr(void);
 extern void delayMS(uint32_t ms);
+}
 #endif
 
 /*=========================================================================*/
@@ -102,23 +104,7 @@ extern void delayMS(uint32_t ms);
  *
  * DESCRIPTION
  *
- *  Tests Prefetch and Data exceptions
- *
- *   "Chad Bartlett's HW 08: Prefetch Abort Exceptions"
- *
- * PARAMETERS
- *
- *  none...
- *
- * EXAMPLE
- *
- * from crt.S
- *
- *  B  main
- *
- * NOTES
- *
- *  This routine never terminates...
+ *   "Chad Bartlett's HW 01: Context Switch Using SWP"
  *
  */
 int main(void)
@@ -134,24 +120,7 @@ int main(void)
     BSP_CSLock(temp);
 
     printString("\033[2J"); /* Clear entire screen */
-    printString("\nChad Bartlett's HW 08: Prefetch Abort Exceptions");
-
-    uint32_t count = 0;
-    while(count < 10) {
-        printString("\n-----\n\nLoop: ");
-        printHex(count + 1);
-        printString("\n\nTesting Data Abort\n");
-        int *p = 0;   // null pointer
-        *p = 0;       // boom! (null pointer dereferenced)
-
-        printString("\nTesting Prefetch Abort\n");
-        void (*fpVoid)(void);
-        fpVoid = (void(*)(void))0x10000000;
-        fpVoid();
-
-        count++;
-    }
-    printString("\n-----\n\n> Test Success!\n");
+    printString("\nChad Bartlett's HW 01: Context Switch Using SWP");
 
     while (1)
     {

@@ -88,7 +88,9 @@ SRC  = \
 	./bsp/bsp.cpp
 
 # List ASM source files here
-ASRC = ./bsp/startup.S
+ASRC = \
+	./bsp/startup.S \
+	./bsp/gpio.S
 
 # List all user directories here
 UINCDIR = \
