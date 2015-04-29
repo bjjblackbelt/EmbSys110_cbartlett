@@ -27,8 +27,8 @@
 								<option id="gnu.c.compiler.option.include.paths.1428745040" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="../inc"/>
 									<listOptionValue builtIn="false" value="/opt/arm-none-eabi/arm-none-eabi/include"/>
-									<listOptionValue builtIn="false" value="/opt/arm-none-eabi/lib/gcc/arm-none-eabi/4.8.1/include"/>
 									<listOptionValue builtIn="false" value="/opt/arm-none-eabi/lib/gcc/arm-none-eabi/4.9.3/include"/>
+									<listOptionValue builtIn="false" value="../../CppUTest/include/CppUTest"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.928101402" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 							</tool>
@@ -37,13 +37,14 @@
 								<option id="gnu.cpp.compiler.option.debugging.level.494348873" name="Debug Level" superClass="gnu.cpp.compiler.option.debugging.level" useByScannerDiscovery="false" value="gnu.cpp.compiler.debugging.level.max" valueType="enumerated"/>
 								<option id="gnu.cpp.compiler.option.include.paths.2029269754" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="/opt/arm-none-eabi/arm-none-eabi/include"/>
-									<listOptionValue builtIn="false" value="/opt/arm-none-eabi/lib/gcc/arm-none-eabi/4.8.1/include"/>
 									<listOptionValue builtIn="false" value="/opt/arm-none-eabi/lib/gcc/arm-none-eabi/4.9.3/include"/>
 									<listOptionValue builtIn="false" value="../../CppUTest/include/CppUTest"/>
 									<listOptionValue builtIn="false" value="../bsp"/>
 									<listOptionValue builtIn="false" value="../dbg"/>
 									<listOptionValue builtIn="false" value="../inc"/>
 									<listOptionValue builtIn="false" value="../main"/>
+									<listOptionValue builtIn="false" value="../prj"/>
+									<listOptionValue builtIn="false" value="../tests"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.562839757" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 							</tool>
@@ -60,12 +61,33 @@
 							</tool>
 						</toolChain>
 					</folderInfo>
+<<<<<<< Updated upstream
 					<sourceEntries>
 						<entry excluding="main/init.cpp" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
+=======
+					<fileInfo id="cdt.managedbuild.config.gnu.cross.exe.debug.1844522839.1487849489" name="TestTemplate.cpp" rcbsApplicability="disable" resourcePath="tests/TestTemplate.cpp" toolsToInvoke="cdt.managedbuild.tool.gnu.cross.cpp.compiler.1814205475.1996092885">
+						<tool id="cdt.managedbuild.tool.gnu.cross.cpp.compiler.1814205475.1996092885" name="Cross G++ Compiler" superClass="cdt.managedbuild.tool.gnu.cross.cpp.compiler.1814205475">
+							<option id="gnu.cpp.compiler.option.include.paths.1255435969" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
+								<listOptionValue builtIn="false" value="/opt/arm-none-eabi/arm-none-eabi/include"/>
+								<listOptionValue builtIn="false" value="/opt/arm-none-eabi/lib/gcc/arm-none-eabi/4.9.3/include"/>
+								<listOptionValue builtIn="false" value="../../CppUTest/include/CppUTest"/>
+								<listOptionValue builtIn="false" value="../bsp"/>
+								<listOptionValue builtIn="false" value="../dbg"/>
+								<listOptionValue builtIn="false" value="../inc"/>
+								<listOptionValue builtIn="false" value="../main"/>
+								<listOptionValue builtIn="false" value="../prj"/>
+								<listOptionValue builtIn="false" value="../tests"/>
+							</option>
+							<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.2044674028" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
+						</tool>
+					</fileInfo>
+>>>>>>> Stashed changes
 				</configuration>
 			</storageModule>
-			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+			<storageModule moduleId="org.eclipse.cdt.core.externalSettings">
+				<externalSettings containerId="ContexSwitchUsingSWP;cdt.managedbuild.config.gnu.cross.exe.release.1128262167" factoryId="org.eclipse.cdt.core.cfg.export.settings.sipplier"/>
+			</storageModule>
 		</cconfiguration>
 		<cconfiguration id="cdt.managedbuild.config.gnu.cross.exe.release.1128262167">
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="cdt.managedbuild.config.gnu.cross.exe.release.1128262167" moduleId="org.eclipse.cdt.core.settings" name="Release">
@@ -94,7 +116,7 @@
 									<listOptionValue builtIn="false" value="../inc"/>
 									<listOptionValue builtIn="false" value="/opt/arm-none-eabi/arm-none-eabi/include"/>
 									<listOptionValue builtIn="false" value="/opt/arm-none-eabi/lib/gcc/arm-none-eabi/4.9.3/include"/>
-									<listOptionValue builtIn="false" value="/opt/arm-none-eabi/lib/gcc/arm-none-eabi/4.8.1/include"/>
+									<listOptionValue builtIn="false" value="../../CppUTest/include/CppUTest"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1356684529" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 							</tool>
@@ -109,7 +131,7 @@
 									<listOptionValue builtIn="false" value="../dbg"/>
 									<listOptionValue builtIn="false" value="../main"/>
 									<listOptionValue builtIn="false" value="../prj"/>
-									<listOptionValue builtIn="false" value="/opt/arm-none-eabi/lib/gcc/arm-none-eabi/4.8.1/include"/>
+									<listOptionValue builtIn="false" value="../tests"/>
 									<listOptionValue builtIn="false" value="../../CppUTest/include/CppUTest"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.253411967" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
@@ -138,21 +160,6 @@
 	<storageModule moduleId="cdtBuildSystem" version="4.0.0">
 		<project id="ContexSwitchUsingSWP_CPP.cdt.managedbuild.target.gnu.cross.exe.1519459007" name="Executable" projectType="cdt.managedbuild.target.gnu.cross.exe"/>
 	</storageModule>
-	<storageModule moduleId="scannerConfiguration">
-		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
-		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.cross.exe.release.1128262167;cdt.managedbuild.config.gnu.cross.exe.release.1128262167.;cdt.managedbuild.tool.gnu.cross.cpp.compiler.1774563528;cdt.managedbuild.tool.gnu.cpp.compiler.input.253411967">
-			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
-		</scannerConfigBuildInfo>
-		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.cross.exe.debug.1844522839;cdt.managedbuild.config.gnu.cross.exe.debug.1844522839.;cdt.managedbuild.tool.gnu.cross.cpp.compiler.1814205475;cdt.managedbuild.tool.gnu.cpp.compiler.input.562839757">
-			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
-		</scannerConfigBuildInfo>
-		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.cross.exe.release.1128262167;cdt.managedbuild.config.gnu.cross.exe.release.1128262167.;cdt.managedbuild.tool.gnu.cross.c.compiler.1490732132;cdt.managedbuild.tool.gnu.c.compiler.input.1356684529">
-			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
-		</scannerConfigBuildInfo>
-		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.cross.exe.debug.1844522839;cdt.managedbuild.config.gnu.cross.exe.debug.1844522839.;cdt.managedbuild.tool.gnu.cross.c.compiler.1968202124;cdt.managedbuild.tool.gnu.c.compiler.input.928101402">
-			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
-		</scannerConfigBuildInfo>
-	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
 	<storageModule moduleId="refreshScope" versionNumber="2">
 		<configuration configurationName="Release">
@@ -163,4 +170,19 @@
 		</configuration>
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
+	<storageModule moduleId="scannerConfiguration">
+		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.cross.exe.debug.1844522839;cdt.managedbuild.config.gnu.cross.exe.debug.1844522839.;cdt.managedbuild.tool.gnu.cross.cpp.compiler.1814205475;cdt.managedbuild.tool.gnu.cpp.compiler.input.562839757">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.cross.exe.release.1128262167;cdt.managedbuild.config.gnu.cross.exe.release.1128262167.;cdt.managedbuild.tool.gnu.cross.cpp.compiler.1774563528;cdt.managedbuild.tool.gnu.cpp.compiler.input.253411967">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.cross.exe.release.1128262167;cdt.managedbuild.config.gnu.cross.exe.release.1128262167.;cdt.managedbuild.tool.gnu.cross.c.compiler.1490732132;cdt.managedbuild.tool.gnu.c.compiler.input.1356684529">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.cross.exe.debug.1844522839;cdt.managedbuild.config.gnu.cross.exe.debug.1844522839.;cdt.managedbuild.tool.gnu.cross.c.compiler.1968202124;cdt.managedbuild.tool.gnu.c.compiler.input.928101402">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		</scannerConfigBuildInfo>
+	</storageModule>
 </cproject>
