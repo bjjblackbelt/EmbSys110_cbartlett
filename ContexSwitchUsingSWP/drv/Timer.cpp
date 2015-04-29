@@ -5,6 +5,9 @@
  *  @author     Chad Bartlett   <cbartlet@uw.edu>
  *******************************************************************************
  */
+#include "Timer.h"
+
+Timer_t* const s_timers[] = {TIMER0, TIMER1};
 
 /**
  * Initialize the timer peripheral.

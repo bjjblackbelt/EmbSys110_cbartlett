@@ -9,6 +9,8 @@
  */
 .global     gpio_init       /* Make function name visible to linker   */
 .global     gpio_read
+.global     led_set
+.global     led_clr
 .global     delayMS
 .code 32
 .extern     printString     /* Make external function visible to assembler */

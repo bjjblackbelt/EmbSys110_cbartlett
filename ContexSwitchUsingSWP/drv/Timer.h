@@ -9,6 +9,7 @@
 #define TIMER_H
 
 #include <stdint.h>
+#include "lpc2378.h"
 
 class Timer
 {
@@ -31,7 +32,7 @@ class Timer
     Timer(const Timer&);            //!< Intentionally not implemented
     Timer& operator=(const Timer&); //!< Intentionally not implemented
 
-    static Timer_t* const s_timers[] = {TIMER0, TIMER1};
+    static Timer_t* const s_timers[];
 };
 
 #endif // #ifndef TIMER_H

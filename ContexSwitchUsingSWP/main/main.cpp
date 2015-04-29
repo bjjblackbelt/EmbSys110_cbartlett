@@ -67,8 +67,9 @@ int main(void)
     led_clr();
     led_set();
     led_clr();
-	Timer_t* timer0 = TIMER0;
- 	Timer_t* timer1 = TIMER1;
+	volatile Timer_t* timer0 = TIMER0;
+ 	volatile Timer_t* timer1 = TIMER1;
+ 	(void)timer0; (void)timer1;
 
     int temp = 0;
     BSP_CSLock(temp);

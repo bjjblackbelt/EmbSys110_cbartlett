@@ -85,12 +85,14 @@ SRC  = \
 	./dbg/print.cpp \
 	./dbg/debugger.cpp \
 	./main/mini_cpp.cpp \
-	./bsp/bsp.cpp
+	./bsp/bsp.cpp \
+	./prj/CriticalSection.cpp \
+	./drv/Timer.cpp
 
 # List ASM source files here
 ASRC = \
 	./bsp/startup.S \
-	./bsp/gpio.S
+	./bsp/gpio.S 
 
 # List all user directories here
 UINCDIR = \
@@ -104,6 +106,7 @@ UINCDIR = \
 	./main \
 	./dbg \
 	./bsp \
+	./drv \
 	./prj
 
 # List the user directory to look for the libraries here
