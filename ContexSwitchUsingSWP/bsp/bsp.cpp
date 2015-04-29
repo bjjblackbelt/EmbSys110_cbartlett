@@ -9,6 +9,11 @@
 #include "lpc2378.h"
 #include "pins.h"
 
+// Prototypes
+extern "C" {
+    extern void gpio_init(void);
+}
+
 /*
  *******************************************************************************
  * Uses SWP instruction to set the lock for a critical section.
@@ -285,6 +290,7 @@ void BSP_InitHardware(void)
     initMAM();
     initPCLK ();
     initGPIO();
+    gpio_init();
 
     /* intialize specific hardware components for UART0 */
     BSP_InitUART0(UART_BAUD(HOST_BAUD_U0),UART_8N1,UART_FIFO_OFF);
