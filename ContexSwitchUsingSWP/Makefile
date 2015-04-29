@@ -21,21 +21,21 @@ OCDTOOLCHAIN =
 
 # Toolchain for original arm-elf Yagarto tools
 # Add your Yagarto bin to your system path: C:\OlimexODS\yagarto\bin;
-TOOLCHAINDIR=/opt/arm-none-eabi/bin
+TOOLCHAINDIR=/opt/arm-none-eabi
 TOOLCHAIN  =arm-none-eabi-
 
-CC          = $(TOOLCHAINDIR)/$(TOOLCHAIN)g++
-# AS          = $(TOOLCHAINDIR)/$(TOOLCHAIN)-gcc -x assembler-with-cpp
-AS          = $(TOOLCHAINDIR)/$(TOOLCHAIN)as
-LD          = $(TOOLCHAINDIR)/$(TOOLCHAIN)gcc
-OBJCOPY     = $(TOOLCHAINDIR)/$(TOOLCHAIN)objcopy
+CC          = $(TOOLCHAINDIR)/bin/$(TOOLCHAIN)g++
+# AS          = $(TOOLCHAINDIR)/bin/$(TOOLCHAIN)-gcc -x assembler-with-cpp
+AS          = $(TOOLCHAINDIR)/bin/$(TOOLCHAIN)as
+LD          = $(TOOLCHAINDIR)/bin/$(TOOLCHAIN)gcc
+OBJCOPY     = $(TOOLCHAINDIR)/bin/$(TOOLCHAIN)objcopy
 
 # Yagarto's arm-none-eabi-objdump has an issue when run from MAKE. So use the objdump
 # from /yagarto/arm-none-eabi/bin (e.g., C:\OlimexODS\yagarto\arm-none-eabi\bin)
 #OBJDUMP     = $(TOOLCHAIN)-objdump
-OBJDUMP     = $(TOOLCHAINDIR)/$(TOOLCHAIN)objdump
-AR          = $(TOOLCHAINDIR)/$(TOOLCHAIN)ar
-RANLIB      = $(TOOLCHAINDIR)/$(TOOLCHAIN)ranlib
+OBJDUMP     = $(TOOLCHAINDIR)/bin/$(TOOLCHAIN)objdump
+AR          = $(TOOLCHAINDIR)/bin/$(TOOLCHAIN)ar
+RANLIB      = $(TOOLCHAINDIR)/bin/$(TOOLCHAIN)ranlib
 
 MCU  = arm7tdmi
 
@@ -92,6 +92,12 @@ ASRC = ./bsp/startup.S
 
 # List all user directories here
 UINCDIR = \
+	$(TOOLCHAINDIR)/arm-none-eabi/include \
+	$(TOOLCHAINDIR)/arm-none-eabi/include/c++/4.9.3 \
+	$(TOOLCHAINDIR)/arm-none-eabi/include/c++/4.9.3/arm-none-eabi \
+	$(TOOLCHAINDIR)/arm-none-eabi/include/c++/4.9.3/backward \
+	$(TOOLCHAINDIR)/arm-none-eabi/include/c++/4.9.3/include \
+	$(TOOLCHAINDIR)/arm-none-eabi/include/c++/4.9.3/include-fixed \
 	./inc \
 	./main \
 	./dbg \
