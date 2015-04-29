@@ -2,11 +2,11 @@
  * MODULE:
  *
  *  lpc2378.h
- * 
+ *
  * DESCRIPTION:
  *
  *  LPC2378 standard definitions file
- * 
+ *
  * OS:
  *
  *  N/A
@@ -21,19 +21,19 @@
  *
  * HISTORY:
  *
- *  - started creating the header file  
+ *  - started creating the header file
  *
  * NOTES:
  *
  *  n/a
  *
  */
- 
+
 #ifndef LPC2378_STANDARD_DEFINITIONS
 #define LPC2378_STANDARD_DEFINITIONS
 
 /*
- * STANDARD DEFINITIONS 
+ * STANDARD DEFINITIONS
  */
 
 #define BIT(a)  (1<<a)
@@ -44,10 +44,10 @@
 
 /*
  * REGISTER MAPPINGS
- */ 
+ */
 
-/* 
- * Fast GPIO Registers 
+/*
+ * Fast GPIO Registers
  */
 
 #define FIO0DIR        0x3FFFC000
@@ -58,7 +58,7 @@
 
 /*
  * UART0
- */ 
+ */
 
 #define U0RBR          0xE000C000
 #define U0THR          0xE000C000
@@ -118,10 +118,10 @@
 #define PCLKSEL0       0xE01FC1A8
 #define PCLKSEL1       0xE01FC1AC
 
+#if 0
 /*
  * Timer0
  */
-
 #define T0IR            0xE0004000
 #define T0TCR           0xE0004004
 #define T0TC            0xE0004008
@@ -140,20 +140,71 @@
 #define T0EMR           0xE000403C
 #define T0CTCR          0xE0004070
 
+/*
+ * Timer1
+ */
+#define T1IR            0xE0008000
+#define T1TCR           0xE0008004
+#define T1TC            0xE0008008
+#define T1PR            0xE000800C
+#define T1PC            0xE0008010
+#define T1MCR           0xE0008014
+#define T1MR0           0xE0008018
+#define T1MR1           0xE000801C
+#define T1MR2           0xE0008020
+#define T1MR3           0xE0008024
+#define T1CCR           0xE0008028
+#define T1CR0           0xE000802C
+#define T1CR1           0xE0008030
+#define T1CR2           0xE0008034
+#define T1CR3           0xE0008038
+#define T1EMR           0xE000803C
+#define T1CTCR          0xE0008070
+#endif
+
+/*
+ * Timer structure
+ */
+typedef struct
+{
+    volatile uint32_t IR;
+    volatile uint32_t TCR;
+    volatile uint32_t TC;
+    volatile uint32_t PR;
+    volatile uint32_t PC;
+    volatile uint32_t MCR;
+    volatile uint32_t MR0;
+    volatile uint32_t MR1;
+    volatile uint32_t MR2;
+    volatile uint32_t MR3;
+    volatile uint32_t CCR;
+    volatile const uint32_t CR0;
+    volatile const uint32_t CR1;
+    volatile uint32_t reserved01[0x2];
+    volatile uint32_t EMR;
+    volatile uint32_t reserved02[0xC];
+    volatile uint32_t CTCR;
+} Timer_t;
+
+#define TIMER0_BASE_ADDR    0xE0004000
+#define TIMER1_BASE_ADDR    0xE0008000
+
+#define TIMER0 ((Timer_t*) TIMER0_BASE_ADDR)
+#define TIMER1 ((Timer_t*) TIMER1_BASE_ADDR)
 
 /*
  * REGISTER DEFINITIONS
- */ 
-
-
-/* 
- * MEMMAP 
  */
 
-#define BOOTLOADERMODE     0x0               
-#define USERFLASHMODE      0x1           
-#define USERRAMMODE        0x2   
-#define EXTERNALMEMORYMODE 0x3                           
+
+/*
+ * MEMMAP
+ */
+
+#define BOOTLOADERMODE     0x0
+#define USERFLASHMODE      0x1
+#define USERRAMMODE        0x2
+#define EXTERNALMEMORYMODE 0x3
 #define MAMCR_OFF          0
 #define MAMCR_PART         1
 #define MAMCR_FULL         2
@@ -171,7 +222,7 @@
 #define SCS_OSCEN          (1<<5)
 #define SCS_OSCSTAT        (1<<6)
 
-#define FCCO               (FOSC*PLL_MUL*2/PLL_DIV) 
+#define FCCO               (FOSC*PLL_MUL*2/PLL_DIV)
 #define PLLCON_PLLE        (1<<0)
 #define PLLCON_PLLC        (1<<1)
 
@@ -180,14 +231,14 @@
 #define LED1_DIR           FIO0DIR
 #define LED1_CLR           FIO0CLR
 #define LED1_PIN           FIO0PIN
-#define LED1_BIT           BIT(21)                                         
+#define LED1_BIT           BIT(21)
 
 #define U0_TX_PINSEL_REG   PINSEL0
-#define U0_TX_PINSEL       (1UL<<4)              
-#define U0_TX_PINMASK      (3UL<<4)              
+#define U0_TX_PINSEL       (1UL<<4)
+#define U0_TX_PINMASK      (3UL<<4)
 #define U0_RX_PINSEL_REG   PINSEL0
-#define U0_RX_PINSEL       (1UL<<6)              
-#define U0_RX_PINMASK      (3UL<<6)              
+#define U0_RX_PINSEL       (1UL<<6)
+#define U0_RX_PINMASK      (3UL<<6)
 
 #define PDIV_1             0x1
 #define PDIV_2             0x2
@@ -205,7 +256,7 @@
 #define PCLK_PWM1          12
 #define PCLK_I2C0          14
 #define PCLK_SPI           16
-#define PCLK_RTC           18         
+#define PCLK_RTC           18
 #define PCLK_SSP1          20
 #define PCLK_DAC           22
 #define PCLK_ADC           24
@@ -237,7 +288,7 @@
 
 /*
  * OLD CODE:
- * 
+ *
  * #define PINSEL0_TX0        PINSEL_MASK (PINSEL_FUNC_ALT_1, 4)
  * #define PINSEL0_RX0        PINSEL_MASK (PINSEL_FUNC_ALT_1, 6)
  * #define PINSEL0_TX1        PINSEL_MASK (PINSEL_FUNC_ALT_1, 30)
@@ -245,8 +296,8 @@
  *
  */
 
-#define ULCR_DLAB_ENABLE   (1<<7)   
-#define ULSR_THRE          (1<<5)   
+#define ULCR_DLAB_ENABLE   (1<<7)
+#define ULSR_THRE          (1<<5)
 #define UIER_THRE          (1<<1)
 #define UART_BAUD(baud)    (uint16_t)((PCLK/((baud)*16.0))+0.5)
 #define HOST_BAUD_U0       (38400)
@@ -255,13 +306,13 @@
 #define PUTC(c)              while(!(VOLATILE32(U0LSR) & ULSR_THRE)) continue; \
 	                       VOLATILE32(U0THR) = (uint8_t) c
 
-#define FOSC               (12000000)          
-#define PLL_MUL            (12)              
-#define PLL_DIV            (1)         	     
+#define FOSC               (12000000)
+#define PLL_MUL            (12)
+#define PLL_DIV            (1)
 #define CCLK_DIV           (6)
-#define CCLK               (FCCO/CCLK_DIV)   
+#define CCLK               (FCCO/CCLK_DIV)
 #define CCLKCFG_VALUE      (CCLK_DIV-1)
-#define PBSD               1                 
-#define PCLK               (CCLK / PBSD)     
+#define PBSD               1
+#define PCLK               (CCLK / PBSD)
 
 #endif

@@ -28,6 +28,10 @@ class CriticalSection
     Status_t Query(int threadID);
 
   private:
+    CriticalSection(const CriticalSection&);            //!< Intentionally not implemented
+    CriticalSection& operator=(const CriticalSection&); //!< Intentionally not implemented
+
+    // Helper functions
     void ResetDataMembers();
 
     static const int THREAD_ID_RESET = -1;

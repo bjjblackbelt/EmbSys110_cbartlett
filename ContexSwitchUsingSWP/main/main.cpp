@@ -63,6 +63,13 @@ int main(void)
     /* initialize */
     BSP_InitHardware();
 
+    // TODO: CMB - Test LED functionality and timer register memory layout
+    led_clr();
+    led_set();
+    led_clr();
+	Timer_t* timer0 = TIMER0;
+ 	Timer_t* timer1 = TIMER1;
+
     int temp = 0;
     BSP_CSLock(temp);
 
@@ -83,5 +90,3 @@ int main(void)
 
     return (0);
 }
-
-
