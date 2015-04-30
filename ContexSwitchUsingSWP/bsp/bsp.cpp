@@ -8,6 +8,7 @@
 #include "bsp.h"
 #include "lpc2378.h"
 #include "pins.h"
+#include "irq.h"
 
 // Prototypes
 extern "C" {
@@ -291,6 +292,7 @@ void BSP_InitHardware(void)
     initPCLK ();
     initGPIO();
     gpio_init();
+    init_VIC();
 
     /* intialize specific hardware components for UART0 */
     BSP_InitUART0(UART_BAUD(HOST_BAUD_U0),UART_8N1,UART_FIFO_OFF);

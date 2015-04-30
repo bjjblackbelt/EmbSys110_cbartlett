@@ -32,6 +32,8 @@
 #ifndef LPC2378_STANDARD_DEFINITIONS
 #define LPC2378_STANDARD_DEFINITIONS
 
+#include <stdint.h>
+
 /*
  * STANDARD DEFINITIONS
  */
@@ -45,6 +47,89 @@
 /*
  * REGISTER MAPPINGS
  */
+
+/* Vectored Interrupt Controller (VIC) */
+#define VIC_BASE_ADDR	0xFFFFF000
+#define VICIRQStatus   (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x000))
+#define VICFIQStatus   (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x004))
+#define VICRawIntr     (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x008))
+#define VICIntSelect   (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x00C))
+#define VICIntEnable   (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x010))
+#define VICIntEnClr    (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x014))
+#define VICSoftInt     (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x018))
+#define VICSoftIntClr  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x01C))
+#define VICProtection  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x020))
+#define VICSWPrioMask  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x024))
+
+#define VICVectAddr0   (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x100))
+#define VICVectAddr1   (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x104))
+#define VICVectAddr2   (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x108))
+#define VICVectAddr3   (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x10C))
+#define VICVectAddr4   (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x110))
+#define VICVectAddr5   (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x114))
+#define VICVectAddr6   (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x118))
+#define VICVectAddr7   (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x11C))
+#define VICVectAddr8   (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x120))
+#define VICVectAddr9   (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x124))
+#define VICVectAddr10  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x128))
+#define VICVectAddr11  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x12C))
+#define VICVectAddr12  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x130))
+#define VICVectAddr13  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x134))
+#define VICVectAddr14  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x138))
+#define VICVectAddr15  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x13C))
+#define VICVectAddr16  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x140))
+#define VICVectAddr17  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x144))
+#define VICVectAddr18  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x148))
+#define VICVectAddr19  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x14C))
+#define VICVectAddr20  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x150))
+#define VICVectAddr21  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x154))
+#define VICVectAddr22  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x158))
+#define VICVectAddr23  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x15C))
+#define VICVectAddr24  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x160))
+#define VICVectAddr25  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x164))
+#define VICVectAddr26  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x168))
+#define VICVectAddr27  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x16C))
+#define VICVectAddr28  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x170))
+#define VICVectAddr29  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x174))
+#define VICVectAddr30  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x178))
+#define VICVectAddr31  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x17C))
+
+/* The name convention below is from previous LPC2000 family MCUs, in LPC23xx/24xx,
+these registers are known as "VICVectPriority(x)". */
+#define VICVectCntl0   (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x200))
+#define VICVectCntl1   (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x204))
+#define VICVectCntl2   (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x208))
+#define VICVectCntl3   (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x20C))
+#define VICVectCntl4   (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x210))
+#define VICVectCntl5   (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x214))
+#define VICVectCntl6   (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x218))
+#define VICVectCntl7   (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x21C))
+#define VICVectCntl8   (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x220))
+#define VICVectCntl9   (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x224))
+#define VICVectCntl10  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x228))
+#define VICVectCntl11  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x22C))
+#define VICVectCntl12  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x230))
+#define VICVectCntl13  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x234))
+#define VICVectCntl14  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x238))
+#define VICVectCntl15  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x23C))
+#define VICVectCntl16  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x240))
+#define VICVectCntl17  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x244))
+#define VICVectCntl18  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x248))
+#define VICVectCntl19  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x24C))
+#define VICVectCntl20  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x250))
+#define VICVectCntl21  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x254))
+#define VICVectCntl22  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x258))
+#define VICVectCntl23  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x25C))
+#define VICVectCntl24  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x260))
+#define VICVectCntl25  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x264))
+#define VICVectCntl26  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x268))
+#define VICVectCntl27  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x26C))
+#define VICVectCntl28  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x270))
+#define VICVectCntl29  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x274))
+#define VICVectCntl30  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x278))
+#define VICVectCntl31  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x27C))
+
+#define VICVectAddr    (*(volatile unsigned long *)(VIC_BASE_ADDR + 0xF00))
 
 /*
  * Fast GPIO Registers
