@@ -7,7 +7,23 @@
  */
 #include "Timer.h"
 
-Timer_t* const s_timers[] = {TIMER0, TIMER1};
+Timer_t* const Timer::s_timers[] = {TIMER0, TIMER1};
+
+/**
+ * Constructor
+ */
+Timer::Timer()
+{
+	//!< Empty
+}
+
+/**
+ * Destructor
+ */
+Timer::~Timer()
+{
+	//!< Empty
+}
 
 /**
  * Initialize the timer peripheral.
@@ -21,21 +37,21 @@ void Timer::Open(TimerNumber_t timer, uint32_t timerInterval)
         case TIMER_00:
         {
             // Enable power
-            PCONP |= BIT(1);
+        	VOLATILE32(PCONP) |= BIT(1);
 
             // Enable peripheral clock
-            PCLKSEL0 &= ~(0x00000004);
-            PCLKSEL0 |= BIT(2);
+        	VOLATILE32(PCLKSEL0) &= ~(0x00000004);
+        	VOLATILE32(PCLKSEL0) |= BIT(2);
             break;
         }
         case TIMER_01:
         {
             // Enable power
-            PCONP |= BIT(2);
+        	VOLATILE32(PCONP) |= BIT(2);
 
             // Enable peripheral clock
-            PCLKSEL0 &= ~(0x00000030);
-            PCLKSEL0 |= BIT(4);
+        	VOLATILE32(PCLKSEL0) &= ~(0x00000030);
+        	VOLATILE32(PCLKSEL0) |= BIT(4);
             break;
         }
     }
@@ -55,6 +71,7 @@ void Timer::Start(TimerNumber_t timer)
 
     // Enable interrupt
 }
+
 void Timer::Stop(TimerNumber_t timer)
 {
     // Disable counter
@@ -74,14 +91,14 @@ void Timer::Close(TimerNumber_t timer)
     {
         case TIMER_00:
         {
-            PCONP &= ~(BIT(1));
-            PCLKSEL0 &= ~(0x00000004);
+        	VOLATILE32(PCONP) &= ~(BIT(1));
+        	VOLATILE32(PCLKSEL0) &= ~(0x00000004);
             break;
         }
         case TIMER_01:
         {
-            PCONP &= ~(BIT(2));
-            PCLKSEL0 &= ~(0x00000030);
+        	VOLATILE32(PCONP) &= ~(BIT(2));
+        	VOLATILE32(PCLKSEL0) &= ~(0x00000030);
             break;
         }
     }
