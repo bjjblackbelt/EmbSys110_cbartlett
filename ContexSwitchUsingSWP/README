@@ -1,45 +1,60 @@
-This directory contains Chad Bartlett's version of HW 08 for EMBSYS100.
+This directory contains Chad Bartlett's version of HW 01 for EMBSYS110:
+    Critical Section Using SWP Instruction
 
 AUTHOR
 ------
-20141216 - Chad Bartlett
+20150430 - Chad Bartlett
 
 Project Tree
 ------------
-./  -
-    |- readme.txt
-inc -
-    |- init.h
-    |- lpc2378.h
-    |- print.h
-    |- pins.h
-src -
-    |- crt.S
-    |- debugger.c
-    |- init.c
-    |- main.c
-    |- print.c
+bin/    -
+        |- ContexSwitchUsingSWP.hex
+bsp/    -
+        |- bsp.cpp
+        |- bsp.h
+        |- gpio.S
+        |- irq.cpp
+        |- irq.h
+        |- lpc2378.h
+        |- lpc2378_flash.ld
+        |- lpc2378_uw.cfg
+        |- pins.h
+        |- startup.S
+dbg/    -
+        |- debugger.cpp
+        |- print.cpp
+        |- print.h
+lib/    -
+        |- libCppUTest.a
+main/   -
+        |- main.cpp
+        |- mini_cpp.cpp
+prj/    -
+        |- CriticalSection.cpp
+        |- CriticalSection.h
+        |- Timer.cpp
+        |- Timer.h
+tests/  -
+        |- stubs/   -
+                    |- StubBsp.cpp
+        |- Makefile
+        |- RunnAllTests.cpp
+        |- TestCriticalSectionAPI.cpp
+        |- TestTemplate.cpp
+./      -
+        |- README
+        |- .cproject
+        |- .project
+
 
 Design
 ------
-Within the Prefetch Abort exception handler I save the state of the CPSR while
-changing modes. That is, instead of simply setting the CPSR to ARM_MODE_SVC and
-ARM_MODE_ABORT, I first cleared the CPSR mode bits and then ORR'd the CPSR with
-the corresponding ARM_MODE_*** mask.
-
-Problems
---------
-After building the Data Abort exception handler for Lab 08 the homework
-was relatively straight forward. The biggest issue I had was deducing whether or
-not it was necessary to leave the bits of the CPSR register intact when
-switching modes. I reviewed the ARM7TDMI Reference Manual and David Seal's ARM
-ARM, but could not any indication if this was necessary. Therefore, I decided to
-play it save and preserve the other bits of the CPSR when changing modes.
-
-Observations
-------------
-It is still a bit confusing why we have to subtract a word from the LR to get
-the address of where the exception actually occurred. Also, it is unclear why
-Prefetch and Data exceptions are different in regards to returning from the
-exceptions. I believe I just need to spend more time with the documentation and
-code.
+This application was designed to test a critical section implementation using
+SWP instead of disabling interrupts. Two timers are configured to trigger
+interrupts at 100-ms and 500-ms. During normal operation an LED is toggled
+within the 100-ms timer interrupt. In addition, within both interrupts handlers
+an attempt is made to take a critical section. If successful, a shared variable
+is incremented, checked for the correct value and subsequently decremented. If
+the check fails the system enters an error state for 5-seconds. During the error
+state, the LED is steady on. At the completion of the error state the shared
+variable is reset and the LED commences toggling once again.
