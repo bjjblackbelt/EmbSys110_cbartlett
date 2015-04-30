@@ -23,6 +23,10 @@
 #include "bsp.h"
 #include "Timer.h"
 
+// TODO: CMB - Remove after testing
+#include "CriticalSection.h"
+CriticalSection* g_pCritSect;
+
 /**
  * @typedef enum USER
  * The buttons and joystick are polled during a GPIO read. These values indicate
@@ -41,8 +45,8 @@ typedef enum
     TOTAL_BTNS  = 8,
 } USER;
 
-static const int TIMER_PERIOD_500_MS = 5000;
-static const int TIMER_PERIOD_100_MS = 1000;
+static const int TIMER_PERIOD_500_MS = TIMER_COMPARE_VALUE(2);  //!< = 6000
+static const int TIMER_PERIOD_100_MS = TIMER_COMPARE_VALUE(10); //!< = 1200
 
 /**
  * Strings to indicate the type of input event
@@ -67,16 +71,13 @@ int main(void)
     /* initialize */
     BSP_InitHardware();
 
-    // TODO: CMB - Test LED functionality and timer register memory layout
-    led_clr();
-    led_set();
-    led_clr();
-    volatile uint16_t uartBaud = UART_BAUD(HOST_BAUD_U0);
-    (void)uartBaud;
-
     //TODO: CMB - Remove
     int temp = 0;
     BSP_CSLock(temp);
+
+    // Initialize Critical Section
+    CriticalSection critSect;
+    g_pCritSect = &critSect;
 
     // Initialize and start timers
     Timer timer;
@@ -84,10 +85,6 @@ int main(void)
     timer.Open(Timer::TIMER_01, TIMER_PERIOD_100_MS);
     timer.Start(Timer::TIMER_00);
     timer.Start(Timer::TIMER_01);
-
-    volatile Timer_t* timer0 = TIMER0;
-    volatile Timer_t* timer1 = TIMER1;
-    (void)timer0; (void)timer1;
 
     printString("\033[2J"); /* Clear entire screen */
     printString("\nChad Bartlett's HW 01: Context Switch Using SWP");

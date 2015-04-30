@@ -27,7 +27,7 @@ TOOLCHAIN  =arm-none-eabi-
 CC          = $(TOOLCHAINDIR)/bin/$(TOOLCHAIN)g++
 # AS          = $(TOOLCHAINDIR)/bin/$(TOOLCHAIN)-gcc -x assembler-with-cpp
 AS          = $(TOOLCHAINDIR)/bin/$(TOOLCHAIN)as
-LD          = $(TOOLCHAINDIR)/bin/$(TOOLCHAIN)gcc
+LD          = $(TOOLCHAINDIR)/bin/$(TOOLCHAIN)g++
 OBJCOPY     = $(TOOLCHAINDIR)/bin/$(TOOLCHAIN)objcopy
 
 # Yagarto's arm-none-eabi-objdump has an issue when run from MAKE. So use the objdump
@@ -86,8 +86,9 @@ SRC  = \
 	./dbg/debugger.cpp \
 	./main/mini_cpp.cpp \
 	./bsp/bsp.cpp \
+	./bsp/irq.cpp \
 	./prj/CriticalSection.cpp \
-	./drv/Timer.cpp
+	./prj/Timer.cpp
 
 # List ASM source files here
 ASRC = \
@@ -106,7 +107,6 @@ UINCDIR = \
 	./main \
 	./dbg \
 	./bsp \
-	./drv \
 	./prj
 
 # List the user directory to look for the libraries here
