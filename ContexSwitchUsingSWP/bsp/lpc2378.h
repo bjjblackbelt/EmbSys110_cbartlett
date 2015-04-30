@@ -36,11 +36,11 @@
  * STANDARD DEFINITIONS
  */
 
-#define BIT(a)  (1<<a)
+#define BIT(a)              static_cast<uint32_t>(1<<a)
 
-#define VOLATILE32(addr) (*(volatile uint32_t *)(addr))
-#define VOLATILE16(addr) (*(volatile uint16_t *)(addr))
-#define VOLATILE8(addr)  (*(volatile uint8_t *)(addr))
+#define VOLATILE32(addr)    (*(volatile uint32_t *)(addr))
+#define VOLATILE16(addr)    (*(volatile uint16_t *)(addr))
+#define VOLATILE8(addr)     (*(volatile uint8_t *)(addr))
 
 /*
  * REGISTER MAPPINGS

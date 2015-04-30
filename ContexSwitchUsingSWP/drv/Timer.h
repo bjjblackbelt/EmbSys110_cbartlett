@@ -16,17 +16,17 @@ class Timer
   public:
     typedef enum
     {
-        TIMER_00,
-        TIMER_01,
+        TIMER_00 = 0,
+        TIMER_01 = 1,
     } TimerNumber_t;
 
     Timer();
     ~Timer();
 
-    void Init(TimerNumber_t timer);
+    void Open(TimerNumber_t timer, uint32_t timerInterval);
     void Start(TimerNumber_t timer);
     void Stop(TimerNumber_t timer);
-    void Reset(TimerNumber_t timer);
+    void Close(TimerNumber_t timer);
 
   private:
     Timer(const Timer&);            //!< Intentionally not implemented

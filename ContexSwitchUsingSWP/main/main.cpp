@@ -21,6 +21,7 @@
 #include "lpc2378.h"
 #include "print.h"
 #include "bsp.h"
+#include "Timer.h"
 
 /**
  * @typedef enum USER
@@ -39,6 +40,9 @@ typedef enum
     USER_RIGHT  = 7,
     TOTAL_BTNS  = 8,
 } USER;
+
+static const int TIMER_PERIOD_500_MS = 5000;
+static const int TIMER_PERIOD_100_MS = 1000;
 
 /**
  * Strings to indicate the type of input event
@@ -67,12 +71,23 @@ int main(void)
     led_clr();
     led_set();
     led_clr();
-	volatile Timer_t* timer0 = TIMER0;
- 	volatile Timer_t* timer1 = TIMER1;
- 	(void)timer0; (void)timer1;
+    volatile uint16_t uartBaud = UART_BAUD(HOST_BAUD_U0);
+    (void)uartBaud;
 
+    //TODO: CMB - Remove
     int temp = 0;
     BSP_CSLock(temp);
+
+    // Initialize and start timers
+    Timer timer;
+    timer.Open(Timer::TIMER_00, TIMER_PERIOD_500_MS);
+    timer.Open(Timer::TIMER_01, TIMER_PERIOD_100_MS);
+    timer.Start(Timer::TIMER_00);
+    timer.Start(Timer::TIMER_01);
+
+    volatile Timer_t* timer0 = TIMER0;
+    volatile Timer_t* timer1 = TIMER1;
+    (void)timer0; (void)timer1;
 
     printString("\033[2J"); /* Clear entire screen */
     printString("\nChad Bartlett's HW 01: Context Switch Using SWP");

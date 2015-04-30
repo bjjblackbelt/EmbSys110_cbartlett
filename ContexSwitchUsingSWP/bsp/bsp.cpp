@@ -99,7 +99,7 @@ static void initPLL(void)
     VOLATILE32(PLLFEED) = 0xAA;
     VOLATILE32(PLLFEED) = 0x55;
 
-    /* Divide F_cco down to get the CCLK output. (288 / 6 = 48) */
+    /* Divide F_cco down to get the CCLK output. (288 / 6 = 48 MHz) */
 
     VOLATILE32(CCLKCFG) = CCLKCFG_VALUE;
 
