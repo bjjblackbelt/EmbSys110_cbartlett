@@ -8,7 +8,7 @@ AUTHOR
 Project Tree
 ------------
 bin/    -
-        |- ContexSwitchUsingSWP.hex
+        |- CriticalSectionUsingSWP.hex
 bsp/    -
         |- bsp.cpp
         |- bsp.h

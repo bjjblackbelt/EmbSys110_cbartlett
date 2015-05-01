@@ -67,7 +67,7 @@ DLIBS =
 #
 
 # Define project name here
-PROJECT = ContexSwitchUsingSWP
+PROJECT = CriticalSectionUsingSWP
 
 # Define linker script file here
 #LDSCRIPT= ./prj/lpc2378_ram.ld
