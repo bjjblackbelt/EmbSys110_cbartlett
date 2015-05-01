@@ -87,6 +87,10 @@ gpio_init:
     LDR     reg_data, [reg_addr]            // read: load PO direction register
     ORR     reg_data, reg_data, #LED_MASK   // modify: set LED pin (p0.13) to output
     STR     reg_data, [reg_addr]
+    /* turn off LED */
+    LDR    reg_addr, =GPIO0SET
+    MOV    reg_mask, #LED_MASK
+    STR    reg_mask, [reg_addr]
 
     /* configure GPIO port 1 (Joystick) */
     LDR     reg_addr, =GPIO0DIR             // PO direction register address

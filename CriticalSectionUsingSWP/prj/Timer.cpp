@@ -188,28 +188,7 @@ extern "C" void Timer::Timer0IntHandler()
 	// Clear Timer0 interrupt
 	s_timers[TIMER_00]->IR = 0x01;
 
-	// Handle nested interrupt
-	IENABLE;
-
-	static bool toggle = false;
-	switch (toggle)
-	{
-		case false:
-		{
-			led_set();
-			break;
-		}
-		case true:
-		{
-			led_clr();
-			break;
-		}
-	}
-	toggle = !toggle;
-
 	ProcessCounterTest(static_cast<int>(Timer::TIMER_00));
-
-	IDISABLE;
 
 	// Acknowledge interrupt
 	VICVectAddr = 0;
@@ -223,14 +202,28 @@ extern "C" void Timer::Timer1IntHandler()
 	// Clear Timer1 interrupt
 	s_timers[TIMER_01]->IR = 0x01;
 
-	// Handle nested interrupt
-	IENABLE;
+	static bool toggle = false;
+    if (s_isErrorState == false)
+    {
+    	switch (toggle)
+    	{
+    		case false:
+    		{
+    			led_set();
+    			break;
+    		}
+    		case true:
+    		{
+    			led_clr();
+    			break;
+    		}
+    	}
+    	toggle = !toggle;
+    }
 
 	ProcessCounterTest(static_cast<int>(Timer::TIMER_01));
 
 	s_sysTick++;
-
-	IDISABLE;
 
 	// Acknowledge interrupt
 	VICVectAddr = 0;
@@ -245,7 +238,7 @@ void Timer::ProcessCounterTest(int threadID)
 	if (s_isErrorState == false)
 	{
 		// Take Critical Section
-#define USE_CRIT_SECT (0U)
+#define USE_CRIT_SECT (1U)
 #if USE_CRIT_SECT
 		CriticalSection::Status_t status = g_pCritSect->Query(threadID);
 #else
