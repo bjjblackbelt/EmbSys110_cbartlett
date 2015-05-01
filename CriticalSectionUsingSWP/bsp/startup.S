@@ -92,8 +92,14 @@ ReservedAddr:  .word 0
 IRQAddr:       .word IRQHandler
 FIQAddr:       .word FIQHandler
 
-   .ltorg
+UndefHandler:   B UndefHandler
+SWIHandler:     B SWIHandler
+@@ PAbortHandler:  B PAbortHandler
+@@ DAbortHandler:  B DAbortHandler
+@@ IRQ_Handler:    B IRQ_Handler
+@@ FIQ_Handler:    B FIQ_Handler
 
+   .ltorg
 
    .section .init, "ax"
    .code 32
@@ -187,12 +193,6 @@ ExitFunction:
 /*                         Default interrupt handler                        */
 /****************************************************************************/
 
-UndefHandler:
-   b UndefHandler
-
-SWIHandler:
-   b SWIHandler
-
 /*
     Write a prefetch abort handler.
     (Hint, do the data abort one first. It's easier.)
@@ -274,9 +274,6 @@ DAbortHandler:
                                   /* The caret (^) after the register list tells */
                                   /* the CPU to restore the CPSR from the SPSR_abt */
 
-IRQHandler:
-   b IRQHandler
-
 FIQHandler:
    b FIQHandler
 
@@ -285,6 +282,66 @@ FIQHandler:
    .weak IRQHandler, FIQHandler
 
    .ltorg
-/*** EOF ***/
 
+@@ IRQ_Wrapper based on Examples for
+@@ AT91-ARM7TDMI AIC from Atmel,
+@@ adapted to LPC23xx/24xx VIC by M. Thomas
+@@ This wrapper avoids compiler-dependencies.
 
+.set LPC_BASE_VIC, 0xFFFFF000
+.set VIC_VectAddr, 0xF00
+
+.arm
+IRQ_Handler:
+
+@- Manage Exception Entry
+@- Adjust and save LR_irq in IRQ stack
+            sub         lr, lr, #4
+            stmfd       sp!, {lr}
+
+@- Save SPSR need to be saved for nested interrupt
+            mrs         r14, SPSR
+            stmfd       sp!, {r14}
+
+@- Save and r0 in IRQ stack
+            stmfd       sp!, {r0}
+
+@- Load the ISR-Address from VICVectAddr
+            ldr         r14, =LPC_BASE_VIC
+            ldr         r0 , [r14, #VIC_VectAddr]
+
+@- Enable Interrupt and Switch in Supervisor Mode
+           msr         CPSR_c, #ARM_MODE_SVC
+
+@- Save scratch/used registers and LR in User Stack
+            stmfd       sp!, { r1-r3, r12, r14 }
+
+@- Branch to the routine pointed by the VIC_VectAddr
+            mov         r14, pc
+            bx          r0
+
+@- Disable Interrupt and switch back in IRQ mode
+			mov 		r1, #0
+			orr 		r1, #I_BIT
+			orr 		r1, #ARM_MODE_IRQ
+            msr         CPSR_c, r1
+
+@- Restore scratch/used registers and LR from User Stack
+            ldmia       sp!, { r1-r3, r12, r14 }
+
+@-  Mark the End of Interrupt on the VIC
+@   by writing to VICVectAddr - not needed
+@   here since already done in the ISRs
+@@           ldr         r14, =LPC_BASE_VIC
+@@           str         r14, [r14, #VIC_VectAddr]
+
+@- Restore R0
+            ldmia       sp!, {r0}
+
+@- Restore SPSR_irq and r0 from IRQ stack
+            ldmia       sp!, {r14}
+            msr         SPSR_cxsf, r14
+
+@- Restore adjusted  LR_irq from IRQ stack directly in the PC
+            ldmia       sp!, {pc}^
+.end
