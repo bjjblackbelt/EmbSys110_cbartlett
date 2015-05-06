@@ -5,7 +5,7 @@
 
 extern void _estack(void);  // to force type checking
 void Reset_Handler(void);
-void default_handler (void) 
+void default_handler (void)
 {
   while(1);
 }
@@ -192,7 +192,7 @@ void (* const g_pfnVectors[])(void) = {
 	DMA2_Channel5_IRQHandler,
 	0, 0, 0, 0, 0, 0, 0, 0,
 	0,
-#if defined (STM32F10X_LD_VL) || (defined STM32F10X_MD_VL) 
+#if defined (STM32F10X_LD_VL) || (defined STM32F10X_MD_VL)
 	[0x1CC/4] = 0xF108F85F
 #elif defined (STM32F10X_HD_VL)
 	[0x1E0/4] = 0xF108F85F

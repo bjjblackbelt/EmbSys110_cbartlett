@@ -3,8 +3,8 @@
 ELF=$(notdir $(CURDIR)).elf
 BIN=$(notdir $(CURDIR)).bin
 
-# Project path
-PROJECTROOT=/home/ubu/Projects/EmbSys110_cbartlett
+# Workspace path
+WORKSPACEROOT=/home/ubu/Projects/EmbSys110_cbartlett
 
 # Tool path
 
@@ -12,7 +12,7 @@ TOOLROOT=/usr/bin
 
 # Library path
 
-LIBROOT=$(PROJECTROOT)/stm32vldiscover_package
+LIBROOT=$(WORKSPACEROOT)/stm32vldiscover_package
 
 # Tools
 
@@ -30,7 +30,7 @@ PERIPH=$(LIBROOT)/Libraries/STM32F10x_StdPeriph_Driver
 
 # Search path for standard files
 
-vpath %.c $(TEMPLATEROOT)
+vpath %.c $(TEMPLATEROOT)/Bsp
 
 # Search path for perpheral library
 
@@ -40,14 +40,14 @@ vpath %.c $(DEVICE)
 
 # Search path for Library
 
-vpath %.c $(TEMPLATEROOT)/Library/ff9/src
-vpath %.c $(TEMPLATEROOT)/Library/ff9/src/option
-vpath %.c $(TEMPLATEROOT)/Library
+vpath %.c $(TEMPLATEROOT)/Lib/ff9/src
+vpath %.c $(TEMPLATEROOT)/Lib/ff9/src/option
+vpath %.c $(TEMPLATEROOT)/Lib
 
 #  Processor specific
 
 PTYPE = STM32F10X_MD_VL
-LDSCRIPT = $(TEMPLATEROOT)/stm32f100.ld
+LDSCRIPT = $(TEMPLATEROOT)/Bsp/stm32f100.ld
 STARTUP= startup_stm32f10x.o system_stm32f10x.o
 
 # Compilation Flags
@@ -56,9 +56,14 @@ FULLASSERT = -DUSE_FULL_ASSERT
 
 LDFLAGS+= -T$(LDSCRIPT) -mthumb -mcpu=cortex-m3
 CFLAGS+= -mcpu=cortex-m3 -mthumb
-CFLAGS+= -I$(TEMPLATEROOT) -I$(DEVICE) -I$(CORE) -I$(PERIPH)/inc -I.
+CFLAGS+= -I$(TEMPLATEROOT)/Bsp -I$(DEVICE) -I$(CORE) -I$(PERIPH)/inc -I.
 CFLAGS+= -D$(PTYPE) -DUSE_STDPERIPH_DRIVER $(FULLASSERT)
-CFLAGS+= -I$(TEMPLATEROOT)/Library/ff9/src -I$(TEMPLATEROOT)/Library
+CFLAGS+= -I$(TEMPLATEROOT)/Lib/ff9/src -I$(TEMPLATEROOT)/Lib
+
+# Store object files in separate directory
+
+OBJSDIR = obj
+OBJS := $(patsubst %.o,$(OBJSDIR)/%.o,$(OBJS))
 
 # Build executable
 
@@ -66,20 +71,33 @@ $(ELF) : $(OBJS)
 	$(LD) $(LDFLAGS) -o $@ $(OBJS) $(LDLIBS)
 
 # compile and generate dependency info
+$(OBJS): | $(OBJSDIR)
 
-%.o: %.c
+$(OBJSDIR):
+	@mkdir -p $@
+
+$(OBJSDIR)/%.o: %.c
 	$(CC) -c $(CFLAGS) $< -o $@
-	$(CC) -MM $(CFLAGS) $< > $*.d
+	$(CC) -MM $(CFLAGS) $< > $(OBJSDIR)/$*.d
 
-%.o: %.s
+$(OBJSDIR)/%.o: %.s
 	$(CC) -c $(CFLAGS) $< -o $@
 
 $(BIN): $(ELF)
 	$(OBJCOPY) -O binary -S $< $@
 
+.PHONY:
+print:
+	@echo "SRC: "
+	@echo $(SRC)
+	@echo "OBJ: "
+	@echo $(OBJS)
+	@echo "OBJDIR: "
+	@echo $(OBJSDIR)
+
 .PHONY: clean
 clean:
-	rm -f $(OBJS) $(OBJS:.o=.d) $(BIN) $(ELF) startup_stm32f* $(CLEANOTHER)
+	rm -fr $(OBJSDIR) $(BIN) $(ELF) $(CLEANOTHER)
 
 .PHONY: debug
 debug: $(ELF)

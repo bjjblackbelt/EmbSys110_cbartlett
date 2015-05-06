@@ -93,7 +93,7 @@ SRC  = \
 # List ASM source files here
 ASRC = \
 	./bsp/startup.S \
-	./bsp/gpio.S 
+	./bsp/gpio.S
 
 # List all user directories here
 UINCDIR = \
@@ -166,6 +166,13 @@ all: $(OBJS) $(PROJECT).elf $(PROJECT).hex $(PROJECT).bin $(PROJECT).lst
 
 %hex: %elf
 	$(OBJCOPY) -O ihex -S $< $@
+
+.PHONY: print
+print:
+	@echo "SRC: "
+	@echo $(SRC)
+	@echo "OBJS: "
+	@echo $(OBJS)
 
 .PHONY: clean
 clean:

@@ -1,8 +1,53 @@
 {
-	"folders":
-	[
-		{
-			"path": "."
-		}
-	]
+    "folders":
+    [
+        {
+            "file_exclude_patterns":
+            [
+                "*.tmp",
+                "*.bin",
+                "*.o",
+                "*.cproject",
+            ],
+
+            "folder_exclude_patterns":
+            [
+                ".settings",
+            ],
+            "follow_symlinks": true,
+            "path": "/home/ubu/Projects/EmbSys110_cbartlett/STM32-Template"
+        }
+    ],
+
+    "settings":
+    {
+        "font_face": "inconsolata",
+        "sublimeclang_options":
+        [
+            "-I${folder:${project_path:STM32-Template.sublime-project}}/Demo",
+            "-I${folder:${project_path:STM32-Template.sublime-project}}/",
+            "-isystem", "/usr/lib/arm-none-eabi/include",
+            "-isystem", "/usr/lib/gcc/arm-none-eabi/4.8.2/include",
+            "-isystem", "/usr/include/c++/4.8/",
+            "-Wall",
+            "-Wno-deprecated-declarations",
+            "-Wno-unknown-pragmas",
+            "-Wno-implicit-function-declaration",
+            "-ferror-limit=10"
+        ],
+    },
+   "build_systems":
+   [
+       {
+           "name": "STM32-Template-Make",
+           "cmd": "make",
+           "working_dir": "${project_path}/Demo"
+       },
+
+       {
+           "name": "STM32-Template-Clean",
+           "cmd": ["make","clean"],
+           "working_dir": "${project_path}/Demo"
+       },
+   ]
 }
