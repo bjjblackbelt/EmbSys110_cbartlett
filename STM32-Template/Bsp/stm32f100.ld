@@ -28,12 +28,12 @@ MEMORY
 __ram_start__ = ORIGIN(RAM);
 __ram_size__  = LENGTH(RAM);
 __ram_end__   = __ram_start__ + __ram_size__;
-_estack = __ram_end__;
+__c_stack_top__ = __ram_end__;
 /* highest address of the user mode stack */
 
 
 
-PROVIDE ( _Stack_Limit = _estack - _Minimum_Stack_Size );
+PROVIDE ( _Stack_Limit = __c_stack_top__ - _Minimum_Stack_Size );
 
 /* Sections Definitions */
 
@@ -72,19 +72,19 @@ SECTIONS
      _etext = .;
     /* This is used by the startup in order to initialize the .data secion
 */
-    _sidata = _etext;
+    __data_load = _etext;
 
     /* This is the initialized data section
     The program executes knowing that the data is in the RAM
     but the loader puts the initial values in the FLASH (inidata).
     It is one task of the startup to copy the initial values from FLASH to
 RAM. */
-    .data  : AT ( _sidata )
+    .data  : AT ( __data_load )
     {
         . = ALIGN(4);
         /* This is used by the startup in order to initialize the .data
 secion */
-        _sdata = . ;
+        __data_start = . ;
 
         *(.data)
         *(.data.*)
@@ -92,7 +92,7 @@ secion */
         . = ALIGN(4);
         /* This is used by the startup in order to initialize the .data
 secion */
-        _edata = . ;
+        __data_end__ = . ;
     } >RAM
 
 
@@ -102,8 +102,8 @@ secion */
         . = ALIGN(4);
         /* This is used by the startup in order to initialize the .bss
 secion */
-        _sbss = .;
-	__bss_start__ = _sbss;
+        __bss_start__ = .;
+	__bss_start__ = __bss_start__;
         *(.bss)
         *(.bss.*)
         *(COMMON)
@@ -111,13 +111,13 @@ secion */
         . = ALIGN(4);
         /* This is used by the startup in order to initialize the .bss
 secion */
-        _ebss = . ;
-	__bss_end__ = _ebss;
+        __bss_end__ = . ;
+	__bss_end__ = __bss_end__;
     } >RAM
 
-    PROVIDE ( end = _ebss );
-    PROVIDE ( _end = _ebss );
-    PROVIDE ( _exit = _ebss );
+    PROVIDE ( end = __bss_end__ );
+    PROVIDE ( _end = __bss_end__ );
+    PROVIDE ( _exit = __bss_end__ );
     PROVIDE (_stackend = ORIGIN(RAM) + LENGTH(RAM) - _Minimum_Stack_Size);
 
     /* This is the user stack section

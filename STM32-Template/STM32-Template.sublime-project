@@ -55,5 +55,11 @@
            "cmd": ["make","clean"],
            "working_dir": "${project_path}"
        },
+
+       {
+           "name": "STM32-Template-ST-Link",
+           "cmd": ["make","stlink"],
+           "working_dir": "${project_path}"
+       },
    ]
 }

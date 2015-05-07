@@ -43,9 +43,7 @@ void DelayMs(uint32_t nTime)
     while (TimingDelay != 0);
 }
 
-extern "C" {
-
-void SysTick_Handler(void)
+extern "C" void SysTick_Handler(void)
 {
     if (TimingDelay != 0x00)
     { TimingDelay --; }
@@ -54,7 +52,7 @@ void SysTick_Handler(void)
 
 
 #ifdef USE_FULL_ASSERT
-void assert_failed(uint8_t* file , uint32_t line)
+extern "C" void assert_failed(uint8_t* file , uint32_t line)
 {
     (void)file; (void)line;
     /* Infinite loop */
@@ -62,5 +60,3 @@ void assert_failed(uint8_t* file , uint32_t line)
     while (1);
 }
 # endif
-
-} // extern "C"

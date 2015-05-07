@@ -8,9 +8,10 @@ LIBOBJS = \
 	stm32f10x_gpio.o \
 	stm32f10x_rcc.o
 
-OBJS= \
-	$(LIBOBJS) \
+SRCOBJS= \
 	main.o
+
+OBJS = $(LIBOBJS) $(SRCOBJS)
 
 # compilation flags for gdb
 
@@ -44,8 +45,8 @@ CWARNINGS   =-Wall \
     	 	 -Wvariadic-macros \
     	 	 -Wwrite-strings \
     	 	 -Wunused -Wunused-parameter \
-			 -Wno-padded
-			 # -Werror \
+			 -Wno-padded \
+			 -Werror
 		 	 #-Wconversion \
 			 #-Wsign-conversion \
     	 	 #-Wcast-qual \
