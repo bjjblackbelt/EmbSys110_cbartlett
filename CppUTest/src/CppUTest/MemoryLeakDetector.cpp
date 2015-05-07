@@ -226,7 +226,7 @@ MemoryLeakDetectorNode* MemoryLeakDetectorTable::getFirstLeak(MemLeakPeriod peri
 
 MemoryLeakDetectorNode* MemoryLeakDetectorTable::getNextLeak(MemoryLeakDetectorNode* leak, MemLeakPeriod period)
 {
-	int i = hash(leak->memory_);
+	unsigned long int i = hash(leak->memory_);
 	MemoryLeakDetectorNode* node = table_[i].getNextLeak(leak, period);
 	if (node) return node;
 
@@ -426,7 +426,7 @@ void MemoryLeakDetector::ConstructMemoryLeakReport(MemLeakPeriod period)
 	int total_leaks = 0;
 	bool giveWarningOnUsingMalloc = false;
 	output_buffer_.add(MEM_LEAK_HEADER);
-	output_buffer_.setWriteLimit(SimpleStringBuffer::SIMPLE_STRING_BUFFER_LEN - MEM_LEAK_NORMAL_MALLOC_FOOTER_SIZE);
+	output_buffer_.setWriteLimit(static_cast<int>(SimpleStringBuffer::SIMPLE_STRING_BUFFER_LEN - MEM_LEAK_NORMAL_MALLOC_FOOTER_SIZE));
 
 	while (leak) {
 		output_buffer_.add(MEM_LEAK_LEAK, leak->size_, leak->file_, leak->line_, leak->allocator_->alloc_name(), leak->memory_);

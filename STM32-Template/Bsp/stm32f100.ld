@@ -147,6 +147,7 @@ stack
      libc.a ( * )
      libm.a ( * )
      libgcc.a ( * )
+     libstdc++.a ( * )
      }
 */
 

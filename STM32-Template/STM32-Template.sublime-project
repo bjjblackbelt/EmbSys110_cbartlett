@@ -41,13 +41,19 @@
        {
            "name": "STM32-Template-Make",
            "cmd": "make",
-           "working_dir": "${project_path}/Demo"
+           "working_dir": "${project_path}"
+       },
+
+       {
+           "name": "STM32-Template-Debug",
+           "cmd": ["make","debug"],
+           "working_dir": "${project_path}"
        },
 
        {
            "name": "STM32-Template-Clean",
            "cmd": ["make","clean"],
-           "working_dir": "${project_path}/Demo"
+           "working_dir": "${project_path}"
        },
    ]
 }
