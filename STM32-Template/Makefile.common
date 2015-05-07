@@ -52,7 +52,9 @@ PTYPE = STM32F10X_MD_VL
 LDSCRIPT = $(TEMPLATEROOT)/Bsp/stm32f100.ld
 STARTUP= \
 	startup_stm32f10x.o \
-	system_stm32f10x.o
+	system_stm32f10x.o \
+	Interrupts.o \
+	Bsp.o
 
 # Compilation Flags
 
@@ -123,6 +125,10 @@ stlink:
 .PHONY: flash
 flash: $(BIN)
 	st-flash write v1 $(BIN) 0x8000000
+
+.PHONY: term
+term:
+	gtkterm -p /dev/ttyUSB0 -s 9600 -b 8 -t 1 -a none &
 
 # pull in dependencies
 
