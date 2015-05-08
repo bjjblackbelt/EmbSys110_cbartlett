@@ -15,7 +15,10 @@ extern "C" {
 #include <stm32f10x_gpio.h>
 }
 
-#define SYSTICK_PER_SEC     (SystemCoreClock/App::TICKS_BETWEEN_SYSTICK_IRQ)
+// Forward declarations
+class DUart;
+
+#define TIME_MS_TO_TICK(ms)     ((ms)*SYSTICK_PER_MS)
 
 namespace App {
 /**
@@ -26,16 +29,13 @@ namespace App {
 //
 
 //!< The number of clock cycles between calls to SysTick_Handler
-static const uint32_t TICKS_BETWEEN_SYSTICK_IRQ = 24000;  //!< Hz
-static const uint32_t USART1_BAUD_RATE = 115200;
-static const uint32_t MAX_NUMBER_STRING_LENGTH = 10;
+static const uint32_t TICKS_BETWEEN_SYSTICK_IRQ = SystemCoreClock/1000;  //!< Hz
+static const uint32_t SYSTICK_PER_MS = (SystemCoreClock/TICKS_BETWEEN_SYSTICK_IRQ/1000);
 
 typedef enum {
     PIN_LED_BLUE  = GPIO_Pin_8,
     PIN_LED_GREEN = GPIO_Pin_9,
     PIN_BTN_USER  = GPIO_Pin_0,
-    PIN_UART_RX   = GPIO_Pin_10,
-    PIN_UART_TX   = GPIO_Pin_9,
 } PinConfiguration_t;
 
 typedef enum {
@@ -48,7 +48,7 @@ typedef enum {
 /**
  * Configures the base peripherals used in this application.
  */
-void InitHardware();
+void InitHardware(DUart& uart);
 
 /**
  * Reads the state of the user button.
@@ -91,7 +91,6 @@ void ResetSysTick();
  * @param string The string to be printed
  */
 void PrintStr(char const * const string);
-
 
 /**
  * Print a hex number.
