@@ -27,12 +27,16 @@ namespace App {
 
 //!< The number of clock cycles between calls to SysTick_Handler
 static const uint32_t TICKS_BETWEEN_SYSTICK_IRQ = 24000;  //!< Hz
+static const uint32_t USART1_BAUD_RATE = 115200;
+static const uint32_t MAX_NUMBER_STRING_LENGTH = 10;
 
 typedef enum {
-    LED_BLUE     = GPIO_Pin_8,
-    LED_GREEN    = GPIO_Pin_9,
-    BTN_USER     = GPIO_Pin_0,
-} HwIdentifier_t;
+    PIN_LED_BLUE  = GPIO_Pin_8,
+    PIN_LED_GREEN = GPIO_Pin_9,
+    PIN_BTN_USER  = GPIO_Pin_0,
+    PIN_UART_RX   = GPIO_Pin_10,
+    PIN_UART_TX   = GPIO_Pin_9,
+} PinConfiguration_t;
 
 typedef enum {
     BTN_PRESSED  = Bit_SET,
@@ -56,19 +60,19 @@ ButtonState_t ReadUserBtn();
  * Turn on an LED.
  * @param led The LED to operate.
  */
-void SetLed(HwIdentifier_t led);
+void SetLed(PinConfiguration_t led);
 
 /**
  * Turn off an LED.
  * @param led The LED to operate.
  */
-void ClrLed(HwIdentifier_t led);
+void ClrLed(PinConfiguration_t led);
 
 /**
  * Toggle an LED.
  * @param led The LED to operate.
  */
-void TglLed(HwIdentifier_t led);
+void TglLed(PinConfiguration_t led);
 
 /**
  * Gets the current system tick value.
@@ -81,6 +85,19 @@ uint32_t GetSysTick();
  * Resets the value of the system tick counter to zero.
  */
 void ResetSysTick();
+
+/**
+ * Prints a string.
+ * @param string The string to be printed
+ */
+void PrintStr(char const * const string);
+
+
+/**
+ * Print a hex number.
+ * @param hex The number to be printed.
+ */
+void PrintHex(uint32_t hex);
 
 /**
  * Blocking delay function in milliseconds.

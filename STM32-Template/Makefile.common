@@ -75,6 +75,8 @@ OBJS := $(patsubst %.o,$(OBJSDIR)/%.o,$(OBJS))
 
 # Build executable
 
+all: $(ELF) $(BIN)
+
 $(ELF) : $(OBJS)
 	$(CXX) $(LDFLAGS) -o $@ $(OBJS) $(LDLIBS)
 	$(MAKE) -C Tests all
@@ -124,11 +126,12 @@ stlink:
 
 .PHONY: flash
 flash: $(BIN)
-	st-flash write v1 $(BIN) 0x8000000
+	st-flash write v1 $(BIN) 0x08000000
 
 .PHONY: term
 term:
-	gtkterm -p /dev/ttyUSB0 -s 9600 -b 8 -t 1 -a none &
+	@echo "\n\t> GtkTerm configuration defined in '~/.gtktermrc'\n"
+	gtkterm -c Project &
 
 # pull in dependencies
 

@@ -6,7 +6,8 @@ vpath %.cpp $(TEMPLATEROOT)/Demo
 
 LIBOBJS = \
 	stm32f10x_gpio.o \
-	stm32f10x_rcc.o
+	stm32f10x_rcc.o \
+	stm32f10x_usart.o
 
 SRCOBJS= \
 	main.o
@@ -45,8 +46,8 @@ CWARNINGS   =-Wall \
     	 	 -Wvariadic-macros \
     	 	 -Wwrite-strings \
     	 	 -Wunused -Wunused-parameter \
-			 -Wno-padded \
-			 -Werror
+			 -Wno-padded
+			 # -Werror
 		 	 #-Wconversion \
 			 #-Wsign-conversion \
     	 	 #-Wcast-qual \

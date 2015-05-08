@@ -26,6 +26,9 @@
         [
             "-I${folder:${project_path:STM32-Template.sublime-project}}/Bsp",
             "-I${folder:${project_path:STM32-Template.sublime-project}}/Demo",
+            "-I${folder:${project_path:STM32-Template.sublime-project}}/../stm32vldiscover_package/Libraries/STM32F10x_StdPeriph_Driver/inc",
+            "-I${folder:${project_path:STM32-Template.sublime-project}}/../stm32vldiscover_package/Libraries/CMSIS/CM3/DeviceSupport/ST/STM32F10x",
+            "-I${folder:${project_path:STM32-Template.sublime-project}}/../stm32vldiscover_package/Libraries/CMSIS/CM3/CoreSupport",
             "-isystem", "/usr/lib/arm-none-eabi/include",
             "-isystem", "/usr/lib/gcc/arm-none-eabi/4.8.2/include",
             "-isystem", "/usr/include/c++/4.8/",
