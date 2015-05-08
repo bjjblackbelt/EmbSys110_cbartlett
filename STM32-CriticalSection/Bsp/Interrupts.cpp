@@ -43,6 +43,10 @@ extern "C" void Reset_Handler(void)
     {
         *dst = 0;
     }
+
+    /* Use the STM32 Libraries to initialize system */
+    SystemInit();
+
     /* call all static constructors in C++ (harmless in C programs) */
     __libc_init_array();
 

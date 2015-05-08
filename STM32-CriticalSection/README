@@ -1,0 +1,60 @@
+This directory contains Chad Bartlett's version of HW 01 for EMBSYS110:
+    Critical Section Using SWP Instruction
+
+AUTHOR
+------
+20150430 - Chad Bartlett
+
+Project Tree
+------------
+bin/    -
+        |- CriticalSectionUsingSWP.hex
+bsp/    -
+        |- bsp.cpp
+        |- bsp.h
+        |- gpio.S
+        |- irq.cpp
+        |- irq.h
+        |- lpc2378.h
+        |- lpc2378_flash.ld
+        |- lpc2378_uw.cfg
+        |- pins.h
+        |- startup.S
+dbg/    -
+        |- debugger.cpp
+        |- print.cpp
+        |- print.h
+lib/    -
+        |- libCppUTest.a
+main/   -
+        |- main.cpp
+        |- mini_cpp.cpp
+prj/    -
+        |- CriticalSection.cpp
+        |- CriticalSection.h
+        |- Timer.cpp
+        |- Timer.h
+tests/  -
+        |- stubs/   -
+                    |- StubBsp.cpp
+        |- Makefile
+        |- RunnAllTests.cpp
+        |- TestCriticalSectionAPI.cpp
+        |- TestTemplate.cpp
+./      -
+        |- README
+        |- .cproject
+        |- .project
+
+
+Design
+------
+This application was designed to test a critical section implementation using
+SWP instead of disabling interrupts. Two timers are configured to trigger
+interrupts at 100-ms and 500-ms. During normal operation an LED is toggled
+within the 100-ms timer interrupt. In addition, within both interrupts handlers
+an attempt is made to take a critical section. If successful, a shared variable
+is incremented, checked for the correct value and subsequently decremented. If
+the check fails the system enters an error state for 5-seconds. During the error
+state, the LED is steady on. At the completion of the error state the shared
+variable is reset and the LED commences toggling once again.
