@@ -1,0 +1,1066 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"ty",
+				"typedef"
+			],
+			[
+				"Prin",
+				"PrintStr"
+			],
+			[
+				"Crit",
+				"CriticalSection"
+			],
+			[
+				"SYS",
+				"TICKS_BETWEEN_SYSTICK_IRQ	const uint32_t"
+			],
+			[
+				"uint",
+				"uint8_t	typedef"
+			],
+			[
+				"uin",
+				"uint8_t	typedef"
+			],
+			[
+				"BTN_",
+				"BTN_PRESSED"
+			],
+			[
+				"swit",
+				"switch-statement	switch-statement"
+			],
+			[
+				"GPIP",
+				"GPIO_Pin_9"
+			],
+			[
+				"LED",
+				"LED_GREEN	App::HwIdentifier_t"
+			],
+			[
+				"name",
+				"namespace"
+			],
+			[
+				"default",
+				"default_handler"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "/home/ubu/Projects/EmbSys110_cbartlett/STM32-CriticalSection/Bsp/Bsp.h",
+			"settings":
+			{
+				"buffer_size": 2651,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/ubu/Projects/EmbSys110_cbartlett/STM32-CriticalSection/Bsp/Bsp.cpp",
+			"settings":
+			{
+				"buffer_size": 3748,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "STM32-CriticalSection.sublime-project",
+			"settings":
+			{
+				"buffer_size": 1920,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "STM32-Template",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"STM32-Template",
+					""
+				],
+				[
+					"Packages/SublimeREPL/sublimerepl_build_system_hack.sublime-build",
+					""
+				],
+				[
+					"Packages/User/QpTestHarness.sublime-build",
+					""
+				],
+				[
+					"Packages/User/QpTestHarness.sublime-build",
+					"Clean"
+				],
+				[
+					"Packages/User/QpTestHarness.sublime-build",
+					"gcov"
+				],
+				[
+					"Packages/User/QpTestHarness.sublime-build",
+					"Test"
+				],
+				[
+					"Packages/User/TestHarness.sublime-build",
+					""
+				],
+				[
+					"Packages/User/TestHarness.sublime-build",
+					"Clean"
+				],
+				[
+					"Packages/User/TestHarness.sublime-build",
+					"Test"
+				],
+				[
+					"Packages/User/java.sublime-build",
+					""
+				],
+				[
+					"Packages/User/pez-home.sublime-build",
+					""
+				],
+				[
+					"Packages/User/pez-home.sublime-build",
+					"Clean"
+				],
+				[
+					"Packages/User/pez-home.sublime-build",
+					"gcov"
+				],
+				[
+					"Packages/User/pez-home.sublime-build",
+					"Test"
+				],
+				[
+					"Packages/User/pez.sublime-build",
+					""
+				],
+				[
+					"Packages/User/pez.sublime-build",
+					"Clean"
+				],
+				[
+					"Packages/User/pez.sublime-build",
+					"Test"
+				],
+				[
+					"Packages/User/pez_RleTests.sublime-build",
+					""
+				],
+				[
+					"Packages/User/pez_RleTests.sublime-build",
+					"Clean"
+				],
+				[
+					"Packages/User/pez_RleTests.sublime-build",
+					"Test"
+				]
+			],
+			[
+				"STM32-Template",
+				""
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"last_filter": "synm",
+		"selected_items":
+		[
+			[
+				"synm",
+				"Set Syntax: Makefile"
+			],
+			[
+				"save",
+				"File: Save All"
+			],
+			[
+				"sav",
+				"File: Save All"
+			],
+			[
+				"wra",
+				"Word Wrap: Toggle"
+			],
+			[
+				"susel",
+				"Surround: surround selection"
+			],
+			[
+				"selection",
+				"Surround: surround selection"
+			],
+			[
+				"sy",
+				"Set Syntax: Makefile"
+			],
+			[
+				"mak",
+				"Set Syntax: Makefile"
+			],
+			[
+				"make",
+				"Set Syntax: Makefile"
+			],
+			[
+				"proedi",
+				"Project: Edit Project"
+			],
+			[
+				"prosa",
+				"Project: Save As"
+			],
+			[
+				"add",
+				"Project: Add Folder"
+			],
+			[
+				"procl",
+				"Project: Close"
+			],
+			[
+				"susle",
+				"SublimeLinter: Show All Errors"
+			],
+			[
+				"sus",
+				"Surround: surround selection"
+			],
+			[
+				"saveal",
+				"File: Save All"
+			],
+			[
+				":w",
+				":w - Save"
+			],
+			[
+				"replsh",
+				"SublimeREPL: Shell"
+			],
+			[
+				"shel",
+				"SublimeREPL: Shell"
+			],
+			[
+				"shell",
+				"SublimeREPL: Shell"
+			],
+			[
+				"wo",
+				"Word Wrap: Toggle"
+			],
+			[
+				"wrap",
+				"Word Wrap: Toggle"
+			],
+			[
+				"sync",
+				"Set Syntax: C"
+			],
+			[
+				"synmake",
+				"Set Syntax: Makefile"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"relshe",
+				"SublimeREPL: Shell"
+			],
+			[
+				"proed",
+				"Project: Edit Project"
+			],
+			[
+				"clo",
+				"Project: Close"
+			],
+			[
+				"sublrsh",
+				"SublimeREPL: Shell"
+			],
+			[
+				"prosave",
+				"Project: Save As"
+			],
+			[
+				"add ",
+				"Project: Add Folder"
+			]
+		],
+		"width": 593.0
+	},
+	"console":
+	{
+		"height": 139.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = 'eb2297e1a458f27d836c04bb0cbaf282' + 'd0e7a3098092775ccb37ca9d6b2e4b7d'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by) "
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-CriticalSection",
+		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-CriticalSection/Bsp",
+		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-CriticalSection/Tests"
+	],
+	"file_history":
+	[
+		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-CriticalSection/Bsp/Interrupts.cpp",
+		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-CriticalSection/Makefile",
+		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-CriticalSection/Makefile.common",
+		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-CriticalSection/Bsp/stm32f100.ld",
+		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-CriticalSection/Bsp/Bsp.h",
+		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-CriticalSection/App/main.cpp",
+		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-CriticalSection/Lib/CriticalSection.cpp",
+		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-CriticalSection/Tests/Makefile",
+		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-CriticalSection/Makefile.Includes",
+		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-CriticalSection/STM32-CriticalSection.map",
+		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-CriticalSection/STM32-CriticalSection.elf",
+		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-CriticalSection/core",
+		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-CriticalSection/Tests/RunAllTests.sh",
+		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-CriticalSection/.gdbinit",
+		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-CriticalSection/obj/Bsp.s",
+		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-CriticalSection/Tests/Stubs/StubBsp.cpp",
+		"/home/ubu/Projects/EmbSys110_cbartlett/CriticalSectionUsingSWP/Makefile",
+		"/home/ubu/Projects/EmbSys110_cbartlett/CriticalSectionUsingSWP/main/main.cpp",
+		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-CriticalSection/Lib/CriticalSection.h",
+		"/home/ubu/Projects/EmbSys110_cbartlett/stm32vldiscover_package/Libraries/CMSIS/CM3/CoreSupport/core_cm3.h",
+		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-CriticalSection/Tests/Stubs/core_cm3.h",
+		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-CriticalSection/Makefile.LibIncludes",
+		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-CriticalSection/Tests/TestCriticalSectionAPI.cpp",
+		"/home/ubu/.config/sublime-text-3/Packages/User/SublimeClang.sublime-settings",
+		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-Template/STM32-Template.sublime-project",
+		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-Template/Bsp/startup_stm32f10x.cpp",
+		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-Template/Bsp/Interrupts.cpp",
+		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-Template/Bsp/stm32f10x_conf.h",
+		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-Template/Bsp/Bsp.cpp",
+		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-Template/Bsp/Bsp.h",
+		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-Template/Lib/DUart.cpp",
+		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-Template/Lib/DUart.h",
+		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-Template/App/main.cpp",
+		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-Template/Makefile.common",
+		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-Template/Makefile",
+		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-Template/Lib/uart.c",
+		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-Template/Lib/uart.h",
+		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-Template/Demo/main.cpp",
+		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-Template/Lib/Uart.h",
+		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-Template/STM32-Template.elf",
+		"/home/ubu/.config/openbox/lubuntu-rc.xml",
+		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-Template/Bsp/stm32f100.ld",
+		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-Template/Bsp/startup_stm32f10x.c",
+		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-Template/Demo/main.c",
+		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-Template/README.md",
+		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-Template/startup_stm32f10x.c",
+		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-Template/stm32f10x_conf.h",
+		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-Template/stm32f100.ld",
+		"/home/ubu/.vimrc"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+			"<project>",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"print",
+			"SystemCoreClock",
+			"TICKS_BETWEEN_SYSTICK_IRQ",
+			"SYSTICK_PER_SEC",
+			"=",
+			"_eusrstack",
+			"__no_init__",
+			"_susrstack",
+			"_usrstack",
+			">RAM",
+			"secion",
+			"_Minimum_Stack_Size",
+			"RAM",
+			"__bss_start__",
+			"SYSTICK",
+			"App::",
+			"TICKS_BETWEEN_",
+			"SYSTICK_",
+			"r0",
+			"%0",
+			"2",
+			"^.*cm3.h",
+			"   1:/home/ubu/Projects/EmbSys110_cbartlett/stm32vldiscover_package/Libraries/CMSIS/CM3/CoreSupport/core_cm3.h",
+			"UADEFS",
+			"DEFS",
+			"-",
+			"CLEANOTHER",
+			"r2",
+			"r1",
+			"ELF",
+			"STDINCS",
+			"-I",
+			"STDINCDIR",
+			"INCDIR",
+			"PERIPH",
+			"CSStatus_t",
+			"CSLock",
+			"LOCKED_STATE",
+			"BSP_",
+			"UNLOCKED_STATE",
+			"${folder:",
+			"STM32-Template.sublime-project",
+			"UART1_TX_PIN",
+			"UART1_RX_PIN",
+			"stdef",
+			"Uart_",
+			"PIN_UART_TX",
+			"PIN_UART_RX",
+			"App::",
+			"P",
+			"uint8_t",
+			"Uart_",
+			"UTestGroup",
+			"UART_H",
+			"BSP_H",
+			"SHIFT_TO_FIRST_NIBBLE",
+			"TRAILING_NIBBLE_SHIFT",
+			"nibble",
+			"cnt",
+			"BITS_IN_BYTE",
+			"NIBBLE_MASK",
+			"4",
+			"CONVERTSION",
+			"char",
+			"leadingZeros",
+			"USARTx",
+			"PIN_",
+			"int",
+			"uart_putc",
+			"UART1",
+			"BTN_USER",
+			"LED_GREEN",
+			"LED_BLUE",
+			"HwIdentifier_t",
+			"LED_GREEN",
+			";",
+			"flash",
+			"Set",
+			"HwIdentifier_t",
+			"BTN",
+			"TimingDelay",
+			"UTESTMACROS_H",
+			"97",
+			"e-",
+			"\"startup_stm32f10x\"",
+			"(uint8_t*)",
+			"_estack",
+			"stdint",
+			"_edata",
+			"_sdata",
+			"_sidata",
+			"_sbss",
+			"__bss_start__",
+			"_ebss",
+			"CC",
+			"assert_failed",
+			"void __attribute__\\(\\(weak\\)\\)",
+			"void __attribute__((weak))",
+			"void __attribute__((weak)) NMI_Handler(void)",
+			"static_cast<void (*)(void)>(",
+			"void ",
+			"__attribute__((weak, alias(\"default_handler\")))",
+			"void 0(void) __attribute__ ((weak, alias (\"default_handler\")));",
+			";",
+			",",
+			";",
+			"                DCD     ",
+			"static_cast<void (*)(void)>(0),",
+			"0,",
+			",",
+			"_estack",
+			"_",
+			"();\n",
+			"();",
+			"void",
+			"g_pfnVectors",
+			"cc",
+			"++",
+			"cc",
+			"/Demo",
+			"SystemInit",
+			"/Library",
+			"Library",
+			"CppUnitTestFramework"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": true,
+		"regex": true,
+		"replace_history":
+		[
+			"SYS_TICKS_BETWEEN_SYSTICK_IRQ",
+			"SYS_SYSTICK_PER_SEC",
+			"PIN_BTN_USER",
+			"PIN_LED_GREEN",
+			"PIN_LED_BLUE",
+			"PinConfiguration_t",
+			"__c_stack_top__",
+			"__data_end__",
+			"__data_start",
+			"__data_load",
+			"__bss_start__",
+			"__bss_end__"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": true,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 2,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "/home/ubu/Projects/EmbSys110_cbartlett/STM32-CriticalSection/Bsp/Bsp.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2651,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content"
+							],
+							"rulers":
+							[
+								80,
+								100
+							],
+							"syntax": "Packages/C Improved/C Improved.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/home/ubu/Projects/EmbSys110_cbartlett/STM32-CriticalSection/Bsp/Bsp.cpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3748,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1815,
+								1815
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content"
+							],
+							"easy_motion_mode": false,
+							"rulers":
+							[
+								80,
+								100
+							],
+							"syntax": "Packages/C++/C++.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 156.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "STM32-CriticalSection.sublime-project",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1920,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								555,
+								555
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content"
+							],
+							"rulers":
+							[
+								80,
+								100,
+								16.9,
+								17.2
+							],
+							"syntax": "Packages/JavaScript/JSON.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 34.0
+	},
+	"input":
+	{
+		"height": 33.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.astyle_error_message":
+	{
+		"height": 0.0
+	},
+	"output.clang":
+	{
+		"height": 112.0
+	},
+	"output.exec":
+	{
+		"height": 356.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "STM32-Template-Make",
+	"project": "STM32-CriticalSection.sublime-project",
+	"replace":
+	{
+		"height": 40.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"makefilcom",
+				"Makefile.common"
+			],
+			[
+				"bsp.h",
+				"Bsp/Bsp.h"
+			],
+			[
+				"makecom",
+				"Makefile.common"
+			],
+			[
+				"make.in",
+				"Makefile.Includes"
+			],
+			[
+				"testmake",
+				"Tests/Makefile"
+			],
+			[
+				"ld",
+				"Bsp/stm32f100.ld"
+			],
+			[
+				"map",
+				"STM32-CriticalSection.map"
+			],
+			[
+				".gd",
+				".gdbinit"
+			],
+			[
+				"crisec.cp",
+				"Lib/CriticalSection.cpp"
+			],
+			[
+				"make",
+				"Makefile"
+			],
+			[
+				"inst",
+				"Bsp/Interrupts.cpp"
+			],
+			[
+				"makco",
+				"Makefile.common"
+			],
+			[
+				"bsp.s",
+				"obj/Bsp.s"
+			],
+			[
+				"makeco",
+				"Makefile.common"
+			],
+			[
+				"makeficom",
+				"Makefile.common"
+			],
+			[
+				"stub",
+				"Tests/Stubs/StubBsp.cpp"
+			],
+			[
+				"stu",
+				"Tests/Stubs/StubBsp.cpp"
+			],
+			[
+				"testcri",
+				"Tests/TestCriticalSectionAPI.cpp"
+			],
+			[
+				"cri.cp",
+				"Lib/CriticalSection.cpp"
+			],
+			[
+				"cri.h",
+				"Lib/CriticalSection.h"
+			],
+			[
+				"in",
+				"Bsp/Interrupts.cpp"
+			],
+			[
+				"main",
+				"App/main.cpp"
+			],
+			[
+				"dua.h",
+				"Lib/DUart.h"
+			],
+			[
+				"uarc",
+				"Lib/uart.c"
+			],
+			[
+				"uar",
+				"Lib/uart.h"
+			],
+			[
+				"conf",
+				"Bsp/stm32f10x_conf.h"
+			],
+			[
+				"start",
+				"Bsp/startup_stm32f10x.cpp"
+			],
+			[
+				"cof",
+				"Bsp/stm32f10x_conf.h"
+			],
+			[
+				".ld",
+				"Bsp/stm32f100.ld"
+			],
+			[
+				"star",
+				"Bsp/startup_stm32f10x.c"
+			],
+			[
+				"ma",
+				"Demo/main.c"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"~/Projects/EmbSys110_cbartlett/EmbSys110-Overall.sublime-project"
+			],
+			[
+				"over",
+				"~/Projects/EmbSys110_cbartlett/EmbSys110-Overall.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 194.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
