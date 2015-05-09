@@ -12,13 +12,14 @@
 
 extern "C" {
 #include <stm32f10x.h>
+#include <system_stm32f10x.h>
 #include <stm32f10x_gpio.h>
 }
 
 // Forward declarations
 class DUart;
 
-#define TIME_MS_TO_TICK(ms)     (((ms)*App::SYSTICK_PER_SEC)/1000)
+#define TIME_MS_TO_TICK(ms)     (((ms)*App::SYS_SYSTICK_PER_SEC)/1000)
 
 namespace App {
 /**
@@ -29,8 +30,11 @@ namespace App {
 //
 
 //!< The number of clock cycles between calls to SysTick_Handler
-extern const uint32_t TICKS_BETWEEN_SYSTICK_IRQ;
-extern const uint32_t SYSTICK_PER_SEC;
+typedef enum
+{
+    SYS_TICKS_BETWEEN_SYSTICK_IRQ = SYSCLK_FREQ_24MHz / 1000, //!< Hz
+    SYS_SYSTICK_PER_SEC           = (SYSCLK_FREQ_24MHz / SYS_TICKS_BETWEEN_SYSTICK_IRQ),
+} SystemConstant_t;
 
 typedef enum
 {

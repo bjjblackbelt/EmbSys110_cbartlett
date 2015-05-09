@@ -22,11 +22,11 @@ CFLAGS  = -O0 -g
 
 CPPFLAGS = \
 	-fno-rtti \
-	-fno-exceptions
-	# -fmessage-length=0 \
-	# -mthumb-interwork \
-	# -mlong-calls \
-	# -fomit-frame-pointer
+	-fno-exceptions \
+	-fmessage-length=0 \
+	-mthumb-interwork \
+	-mlong-calls \
+	-fomit-frame-pointer
 
 ASFLAGS = -g
 

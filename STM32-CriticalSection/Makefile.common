@@ -50,14 +50,12 @@ STARTUP= \
 
 FULLASSERT = -DUSE_FULL_ASSERT
 
-# LDFLAGS+= -T$(LDSCRIPT) -mthumb -mcpu=cortex-m3 -Wl,-Map=$(PROJECT).map,--cref,--no-warn-mismatch,--gc-sections
 LDFLAGS+= -T$(LDSCRIPT) -mthumb -mcpu=cortex-m3 -Wl,-Map=$(PROJECT).map
-# LDFLAGS+= -T$(LDSCRIPT) -mthumb -mcpu=cortex-m3
 # CFLAGS+= -mcpu=cortex-m3 -mthumb -Wa,-adhln
 CFLAGS+= -mcpu=cortex-m3 -mthumb
 CFLAGS+= -I$(TEMPLATEROOT)/Bsp -I. $(STDINCS)
-CFLAGS+= -D$(PTYPE) -DUSE_STDPERIPH_DRIVER $(FULLASSERT)
-CFLAGS+= -I$(TEMPLATEROOT)/Lib/ff9/src -I$(TEMPLATEROOT)/Lib
+CFLAGS+= -D$(PTYPE) -DUSE_STDPERIPH_DRIVER $(FULLASSERT) -DSTM32F10X_MD_VL
+CFLAGS+= -I$(TEMPLATEROOT)/Lib
 CFLAGS+= -I$(LIBRARY)
 
 # add other objects to clean
@@ -84,21 +82,21 @@ $(OBJSDIR):
 	@mkdir -p $@
 
 $(OBJSDIR)/%.o: %.c
-	$(CC) -c $(CFLAGS) $(CWARNINGS) $< -o $@
-	$(CC) -MM $(CFLAGS) $< > $(OBJSDIR)/$*.d
+	@$(CC) -c $(CFLAGS) $(CWARNINGS) $< -o $@
+	@$(CC) -MM $(CFLAGS) $< > $(OBJSDIR)/$*.d
 
 $(OBJSDIR)/%.o: %.cpp
-	# $(CXX) -c $(CFLAGS) $(CPPFLAGS) $(CWARNINGS) $(CPPWARNINGS) $< -o $@ > $(OBJSDIR)/$*.s
-	$(CXX) -c $(CFLAGS) $(CPPFLAGS) $(CWARNINGS) $(CPPWARNINGS) $< -o $@
-	$(CXX) -MM $(CFLAGS) $(CPPFLAGS) $< > $(OBJSDIR)/$*.d
+	@$(CXX) -c $(CFLAGS) $(CPPFLAGS) $(CWARNINGS) $(CPPWARNINGS) $< -o $@
+	# @$(CXX) -c $(CFLAGS) $(CPPFLAGS) $(CWARNINGS) $(CPPWARNINGS) $< -o $@ > $(OBJSDIR)/$*.s
+	@$(CXX) -MM $(CFLAGS) $(CPPFLAGS) $< > $(OBJSDIR)/$*.d
 
 $(OBJSDIR)/%.o: %.s
-	$(CC) -c $(CFLAGS) $< -o $@
+	@$(CC) -c $(CFLAGS) $< -o $@
 
 $(BIN): $(ELF)
 	$(OBJCOPY) -O binary -S $< $@
 
-.PHONY:
+.PHONY: print
 print:
 	@echo "OBJ: "
 	@echo $(OBJS)

@@ -5,7 +5,7 @@
   * @version V3.3.0
   * @date    04/16/2010
   * @brief   CMSIS Cortex-M3 Device Peripheral Access Layer System Header File.
-  ******************************************************************************  
+  ******************************************************************************
   *
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
   * WITH CODING INFORMATION REGARDING THEIR PRODUCTS IN ORDER FOR THEM TO SAVE
@@ -24,8 +24,8 @@
 
 /** @addtogroup stm32f10x_system
   * @{
-  */  
-  
+  */
+
 /**
   * @brief Define to prevent recursive inclusion
   */
@@ -34,7 +34,7 @@
 
 #ifdef __cplusplus
  extern "C" {
-#endif 
+#endif
 
 /** @addtogroup STM32F10x_System_Includes
   * @{
@@ -48,6 +48,18 @@
 /** @addtogroup STM32F10x_System_Exported_types
   * @{
   */
+
+#if defined (STM32F10X_LD_VL) || (defined STM32F10X_MD_VL)
+/* #define SYSCLK_FREQ_HSE    HSE_Value */
+ #define SYSCLK_FREQ_24MHz  24000000
+#else
+/* #define SYSCLK_FREQ_HSE    HSE_Value */
+/* #define SYSCLK_FREQ_24MHz  24000000 */
+/* #define SYSCLK_FREQ_36MHz  36000000 */
+/* #define SYSCLK_FREQ_48MHz  48000000 */
+/* #define SYSCLK_FREQ_56MHz  56000000 */
+#define SYSCLK_FREQ_72MHz  72000000
+#endif
 
 extern uint32_t SystemCoreClock;          /*!< System Clock Frequency (Core Clock) */
 
@@ -74,7 +86,7 @@ extern uint32_t SystemCoreClock;          /*!< System Clock Frequency (Core Cloc
 /** @addtogroup STM32F10x_System_Exported_Functions
   * @{
   */
-  
+
 extern void SystemInit(void);
 extern void SystemCoreClockUpdate(void);
 /**
@@ -90,8 +102,8 @@ extern void SystemCoreClockUpdate(void);
 /**
   * @}
   */
-  
+
 /**
   * @}
-  */  
+  */
 /******************* (C) COPYRIGHT 2010 STMicroelectronics *****END OF FILE****/

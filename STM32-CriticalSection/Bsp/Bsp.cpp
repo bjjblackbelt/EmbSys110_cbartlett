@@ -23,10 +23,6 @@ static void Button_Init();
 
 static DUart* s_pUart = NULL;
 
-// Define constants
-const uint32_t App::TICKS_BETWEEN_SYSTICK_IRQ = SystemCoreClock / 1000; //!< Hz @ no.init
-const uint32_t App::SYSTICK_PER_SEC = (SystemCoreClock / TICKS_BETWEEN_SYSTICK_IRQ);
-
 namespace App {
 
 void InitHardware(DUart& uart)
@@ -38,7 +34,7 @@ void InitHardware(DUart& uart)
     s_pUart->Init();
 
     // Configure SysTick Timer
-    if (SysTick_Config(TICKS_BETWEEN_SYSTICK_IRQ)) while (1);
+    if (SysTick_Config(App::SYS_TICKS_BETWEEN_SYSTICK_IRQ)) while (1);
 }
 
 ButtonState_t ReadUserBtn()
@@ -94,8 +90,7 @@ void ResetSysTick()
 
 void DelayMs(uint32_t nTime)
 {
-    // uint32_t nTicks = TIME_MS_TO_TICK(nTime);
-    uint32_t nTicks = (((nTime)*App::SYSTICK_PER_SEC)/1000);
+    uint32_t nTicks = TIME_MS_TO_TICK(nTime);
     ResetSysTick();
     while (GetSysTick() < nTicks);
 }

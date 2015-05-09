@@ -16,7 +16,8 @@ include ../Makefile.Includes
 CPPUTEST_HOME = $(WORKSPACEROOT)/CppUTest
 
 # List all user C define here, like -D_DEBUG=1
-UDEFS =
+UDEFS = \
+	-DSTM32F10X_MD_VL
 
 # List Application source files here
 SRC  = \
@@ -62,3 +63,9 @@ all:
 .PHONY: clean
 clean:
 	@$(RM) ./$(PROJECT).sh
+
+.PHONY: print
+print:
+	@echo "INCDIR: "
+	@echo $(INCDIR)
+
