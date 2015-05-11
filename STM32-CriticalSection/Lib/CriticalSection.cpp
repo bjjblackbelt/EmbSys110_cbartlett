@@ -111,7 +111,7 @@ CriticalSection::Status_t CriticalSection::Query(int threadID)
     CriticalSection::Status_t status = BUSY;
     int state = static_cast<int>(m_lockedState);
 
-    if (App::CSLock(state) != App::LOCKED_STATE)
+    if (App::CSLock(&state) != App::LOCKED_STATE)
     {
         m_currThreadID = threadID;
         m_lockedState = static_cast<App::CSStatus_t>(state);

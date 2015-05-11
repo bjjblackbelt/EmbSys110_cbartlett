@@ -123,7 +123,7 @@ void DelayMs(uint32_t nTime);
  * @param lock - A reference to the lock variable
  * @returns Returns the value of LOCKED_STATE if the lock was NOT acquired.
 */
-CSStatus_t CSLock(int& lock);
+CSStatus_t CSLock(int* lock);
 
 } // namespace App
 #endif // #ifndef BSP_H

@@ -111,9 +111,14 @@ clean:
 test:
 	$(MAKE) -C Tests all
 
-.PHONY: debug
-debug: $(ELF)
-	ddd --debugger arm-none-eabi-gdb $(ELF)
+.PHONY: ddd
+ddd: $(ELF)
+	ddd --command=.ddd_gdb --debugger arm-none-eabi-gdb $(ELF)
+
+.PHONY: nemiver
+nemiver: $(ELF)
+	arm-none-eabi-gdb --batch --command=.nemiver_gdb $(ELF)
+	nemiver --remote=localhost:4242 --gdb-binary=/usr/bin/arm-none-eabi-gdb $(ELF)
 
 .PHONY: stlink
 stlink:

@@ -105,16 +105,15 @@ void PrintHex(uint32_t hex)
     s_pUart->PrintHex(hex);
 }
 
-CSStatus_t CSLock(int& lock)
+CSStatus_t CSLock(int* lock)
 {
 	CSStatus_t lockStatus;
 
 	asm volatile ("MOV r1, %2;"            /* Load the 'lock taken' value */
                   "LDREX r0, [%1];"        /* Load the lock value */
-                  "STREX r0, r1, [%1];"    /* r0 = lock -> lock = LOCKED_STATE */
-                  "STR r0, [%0];"          /* lockStatus = r0 */
-			      :                                                         /* Outputs: */
-				  : "r" (&lockStatus), "r" (&lock), "I" (App::LOCKED_STATE) /* Inputs: %0, %1, %2 */
+                  "STREX r0, r1, [%0];"    /* r0 = lock -> lock = LOCKED_STATE */
+			      : "=r" (lock)                                                        /* Outputs: */
+				  : "r" (lock), "I" (App::LOCKED_STATE) /* Inputs: %0, %1, %2 */
                   : "r0", "r1"                                              /* Clobbered Regs  */
 				  );
 

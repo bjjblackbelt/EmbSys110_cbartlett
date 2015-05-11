@@ -14,11 +14,17 @@ int main(void)
     int temp = App::UNLOCKED_STATE;
     App::PrintStr("Temp A: ");
     App::PrintHex(temp);
-    App::CSStatus_t state = App::CSLock(temp);
+    App::CSStatus_t state = App::CSLock(&temp);
     App::PrintStr(" Temp B: ");
     App::PrintHex(temp);
     App::PrintStr(" State: ");
     App::PrintHex(state);
+    App::PrintStr("\n");
+
+    if ((temp != App::LOCKED_STATE) || (state != App::UNLOCKED_STATE))
+    {
+        App::PrintStr(" > !!!FAILED!!! \n");
+    }
 
     // Main loop
     while (1)
