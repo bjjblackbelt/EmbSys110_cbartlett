@@ -10,24 +10,34 @@ DDEFS = -g3 $(WARNINGS)
 # Define project name
 PROJECT = RunAllTests
 
+include ../Makefile.Includes
+
 # Define CppUTest home
-CPPUTEST_HOME = ../../CppUTest
+CPPUTEST_HOME = $(WORKSPACEROOT)/CppUTest
 
 # List all user C define here, like -D_DEBUG=1
-UDEFS =
+UDEFS = \
+	-DSTM32F10X_MD_VL
 
 # List Application source files here
 SRC  = \
+	../Lib/CriticalSection.cpp
 
 # List Test source files here
 TSRC  = \
+	Stubs/StubBsp.cpp \
 	RunAllTests.cpp \
-	Test_Template.cpp
+	Test_Template.cpp \
+	TestCriticalSectionAPI.cpp
 
 # List all user directories here
 UINCDIR = \
-	. \
-	${CPPUTEST_HOME}/include/CppUTest
+	${CPPUTEST_HOME}/include/CppUTest \
+	$(STDINCDIR) \
+	./ \
+	../Lib \
+	../App \
+	../Bsp
 
 # List the user directory to look for the libraries here
 ULIBDIR = ${CPPUTEST_HOME}/lib
@@ -47,6 +57,15 @@ LIBS    = $(patsubst %,-l%,$(ULIBS))
 CPFLAGS = $(OPT) -fno-rtti -fno-exceptions -fmessage-length=0 -fomit-frame-pointer $(DEFS)
 
 all:
-	$(CC) $(SRC) $(TSRC) $(LIBDIR) $(LIBS) $(CPFLAGS) $(INCDIR) -o $(PROJECT).sh
-	./$(PROJECT).sh
+	@$(CC) $(SRC) $(TSRC) $(LIBDIR) $(LIBS) $(CPFLAGS) $(INCDIR) -o $(PROJECT).sh
+	@./$(PROJECT).sh
+
+.PHONY: clean
+clean:
+	@$(RM) ./$(PROJECT).sh
+
+.PHONY: print
+print:
+	@echo "INCDIR: "
+	@echo $(INCDIR)
 

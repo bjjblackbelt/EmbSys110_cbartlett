@@ -12,13 +12,14 @@
 
 extern "C" {
 #include <stm32f10x.h>
+#include <system_stm32f10x.h>
 #include <stm32f10x_gpio.h>
 }
 
 // Forward declarations
 class DUart;
 
-#define TIME_MS_TO_TICK(ms)     ((ms)*SYSTICK_PER_MS)
+#define TIME_MS_TO_TICK(ms)     (((ms)*App::SYS_SYSTICK_PER_SEC)/1000)
 
 namespace App {
 /**
@@ -29,19 +30,30 @@ namespace App {
 //
 
 //!< The number of clock cycles between calls to SysTick_Handler
-static const uint32_t TICKS_BETWEEN_SYSTICK_IRQ = SystemCoreClock/1000;  //!< Hz
-static const uint32_t SYSTICK_PER_MS = (SystemCoreClock/TICKS_BETWEEN_SYSTICK_IRQ/1000);
+typedef enum
+{
+    SYS_TICKS_BETWEEN_SYSTICK_IRQ = SYSCLK_FREQ_24MHz / 1000, //!< Hz
+    SYS_SYSTICK_PER_SEC           = (SYSCLK_FREQ_24MHz / SYS_TICKS_BETWEEN_SYSTICK_IRQ),
+} SystemConstant_t;
 
-typedef enum {
+typedef enum
+{
     PIN_LED_BLUE  = GPIO_Pin_8,
     PIN_LED_GREEN = GPIO_Pin_9,
     PIN_BTN_USER  = GPIO_Pin_0,
 } PinConfiguration_t;
 
-typedef enum {
+typedef enum
+{
     BTN_PRESSED  = Bit_SET,
     BTN_RELEASED = Bit_RESET,
 } ButtonState_t;
+
+typedef enum
+{
+    UNLOCKED_STATE = 0,
+    LOCKED_STATE   = 1
+} CSStatus_t;
 
 /** @} */
 
@@ -104,6 +116,14 @@ void PrintHex(uint32_t hex);
  * @param nTime The number of milliseconds to delay.
  */
 void DelayMs(uint32_t nTime);
+
+/**
+ * Uses LDREX and STREX instructions to set the lock for a critical section.
+ *
+ * @param lock - A reference to the lock variable
+ * @returns Returns the value of App::LOCKED_STATE if the lock was NOT acquired.
+*/
+CSStatus_t CSLock(int* lock);
 
 } // namespace App
 #endif // #ifndef BSP_H

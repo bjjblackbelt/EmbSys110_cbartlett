@@ -34,7 +34,7 @@ void InitHardware(DUart& uart)
     s_pUart->Init();
 
     // Configure SysTick Timer
-    if (SysTick_Config(TICKS_BETWEEN_SYSTICK_IRQ)) while (1);
+    if (SysTick_Config(App::SYS_TICKS_BETWEEN_SYSTICK_IRQ)) while (1);
 }
 
 ButtonState_t ReadUserBtn()
@@ -103,6 +103,22 @@ void PrintStr(char const * const string)
 void PrintHex(uint32_t hex)
 {
     s_pUart->PrintHex(hex);
+}
+
+CSStatus_t CSLock(int* lock)
+{
+	CSStatus_t lockStatus;
+
+	asm volatile ("MOV      r1, %[lockedState];"                               /* Load the 'lock taken' value */
+                  "LDREX    r0, [%[lockAddr]];"                                /* Load the lock value */
+                  "STREX    r0, r1, [%[lockAddr]];"                            /* r0 = lock -> lock = LOCKED_STATE */
+                  "MOV      %[lockStatus], r0;"                                /* lockedStatus = r0 */
+			      : [lockAddr] "=r" (lock), [lockStatus] "=r" (lockStatus)     /* Outputs: %0, %1 */
+				  : "[lockAddr]" (lock), [lockedState] "I" (App::LOCKED_STATE) /* Inputs:  %2, %3 */
+                  : "r0", "r1"                                                 /* Clobbered Regs  */
+				  );
+
+    return lockStatus;
 }
 
 } // namespace App

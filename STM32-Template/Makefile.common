@@ -1,18 +1,16 @@
 # name of executable
 
+PROJECT=$(notdir $(CURDIR))
 ELF=$(notdir $(CURDIR)).elf
 BIN=$(notdir $(CURDIR)).bin
 
-# Workspace path
-WORKSPACEROOT=/home/ubu/Projects/EmbSys110_cbartlett
+# Get common definitions
+
+include Makefile.Includes
 
 # Tool path
 
 TOOLROOT=/usr/bin
-
-# Library path
-
-LIBROOT=$(WORKSPACEROOT)/stm32vldiscover_package
 
 # Tools
 
@@ -22,13 +20,6 @@ LD=$(TOOLROOT)/arm-none-eabi-g++
 AR=$(TOOLROOT)/arm-none-eabi-ar
 AS=$(TOOLROOT)/arm-none-eabi-as
 OBJCOPY=$(TOOLROOT)/arm-none-eabi-objcopy
-
-# Code Paths
-
-DEVICE=$(LIBROOT)/Libraries/CMSIS/CM3/DeviceSupport/ST/STM32F10x
-CORE=$(LIBROOT)/Libraries/CMSIS/CM3/CoreSupport
-PERIPH=$(LIBROOT)/Libraries/STM32F10x_StdPeriph_Driver
-LIBRARY=/usr/arm-none-eabi/include
 
 # Search path for standard files
 
@@ -42,9 +33,7 @@ vpath %.c $(DEVICE)
 
 # Search path for Library
 
-vpath %.c $(TEMPLATEROOT)/Lib/ff9/src
-vpath %.c $(TEMPLATEROOT)/Lib/ff9/src/option
-vpath %.c $(TEMPLATEROOT)/Lib
+vpath %.cpp $(TEMPLATEROOT)/Lib
 
 #  Processor specific
 
@@ -54,18 +43,24 @@ STARTUP= \
 	startup_stm32f10x.o \
 	system_stm32f10x.o \
 	Interrupts.o \
+	DUart.o \
 	Bsp.o
 
 # Compilation Flags
 
 FULLASSERT = -DUSE_FULL_ASSERT
 
-LDFLAGS+= -T$(LDSCRIPT) -mthumb -mcpu=cortex-m3
+LDFLAGS+= -T$(LDSCRIPT) -mthumb -mcpu=cortex-m3 -Wl,-Map=$(PROJECT).map
+# CFLAGS+= -mcpu=cortex-m3 -mthumb -Wa,-adhln
 CFLAGS+= -mcpu=cortex-m3 -mthumb
-CFLAGS+= -I$(TEMPLATEROOT)/Bsp -I$(DEVICE) -I$(CORE) -I$(PERIPH)/inc -I.
-CFLAGS+= -D$(PTYPE) -DUSE_STDPERIPH_DRIVER $(FULLASSERT)
-CFLAGS+= -I$(TEMPLATEROOT)/Lib/ff9/src -I$(TEMPLATEROOT)/Lib
+CFLAGS+= -I$(TEMPLATEROOT)/Bsp -I. $(STDINCS)
+CFLAGS+= -D$(PTYPE) -DUSE_STDPERIPH_DRIVER $(FULLASSERT) -DSTM32F10X_MD_VL
+CFLAGS+= -I$(TEMPLATEROOT)/Lib
 CFLAGS+= -I$(LIBRARY)
+
+# add other objects to clean
+
+CLEANOTHER = $(PROJECT).map
 
 # Store object files in separate directory
 
@@ -75,11 +70,10 @@ OBJS := $(patsubst %.o,$(OBJSDIR)/%.o,$(OBJS))
 
 # Build executable
 
-all: $(ELF) $(BIN)
+all: $(ELF) $(BIN) test
 
 $(ELF) : $(OBJS)
 	$(CXX) $(LDFLAGS) -o $@ $(OBJS) $(LDLIBS)
-	$(MAKE) -C Tests all
 
 # compile and generate dependency info
 $(OBJS): | $(OBJSDIR)
@@ -88,20 +82,21 @@ $(OBJSDIR):
 	@mkdir -p $@
 
 $(OBJSDIR)/%.o: %.c
-	$(CC) -c $(CFLAGS) $(CWARNINGS) $< -o $@
-	$(CC) -MM $(CFLAGS) $< > $(OBJSDIR)/$*.d
+	@$(CC) -c $(CFLAGS) $(CWARNINGS) $< -o $@
+	@$(CC) -MM $(CFLAGS) $< > $(OBJSDIR)/$*.d
 
 $(OBJSDIR)/%.o: %.cpp
-	$(CXX) -c $(CFLAGS) $(CPPFLAGS) $(CWARNINGS) $(CPPWARNINGS) $< -o $@
-	$(CXX) -MM $(CFLAGS) $(CPPFLAGS) $< > $(OBJSDIR)/$*.d
+	@$(CXX) -c $(CFLAGS) $(CPPFLAGS) $(CWARNINGS) $(CPPWARNINGS) $< -o $@
+	# @$(CXX) -c $(CFLAGS) $(CPPFLAGS) $(CWARNINGS) $(CPPWARNINGS) $< -o $@ > $(OBJSDIR)/$*.s
+	@$(CXX) -MM $(CFLAGS) $(CPPFLAGS) $< > $(OBJSDIR)/$*.d
 
 $(OBJSDIR)/%.o: %.s
-	$(CC) -c $(CFLAGS) $< -o $@
+	@$(CC) -c $(CFLAGS) $< -o $@
 
 $(BIN): $(ELF)
 	$(OBJCOPY) -O binary -S $< $@
 
-.PHONY:
+.PHONY: print
 print:
 	@echo "OBJ: "
 	@echo $(OBJS)
@@ -116,9 +111,14 @@ clean:
 test:
 	$(MAKE) -C Tests all
 
-.PHONY: debug
-debug: $(ELF)
-	ddd --debugger arm-none-eabi-gdb $(ELF)
+.PHONY: ddd
+ddd: $(ELF)
+	ddd --command=.ddd_gdb --debugger arm-none-eabi-gdb $(ELF)
+
+.PHONY: nemiver
+nemiver: $(ELF)
+	arm-none-eabi-gdb --batch --command=.nemiver_gdb $(ELF)
+	nemiver --remote=localhost:4242 --gdb-binary=/usr/bin/arm-none-eabi-gdb $(ELF)
 
 .PHONY: stlink
 stlink:

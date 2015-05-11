@@ -9,7 +9,7 @@ LIBOBJS = \
 	stm32f10x_gpio.o \
 	stm32f10x_rcc.o \
 	stm32f10x_usart.o \
-	DUart.o
+	CriticalSection.o
 
 SRCOBJS= \
 	main.o
@@ -22,7 +22,11 @@ CFLAGS  = -O0 -g
 
 CPPFLAGS = \
 	-fno-rtti \
-	-fno-exceptions
+	-fno-exceptions \
+	-fmessage-length=0 \
+	-mthumb-interwork \
+	-mlong-calls \
+	-fomit-frame-pointer
 
 ASFLAGS = -g
 

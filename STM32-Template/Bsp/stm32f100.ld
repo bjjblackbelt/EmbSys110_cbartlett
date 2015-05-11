@@ -70,28 +70,24 @@ SECTIONS
 
     . = ALIGN(4);
      _etext = .;
-    /* This is used by the startup in order to initialize the .data secion
-*/
+    /* This is used by the startup in order to initialize the .data section */
     __data_load = _etext;
 
     /* This is the initialized data section
     The program executes knowing that the data is in the RAM
     but the loader puts the initial values in the FLASH (inidata).
-    It is one task of the startup to copy the initial values from FLASH to
-RAM. */
+    It is one task of the startup to copy the initial values from FLASH to RAM. */
     .data  : AT ( __data_load )
     {
         . = ALIGN(4);
-        /* This is used by the startup in order to initialize the .data
-secion */
+        /* This is used by the startup in order to initialize the .data section */
         __data_start = . ;
 
         *(.data)
         *(.data.*)
 
         . = ALIGN(4);
-        /* This is used by the startup in order to initialize the .data
-secion */
+        /* This is used by the startup in order to initialize the .data section */
         __data_end__ = . ;
     } >RAM
 
@@ -100,19 +96,17 @@ secion */
     .bss :
     {
         . = ALIGN(4);
-        /* This is used by the startup in order to initialize the .bss
-secion */
+        /* This is used by the startup in order to initialize the .bss section */
         __bss_start__ = .;
-	__bss_start__ = __bss_start__;
+    	__bss_start__ = __bss_start__;
         *(.bss)
         *(.bss.*)
         *(COMMON)
 
         . = ALIGN(4);
-        /* This is used by the startup in order to initialize the .bss
-secion */
+        /* This is used by the startup in order to initialize the .bss section */
         __bss_end__ = . ;
-	__bss_end__ = __bss_end__;
+    	__bss_end__ = __bss_end__;
     } >RAM
 
     PROVIDE ( end = __bss_end__ );
@@ -120,11 +114,22 @@ secion */
     PROVIDE ( _exit = __bss_end__ );
     PROVIDE (_stackend = ORIGIN(RAM) + LENGTH(RAM) - _Minimum_Stack_Size);
 
+    /* This is the no initialization section. Data in this section will not be
+       cleared upon reset.  */
+    .noinit :
+    {
+        . = ALIGN(4);
+        __no_init__ = . ;
+
+        . = . +  128; /* bytes */
+
+        . = ALIGN(4);
+        __no_init__ = . ;
+    } >RAM
+
     /* This is the user stack section
-    This is just to check that there is enough RAM left for the User mode
-stack
-    It should generate an error if it's full.
-     */
+    This is just to check that there is enough RAM left for the User mode stack
+    It should generate an error if it's full. */
     ._usrstack :
     {
         . = ALIGN(4);
