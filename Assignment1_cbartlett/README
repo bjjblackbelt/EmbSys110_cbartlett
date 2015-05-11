@@ -49,4 +49,4 @@ debug information. In addition, LEDs are toggled to indicate the state of the
 running application. Threads are executed forever using a round-robin schedule.
 The first two threads manipulate the globally shared variable and the third
 thread monitors the shared variable for errors. If an error occurs, a message is
-output through the serial-port and the LEDs flash an error pattern.
+output through the serial-port and the LEDs enter an error pattern state.
