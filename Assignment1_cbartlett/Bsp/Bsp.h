@@ -34,6 +34,9 @@ typedef enum
 {
     SYS_TICKS_BETWEEN_SYSTICK_IRQ = SYSCLK_FREQ_24MHz / 1000, //!< Hz
     SYS_SYSTICK_PER_SEC           = (SYSCLK_FREQ_24MHz / SYS_TICKS_BETWEEN_SYSTICK_IRQ),
+    SYS_TICKS_100_MS              = SYS_SYSTICK_PER_SEC / 10,
+    SYS_TICKS_250_MS              = SYS_SYSTICK_PER_SEC / 4,
+    SYS_TICKS_10_SEC              = 10 * SYS_SYSTICK_PER_SEC,
 } SystemConstant_t;
 
 typedef enum
@@ -105,10 +108,16 @@ void ResetSysTick();
 void PrintStr(char const * const string);
 
 /**
- * Print a hex number.
+ * Print a number in hexadecimal formal.
  * @param hex The number to be printed.
  */
 void PrintHex(uint32_t hex);
+
+/**
+ * Print a number in decimal formal.
+ * @param hex The number to be printed.
+ */
+void PrintDec(uint32_t dec);
 
 /**
  * Blocking delay function in milliseconds.

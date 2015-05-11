@@ -105,6 +105,11 @@ void PrintHex(uint32_t hex)
     s_pUart->PrintHex(hex);
 }
 
+void PrintDec(uint32_t dec)
+{
+    s_pUart->PrintDec(dec);
+}
+
 CSStatus_t CSLock(int* lock)
 {
 	CSStatus_t lockStatus;
@@ -155,7 +160,15 @@ static void Button_Init()
 #ifdef USE_FULL_ASSERT
 extern "C" void assert_failed(uint8_t* file , uint32_t line)
 {
-    (void)file; (void)line;
+    App::PrintStr("ASSERT: ");
+    App::PrintStr((char const * const)file);
+    App::PrintStr(" Line: ");
+    App::PrintHex(line);
+    App::PrintStr("\n");
+
+    App::SetLed(App::PIN_LED_BLUE);
+    App::SetLed(App::PIN_LED_GREEN);
+
     /* Infinite loop */
     /* Use GDB to find out why we're here */
     while (1);

@@ -39,10 +39,16 @@ class DUart
     void PrintStr(char const * const string);
 
     /**
-     * Print a hex number.
+     * Print a number in hexadecimal formal.
      * @param hex The number to be printed.
      */
     void PrintHex(uint32_t hex);
+
+    /**
+     * Print a number in decimal formal.
+     * @param hex The number to be printed.
+     */
+    void PrintDec(uint32_t dec);
 
   private:
     DUart(const DUart&);            //!< Intentionally not implemented
@@ -61,11 +67,17 @@ class DUart
     uint8_t GetC();
 
     /**
-     * Convert number to ascii character.
+     * Convert number to ascii character in hexadecimal format and print.
+     * @param  byte  The number to be converted.
+     */
+    void PrintHexCharacter(uint8_t byte);
+
+    /**
+     * Convert number to ascii character in decimal format and print.
      * @param  byte  The number to be converted.
      * @return       Returns the number as an ascii character.
      */
-    uint8_t ConvertHexToAscii(uint8_t byte);
+    void PrintDecimalCharacter(uint8_t byte);
 };
 
 #endif // #ifndef DUART_H
