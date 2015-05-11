@@ -88,18 +88,10 @@
 			}
 		},
 		{
-			"file": "Tests/Stubs/StubBsp.cpp",
+			"file": "README",
 			"settings":
 			{
-				"buffer_size": 553,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "STM32-Template.sublime-project",
-			"settings":
-			{
-				"buffer_size": 2236,
+				"buffer_size": 1520,
 				"line_ending": "Unix"
 			}
 		},
@@ -107,7 +99,7 @@
 			"file": "Makefile.common",
 			"settings":
 			{
-				"buffer_size": 2743,
+				"buffer_size": 2767,
 				"line_ending": "Unix"
 			}
 		}
@@ -207,12 +199,12 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 392.0,
-		"last_filter": "procl",
+		"height": 96.0,
+		"last_filter": "proclo",
 		"selected_items":
 		[
 			[
-				"procl",
+				"proclo",
 				"Project: Close"
 			],
 			[
@@ -270,6 +262,10 @@
 			[
 				"add",
 				"Project: Add Folder"
+			],
+			[
+				"procl",
+				"Project: Close"
 			],
 			[
 				"susle",
@@ -361,62 +357,16 @@
 	},
 	"expanded_folders":
 	[
-		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-Template"
+		"/home/ubu/Projects/EmbSys110_cbartlett/Assignment1_cbartlett",
+		"/home/ubu/Projects/EmbSys110_cbartlett/Assignment1_cbartlett/App",
+		"/home/ubu/Projects/EmbSys110_cbartlett/Assignment1_cbartlett/Bin",
+		"/home/ubu/Projects/EmbSys110_cbartlett/Assignment1_cbartlett/Bsp",
+		"/home/ubu/Projects/EmbSys110_cbartlett/Assignment1_cbartlett/Lib",
+		"/home/ubu/Projects/EmbSys110_cbartlett/Assignment1_cbartlett/Tests",
+		"/home/ubu/Projects/EmbSys110_cbartlett/Assignment1_cbartlett/Tests/Stubs"
 	],
 	"file_history":
 	[
-		"/home/ubu/.bash_aliases",
-		"/home/ubu/.config/sublime-text-3/Packages/User/SublimeClang.sublime-settings",
-		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-CriticalSection/.gdbinit",
-		"/home/ubu/bin/killstlink.sh",
-		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-CriticalSection/.nemiver_gdb",
-		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-CriticalSection/Makefile",
-		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-CriticalSection/Bsp/Interrupts.cpp",
-		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-CriticalSection/Makefile.common",
-		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-CriticalSection/Bsp/stm32f100.ld",
-		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-CriticalSection/Bsp/Bsp.h",
-		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-CriticalSection/App/main.cpp",
-		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-CriticalSection/Lib/CriticalSection.cpp",
-		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-CriticalSection/Tests/Makefile",
-		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-CriticalSection/Makefile.Includes",
-		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-CriticalSection/STM32-CriticalSection.map",
-		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-CriticalSection/STM32-CriticalSection.elf",
-		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-CriticalSection/core",
-		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-CriticalSection/Tests/RunAllTests.sh",
-		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-CriticalSection/obj/Bsp.s",
-		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-CriticalSection/Tests/Stubs/StubBsp.cpp",
-		"/home/ubu/Projects/EmbSys110_cbartlett/CriticalSectionUsingSWP/Makefile",
-		"/home/ubu/Projects/EmbSys110_cbartlett/CriticalSectionUsingSWP/main/main.cpp",
-		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-CriticalSection/Lib/CriticalSection.h",
-		"/home/ubu/Projects/EmbSys110_cbartlett/stm32vldiscover_package/Libraries/CMSIS/CM3/CoreSupport/core_cm3.h",
-		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-CriticalSection/Tests/Stubs/core_cm3.h",
-		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-CriticalSection/Makefile.LibIncludes",
-		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-CriticalSection/Tests/TestCriticalSectionAPI.cpp",
-		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-Template/STM32-Template.sublime-project",
-		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-Template/Bsp/startup_stm32f10x.cpp",
-		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-Template/Bsp/Interrupts.cpp",
-		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-Template/Bsp/stm32f10x_conf.h",
-		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-Template/Bsp/Bsp.cpp",
-		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-Template/Bsp/Bsp.h",
-		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-Template/Lib/DUart.cpp",
-		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-Template/Lib/DUart.h",
-		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-Template/App/main.cpp",
-		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-Template/Makefile.common",
-		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-Template/Makefile",
-		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-Template/Lib/uart.c",
-		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-Template/Lib/uart.h",
-		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-Template/Demo/main.cpp",
-		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-Template/Lib/Uart.h",
-		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-Template/STM32-Template.elf",
-		"/home/ubu/.config/openbox/lubuntu-rc.xml",
-		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-Template/Bsp/stm32f100.ld",
-		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-Template/Bsp/startup_stm32f10x.c",
-		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-Template/Demo/main.c",
-		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-Template/README.md",
-		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-Template/startup_stm32f10x.c",
-		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-Template/stm32f10x_conf.h",
-		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-Template/stm32f100.ld",
-		"/home/ubu/.vimrc"
 	],
 	"find":
 	{
@@ -485,7 +435,7 @@
 			"BSP_",
 			"UNLOCKED_STATE",
 			"${folder:",
-			"STM32-Template.sublime-project",
+			"Assignment1_cbartlett.sublime-project",
 			"UART1_TX_PIN",
 			"UART1_RX_PIN",
 			"stdef",
@@ -593,7 +543,7 @@
 	"groups":
 	[
 		{
-			"selected": 4,
+			"selected": 5,
 			"sheets":
 			[
 				{
@@ -609,8 +559,8 @@
 						"selection":
 						[
 							[
-								2619,
-								2619
+								2617,
+								2617
 							]
 						],
 						"settings":
@@ -679,8 +629,8 @@
 							[
 								80,
 								100,
-								18.9,
-								19.2
+								16.9,
+								17.2
 							],
 							"syntax": "Packages/C++/C++.tmLanguage"
 						},
@@ -704,8 +654,8 @@
 						"selection":
 						[
 							[
-								2534,
-								2534
+								2532,
+								2532
 							]
 						],
 						"settings":
@@ -773,13 +723,13 @@
 							[
 								80,
 								100,
-								35.9,
-								36.2
+								33.9,
+								34.2
 							],
 							"syntax": "Packages/C Improved/C Improved.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 793.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 4,
@@ -798,8 +748,8 @@
 						"selection":
 						[
 							[
-								2440,
-								2440
+								2438,
+								2438
 							]
 						],
 						"settings":
@@ -868,8 +818,8 @@
 							[
 								80,
 								100,
-								96.9,
-								97.2
+								94.9,
+								95.2
 							],
 							"syntax": "Packages/C++/C++.tmLanguage"
 						},
@@ -902,46 +852,11 @@
 							"BracketHighlighterBusy": false,
 							"bh_regions":
 							[
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
 								"bh_c_define",
 								"bh_c_define_center",
 								"bh_c_define_open",
 								"bh_c_define_close",
 								"bh_c_define_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
 								"bh_regex",
 								"bh_regex_center",
 								"bh_regex_open",
@@ -952,11 +867,46 @@
 								"bh_single_quote_open",
 								"bh_single_quote_close",
 								"bh_single_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
 								"bh_unmatched",
 								"bh_unmatched_center",
 								"bh_unmatched_open",
 								"bh_unmatched_close",
-								"bh_unmatched_content"
+								"bh_unmatched_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content"
 							],
 							"easy_motion_mode": false,
 							"rulers":
@@ -967,193 +917,6 @@
 								0.2
 							],
 							"syntax": "Packages/C++/C++.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "Tests/Stubs/StubBsp.cpp",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 553,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								497,
-								497
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"bh_regions":
-							[
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content"
-							],
-							"easy_motion_mode": false,
-							"rulers":
-							[
-								80,
-								100,
-								55.9,
-								56.2
-							],
-							"syntax": "Packages/C++/C++.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "STM32-Template.sublime-project",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2236,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"bh_regions":
-							[
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content"
-							],
-							"rulers":
-							[
-								80,
-								100
-							],
-							"syntax": "Packages/JavaScript/JSON.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -1163,20 +926,20 @@
 					"type": "text"
 				},
 				{
-					"buffer": 6,
-					"file": "Makefile.common",
+					"buffer": 4,
+					"file": "README",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2743,
+						"buffer_size": 1520,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2691,
-								2691
+								860,
+								860
 							]
 						],
 						"settings":
@@ -1184,31 +947,128 @@
 							"BracketHighlighterBusy": false,
 							"bh_regions":
 							[
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
 								"bh_single_quote",
 								"bh_single_quote_center",
 								"bh_single_quote_open",
 								"bh_single_quote_close",
 								"bh_single_quote_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
 								"bh_angle",
 								"bh_angle_center",
 								"bh_angle_open",
 								"bh_angle_close",
 								"bh_angle_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content"
+							],
+							"rulers":
+							[
+								80,
+								100
+							],
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "Makefile.common",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2767,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2202,
+								2202
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
 								"bh_c_define",
 								"bh_c_define_center",
 								"bh_c_define_open",
@@ -1219,42 +1079,37 @@
 								"bh_curly_open",
 								"bh_curly_close",
 								"bh_curly_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
 								"bh_regex",
 								"bh_regex_center",
 								"bh_regex_open",
 								"bh_regex_close",
 								"bh_regex_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
 								"bh_double_quote",
 								"bh_double_quote_center",
 								"bh_double_quote_open",
 								"bh_double_quote_close",
-								"bh_double_quote_content"
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
 							],
 							"easy_motion_mode": false,
 							"rulers":
 							[
 								80,
 								100,
-								-0.1,
-								0.2
+								19.9,
+								20.2
 							],
 							"syntax": "Packages/Makefile/Makefile.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 1201.0,
+						"translation.y": 70.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 0,
 					"type": "text"
 				}
 			]
@@ -1308,7 +1163,7 @@
 		"height": 0.0
 	},
 	"pinned_build_system": "STM32-Template-Make",
-	"project": "STM32-Template.sublime-project",
+	"project": "Assignment1_cbartlett.sublime-project",
 	"replace":
 	{
 		"height": 40.0
@@ -1321,8 +1176,8 @@
 		"selected_items":
 		[
 			[
-				"stub",
-				"Tests/Stubs/StubBsp.cpp"
+				"readm",
+				"README"
 			],
 			[
 				"critical.cpp",
@@ -1395,6 +1250,10 @@
 			[
 				"makeficom",
 				"Makefile.common"
+			],
+			[
+				"stub",
+				"Tests/Stubs/StubBsp.cpp"
 			],
 			[
 				"stu",

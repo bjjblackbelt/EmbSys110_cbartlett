@@ -1,0 +1,230 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+ADC1_2_IRQHandler	Bsp/startup_stm32f10x.cpp	150;"	d	file:
+ADC3_IRQHandler	Bsp/startup_stm32f10x.cpp	179;"	d	file:
+ASFLAGS	Makefile	/^ASFLAGS = -g$/;"	m
+App	Bsp/Bsp.cpp	/^namespace App {$/;"	n	file:
+App	Bsp/Bsp.h	/^namespace App {$/;"	n
+App	Bsp/Interrupts.cpp	/^namespace App {$/;"	n	file:
+BSP_H	Bsp/Bsp.h	9;"	d
+BTN_PRESSED	Bsp/Bsp.h	/^    BTN_PRESSED  = Bit_SET,$/;"	e	enum:App::__anon5
+BTN_RELEASED	Bsp/Bsp.h	/^    BTN_RELEASED = Bit_RESET,$/;"	e	enum:App::__anon5
+BUSY	Lib/CriticalSection.h	/^        BUSY,$/;"	e	enum:CriticalSection::__anon1
+BusFault_Handler	Bsp/startup_stm32f10x.cpp	126;"	d	file:
+ButtonState_t	Bsp/Bsp.h	/^} ButtonState_t;$/;"	t	namespace:App	typeref:enum:App::__anon5
+Button_Init	Bsp/Bsp.cpp	/^static void Button_Init()$/;"	f	file:
+CAN1_RX1_IRQHandler	Bsp/startup_stm32f10x.cpp	153;"	d	file:
+CAN1_SCE_IRQHandler	Bsp/startup_stm32f10x.cpp	154;"	d	file:
+CAN2_RX0_IRQHandler	Bsp/startup_stm32f10x.cpp	196;"	d	file:
+CAN2_RX1_IRQHandler	Bsp/startup_stm32f10x.cpp	197;"	d	file:
+CAN2_SCE_IRQHandler	Bsp/startup_stm32f10x.cpp	198;"	d	file:
+CAN2_TX_IRQHandler	Bsp/startup_stm32f10x.cpp	195;"	d	file:
+CC	Tests/Makefile	/^CC = g++$/;"	m
+CFLAGS	Makefile	/^CFLAGS  = -O0 -g$/;"	m
+CPFLAGS	Tests/Makefile	/^CPFLAGS = $(OPT) -fno-rtti -fno-exceptions -fmessage-length=0 -fomit-frame-pointer $(DEFS)$/;"	m
+CPPFLAGS	Makefile	/^CPPFLAGS = \\$/;"	m
+CPPUTEST_HOME	Tests/Makefile	/^CPPUTEST_HOME = $(WORKSPACEROOT)\/CppUTest$/;"	m
+CPPWARNINGS	Makefile	/^CPPWARNINGS	=-Weffc++ -Woverloaded-virtual$/;"	m
+CRITICAL_SECTION_H	Lib/CriticalSection.h	9;"	d
+CSLock	Bsp/Bsp.cpp	/^CSStatus_t CSLock(int* lock)$/;"	f	namespace:App
+CSLock	Tests/Stubs/StubBsp.cpp	/^App::CSStatus_t App::CSLock(int& lock)$/;"	f	class:App
+CSStatus_t	Bsp/Bsp.h	/^} CSStatus_t;$/;"	t	namespace:App	typeref:enum:App::__anon6
+CWARNINGS	Makefile	/^CWARNINGS   =-Wall \\$/;"	m
+Close	Lib/Timer.cpp	/^void Timer::Close(TimerNumber_t timer)$/;"	f	class:Timer
+ClrLed	Bsp/Bsp.cpp	/^void ClrLed(PinConfiguration_t led)$/;"	f	namespace:App
+ConvertHexToAscii	Lib/DUart.cpp	/^uint8_t DUart::ConvertHexToAscii(uint8_t byte)$/;"	f	class:DUart
+CriticalSection	Lib/CriticalSection.cpp	/^CriticalSection::CriticalSection()$/;"	f	class:CriticalSection
+CriticalSection	Lib/CriticalSection.h	/^class CriticalSection$/;"	c
+DDEFS	Tests/Makefile	/^DDEFS = -g3 $(WARNINGS)$/;"	m
+DEFS	Tests/Makefile	/^DEFS    = $(DDEFS) $(UDEFS)$/;"	m
+DMA1_Channel1_IRQHandler	Bsp/startup_stm32f10x.cpp	143;"	d	file:
+DMA1_Channel2_IRQHandler	Bsp/startup_stm32f10x.cpp	144;"	d	file:
+DMA1_Channel3_IRQHandler	Bsp/startup_stm32f10x.cpp	145;"	d	file:
+DMA1_Channel4_IRQHandler	Bsp/startup_stm32f10x.cpp	146;"	d	file:
+DMA1_Channel5_IRQHandler	Bsp/startup_stm32f10x.cpp	147;"	d	file:
+DMA1_Channel6_IRQHandler	Bsp/startup_stm32f10x.cpp	148;"	d	file:
+DMA1_Channel7_IRQHandler	Bsp/startup_stm32f10x.cpp	149;"	d	file:
+DMA2_Channel1_IRQHandler	Bsp/startup_stm32f10x.cpp	188;"	d	file:
+DMA2_Channel2_IRQHandler	Bsp/startup_stm32f10x.cpp	189;"	d	file:
+DMA2_Channel3_IRQHandler	Bsp/startup_stm32f10x.cpp	190;"	d	file:
+DMA2_Channel4_5_IRQHandler	Bsp/startup_stm32f10x.cpp	191;"	d	file:
+DMA2_Channel5_IRQHandler	Bsp/startup_stm32f10x.cpp	192;"	d	file:
+DUART_H	Lib/DUart.h	9;"	d
+DUart	Lib/DUart.cpp	/^DUart::DUart()$/;"	f	class:DUart
+DUart	Lib/DUart.h	/^class DUart$/;"	c
+DebugMon_Handler	Bsp/startup_stm32f10x.cpp	129;"	d	file:
+DelayMs	Bsp/Bsp.cpp	/^void DelayMs(uint32_t nTime)$/;"	f	namespace:App
+ETH_IRQHandler	Bsp/startup_stm32f10x.cpp	193;"	d	file:
+ETH_WKUP_IRQHandler	Bsp/startup_stm32f10x.cpp	194;"	d	file:
+EXTI0_IRQHandler	Bsp/startup_stm32f10x.cpp	138;"	d	file:
+EXTI15_10_IRQHandler	Bsp/startup_stm32f10x.cpp	172;"	d	file:
+EXTI1_IRQHandler	Bsp/startup_stm32f10x.cpp	139;"	d	file:
+EXTI2_IRQHandler	Bsp/startup_stm32f10x.cpp	140;"	d	file:
+EXTI3_IRQHandler	Bsp/startup_stm32f10x.cpp	141;"	d	file:
+EXTI4_IRQHandler	Bsp/startup_stm32f10x.cpp	142;"	d	file:
+EXTI9_5_IRQHandler	Bsp/startup_stm32f10x.cpp	155;"	d	file:
+Enter	Lib/CriticalSection.cpp	/^CriticalSection::Status_t CriticalSection::Enter(int threadID)$/;"	f	class:CriticalSection
+ExceptionHandler	Bsp/startup_stm32f10x.cpp	/^typedef void (*ExceptionHandler)(void);$/;"	t	file:
+FLASH_IRQHandler	Bsp/startup_stm32f10x.cpp	136;"	d	file:
+FSMC_IRQHandler	Bsp/startup_stm32f10x.cpp	180;"	d	file:
+GetC	Lib/DUart.cpp	/^uint8_t DUart::GetC()$/;"	f	class:DUart
+GetSysTick	Bsp/Bsp.cpp	/^uint32_t GetSysTick()$/;"	f	namespace:App
+I2C1_ER_IRQHandler	Bsp/startup_stm32f10x.cpp	164;"	d	file:
+I2C1_EV_IRQHandler	Bsp/startup_stm32f10x.cpp	163;"	d	file:
+I2C2_ER_IRQHandler	Bsp/startup_stm32f10x.cpp	166;"	d	file:
+I2C2_EV_IRQHandler	Bsp/startup_stm32f10x.cpp	165;"	d	file:
+INCDIR	Tests/Makefile	/^INCDIR  = $(patsubst %,-I%,$(DINCDIR) $(UINCDIR))$/;"	m
+Init	Lib/DUart.cpp	/^void DUart::Init()$/;"	f	class:DUart
+InitHardware	Bsp/Bsp.cpp	/^void InitHardware(DUart& uart)$/;"	f	namespace:App
+LEADING_NIBBLE_MASK	Lib/DUart.cpp	80;"	d	file:
+LIBDIR	Tests/Makefile	/^LIBDIR  = $(patsubst %,-L%,$(DLIBDIR) $(ULIBDIR))$/;"	m
+LIBOBJS	Makefile	/^LIBOBJS = \\$/;"	m
+LIBS	Tests/Makefile	/^LIBS    = $(patsubst %,-l%,$(ULIBS))$/;"	m
+LOCKED_STATE	Bsp/Bsp.h	/^    LOCKED_STATE   = 1$/;"	e	enum:App::__anon6
+Leave	Lib/CriticalSection.cpp	/^CriticalSection::Status_t CriticalSection::Leave(int threadID)$/;"	f	class:CriticalSection
+Led_Init	Bsp/Bsp.cpp	/^static void Led_Init()$/;"	f	file:
+MemManage_Handler	Bsp/startup_stm32f10x.cpp	125;"	d	file:
+NMI_Handler	Bsp/startup_stm32f10x.cpp	124;"	d	file:
+OBJS	Makefile	/^OBJS = $(LIBOBJS) $(SRCOBJS)$/;"	m
+OBJS	Tests/Makefile	/^OBJS    = $(SRC:.cpp=.o) $(TSRC:.cpp=.o)$/;"	m
+OPT	Tests/Makefile	/^OPT = -O0$/;"	m
+OTG_FS_IRQHandler	Bsp/startup_stm32f10x.cpp	199;"	d	file:
+Open	Lib/Timer.cpp	/^void Timer::Open(TimerNumber_t timer, uint32_t timerInterval)$/;"	f	class:Timer
+PIN_BTN_USER	Bsp/Bsp.h	/^    PIN_BTN_USER  = GPIO_Pin_0,$/;"	e	enum:App::__anon4
+PIN_LED_BLUE	Bsp/Bsp.h	/^    PIN_LED_BLUE  = GPIO_Pin_8,$/;"	e	enum:App::__anon4
+PIN_LED_GREEN	Bsp/Bsp.h	/^    PIN_LED_GREEN = GPIO_Pin_9,$/;"	e	enum:App::__anon4
+PROJECT	Tests/Makefile	/^PROJECT = RunAllTests$/;"	m
+PVD_IRQHandler	Bsp/startup_stm32f10x.cpp	133;"	d	file:
+PendSV_Handler	Bsp/startup_stm32f10x.cpp	130;"	d	file:
+PinConfiguration_t	Bsp/Bsp.h	/^} PinConfiguration_t;$/;"	t	namespace:App	typeref:enum:App::__anon4
+PrintHex	Bsp/Bsp.cpp	/^void PrintHex(uint32_t hex)$/;"	f	namespace:App
+PrintHex	Lib/DUart.cpp	/^void DUart::PrintHex(uint32_t hex)$/;"	f	class:DUart
+PrintStr	Bsp/Bsp.cpp	/^void PrintStr(char const * const string)$/;"	f	namespace:App
+PrintStr	Lib/DUart.cpp	/^void DUart::PrintStr(char const * const string)$/;"	f	class:DUart
+ProcessCounterTest	Lib/Timer.cpp	/^void Timer::ProcessCounterTest(int threadID)$/;"	f	class:Timer
+PutC	Lib/DUart.cpp	/^void DUart::PutC(uint8_t c)$/;"	f	class:DUart
+Query	Lib/CriticalSection.cpp	/^CriticalSection::Status_t CriticalSection::Query(int threadID)$/;"	f	class:CriticalSection
+RCC_IRQHandler	Bsp/startup_stm32f10x.cpp	137;"	d	file:
+RESOURCES	Lib/CriticalSection.h	/^        RESOURCES$/;"	e	enum:CriticalSection::__anon1
+RM	Tests/Makefile	/^RM = rm -fr$/;"	m
+RTCAlarm_IRQHandler	Bsp/startup_stm32f10x.cpp	173;"	d	file:
+RTC_IRQHandler	Bsp/startup_stm32f10x.cpp	135;"	d	file:
+ReadUserBtn	Bsp/Bsp.cpp	/^ButtonState_t ReadUserBtn()$/;"	f	namespace:App
+ResetDataMembers	Lib/CriticalSection.cpp	/^void CriticalSection::ResetDataMembers()$/;"	f	class:CriticalSection
+ResetSysTick	Bsp/Bsp.cpp	/^void ResetSysTick()$/;"	f	namespace:App
+Reset_Handler	Bsp/Interrupts.cpp	/^extern "C" void Reset_Handler(void)$/;"	f
+SDIO_IRQHandler	Bsp/startup_stm32f10x.cpp	181;"	d	file:
+SHIFT_TO_FIRST_NIBBLE_POS	Lib/DUart.cpp	81;"	d	file:
+SPI1_IRQHandler	Bsp/startup_stm32f10x.cpp	167;"	d	file:
+SPI2_IRQHandler	Bsp/startup_stm32f10x.cpp	168;"	d	file:
+SPI3_IRQHandler	Bsp/startup_stm32f10x.cpp	183;"	d	file:
+SRC	Tests/Makefile	/^SRC  = \\$/;"	m
+SRCOBJS	Makefile	/^SRCOBJS= \\$/;"	m
+SUCCESS	Lib/CriticalSection.h	/^        SUCCESS,$/;"	e	enum:CriticalSection::__anon1
+SVC_Handler	Bsp/startup_stm32f10x.cpp	128;"	d	file:
+SYSCLK_FREQ_24MHz	Tests/Stubs/StubBsp.cpp	10;"	d	file:
+SYS_SYSTICK_PER_SEC	Bsp/Bsp.h	/^    SYS_SYSTICK_PER_SEC           = (SYSCLK_FREQ_24MHz \/ SYS_TICKS_BETWEEN_SYSTICK_IRQ),$/;"	e	enum:App::__anon3
+SYS_TICKS_BETWEEN_SYSTICK_IRQ	Bsp/Bsp.h	/^    SYS_TICKS_BETWEEN_SYSTICK_IRQ = SYSCLK_FREQ_24MHz \/ 1000, \/\/!< Hz$/;"	e	enum:App::__anon3
+SetLed	Bsp/Bsp.cpp	/^void SetLed(PinConfiguration_t led)$/;"	f	namespace:App
+Spurious_Handler	Bsp/startup_stm32f10x.cpp	/^extern "C" void Spurious_Handler(void) {$/;"	f
+Start	Lib/Timer.cpp	/^void Timer::Start(TimerNumber_t timer)$/;"	f	class:Timer
+Status_t	Lib/CriticalSection.h	/^    } Status_t;$/;"	t	class:CriticalSection	typeref:enum:CriticalSection::__anon1
+Stop	Lib/Timer.cpp	/^void Timer::Stop(TimerNumber_t timer)$/;"	f	class:Timer
+SysTick_Handler	Bsp/Interrupts.cpp	/^extern "C" void SysTick_Handler(void)$/;"	f
+SysTick_Handler	Bsp/startup_stm32f10x.cpp	131;"	d	file:
+SystemConstant_t	Bsp/Bsp.h	/^} SystemConstant_t;$/;"	t	namespace:App	typeref:enum:App::__anon3
+SystemCoreClock	Tests/Stubs/StubBsp.cpp	/^uint32_t SystemCoreClock = SYSCLK_FREQ_24MHz;$/;"	v
+TAMPER_IRQHandler	Bsp/startup_stm32f10x.cpp	134;"	d	file:
+TEMPLATEROOT	Makefile	/^TEMPLATEROOT = .$/;"	m
+TEST	Tests/TestCriticalSectionAPI.cpp	/^TEST(TestCriticalSectionAPI, ASecondThreadCannotLeaveACritSectIfHeldByAnotherThread)$/;"	f
+TEST	Tests/TestCriticalSectionAPI.cpp	/^TEST(TestCriticalSectionAPI, ASecondThreadCannotTakeLockUntilNumLocksForFirstThreadIsZero)$/;"	f
+TEST	Tests/TestCriticalSectionAPI.cpp	/^TEST(TestCriticalSectionAPI, ASecondThreadCannotTakeTheCriticalSectionIfTakenByFirst)$/;"	f
+TEST	Tests/TestCriticalSectionAPI.cpp	/^TEST(TestCriticalSectionAPI, ASingleThreadCanTakeMultipleCriticalSections)$/;"	f
+TEST	Tests/TestCriticalSectionAPI.cpp	/^TEST(TestCriticalSectionAPI, FirstThreadLockThenUnlockThenSecondThreadLockSucceeds)$/;"	f
+TEST	Tests/TestCriticalSectionAPI.cpp	/^TEST(TestCriticalSectionAPI, FirstThreadUnLockThenlockThenSecondThreadLockFails)$/;"	f
+TEST	Tests/TestCriticalSectionAPI.cpp	/^TEST(TestCriticalSectionAPI, IfNoThreadHoldsTheCritSectReturnIndication)$/;"	f
+TEST	Tests/TestCriticalSectionAPI.cpp	/^TEST(TestCriticalSectionAPI, Initialize)$/;"	f
+TEST	Tests/TestCriticalSectionAPI.cpp	/^TEST(TestCriticalSectionAPI, ThereAreNoSideEffectsIfLeaveCritSectCalledWhenNoLocks)$/;"	f
+TEST	Tests/Test_Template.cpp	/^TEST(Template, Initialize)$/;"	f
+TEST_GROUP	Tests/TestCriticalSectionAPI.cpp	/^TEST_GROUP(TestCriticalSectionAPI)$/;"	f
+TEST_GROUP	Tests/Test_Template.cpp	/^TEST_GROUP(Template)$/;"	f
+THREAD_ID_RESET	Lib/CriticalSection.h	/^    static const int THREAD_ID_RESET = -1;$/;"	m	class:CriticalSection
+TIM1_BRK_IRQHandler	Bsp/startup_stm32f10x.cpp	156;"	d	file:
+TIM1_CC_IRQHandler	Bsp/startup_stm32f10x.cpp	159;"	d	file:
+TIM1_TRG_COM_IRQHandler	Bsp/startup_stm32f10x.cpp	158;"	d	file:
+TIM1_UP_IRQHandler	Bsp/startup_stm32f10x.cpp	157;"	d	file:
+TIM2_IRQHandler	Bsp/startup_stm32f10x.cpp	160;"	d	file:
+TIM3_IRQHandler	Bsp/startup_stm32f10x.cpp	161;"	d	file:
+TIM4_IRQHandler	Bsp/startup_stm32f10x.cpp	162;"	d	file:
+TIM5_IRQHandler	Bsp/startup_stm32f10x.cpp	182;"	d	file:
+TIM6_IRQHandler	Bsp/startup_stm32f10x.cpp	186;"	d	file:
+TIM7_IRQHandler	Bsp/startup_stm32f10x.cpp	187;"	d	file:
+TIM8_BRK_IRQHandler	Bsp/startup_stm32f10x.cpp	175;"	d	file:
+TIM8_CC_IRQHandler	Bsp/startup_stm32f10x.cpp	178;"	d	file:
+TIM8_TRG_COM_IRQHandler	Bsp/startup_stm32f10x.cpp	177;"	d	file:
+TIM8_UP_IRQHandler	Bsp/startup_stm32f10x.cpp	176;"	d	file:
+TIMER_00	Lib/Timer.h	/^        TIMER_00 = 0,$/;"	e	enum:Timer::__anon2
+TIMER_01	Lib/Timer.h	/^        TIMER_01 = 1,$/;"	e	enum:Timer::__anon2
+TIMER_COMPARE_VALUE	Lib/Timer.h	19;"	d
+TIMER_H	Lib/Timer.h	9;"	d
+TIMER_PRESCALER	Lib/Timer.h	/^    static const uint32_t TIMER_PRESCALER = 4000;$/;"	m	class:Timer
+TIME_MS_TO_TICK	Bsp/Bsp.h	22;"	d
+TIME_MS_TO_TICK	Lib/Timer.cpp	34;"	d	file:
+TSRC	Tests/Makefile	/^TSRC  = \\$/;"	m
+TglLed	Bsp/Bsp.cpp	/^void TglLed(PinConfiguration_t led)$/;"	f	namespace:App
+Timer	Lib/Timer.cpp	/^Timer::Timer()$/;"	f	class:Timer
+Timer	Lib/Timer.h	/^class Timer$/;"	c
+Timer0IntHandler	Lib/Timer.cpp	/^extern "C" void Timer::Timer0IntHandler()$/;"	f	class:Timer
+Timer1IntHandler	Lib/Timer.cpp	/^extern "C" void Timer::Timer1IntHandler()$/;"	f	class:Timer
+TimerNumber_t	Lib/Timer.h	/^    } TimerNumber_t;$/;"	t	class:Timer	typeref:enum:Timer::__anon2
+UART4_IRQHandler	Bsp/startup_stm32f10x.cpp	184;"	d	file:
+UART5_IRQHandler	Bsp/startup_stm32f10x.cpp	185;"	d	file:
+UDEFS	Tests/Makefile	/^UDEFS = \\$/;"	m
+UINCDIR	Tests/Makefile	/^UINCDIR = \\$/;"	m
+ULIBDIR	Tests/Makefile	/^ULIBDIR = ${CPPUTEST_HOME}\/lib$/;"	m
+ULIBS	Tests/Makefile	/^ULIBS = CppUTest$/;"	m
+UNLOCKED_STATE	Bsp/Bsp.h	/^    UNLOCKED_STATE = 0,$/;"	e	enum:App::__anon6
+USART1_BAUD_RATE	Lib/DUart.cpp	/^static const uint32_t USART1_BAUD_RATE = 115200;$/;"	v	file:
+USART1_IRQHandler	Bsp/startup_stm32f10x.cpp	169;"	d	file:
+USART1_RX_PIN	Lib/DUart.cpp	/^static const uint16_t USART1_RX_PIN    = GPIO_Pin_10;$/;"	v	file:
+USART1_TX_PIN	Lib/DUart.cpp	/^static const uint16_t USART1_TX_PIN    = GPIO_Pin_9;$/;"	v	file:
+USART2_IRQHandler	Bsp/startup_stm32f10x.cpp	170;"	d	file:
+USART3_IRQHandler	Bsp/startup_stm32f10x.cpp	171;"	d	file:
+USBWakeUp_IRQHandler	Bsp/startup_stm32f10x.cpp	174;"	d	file:
+USB_HP_CAN1_TX_IRQHandler	Bsp/startup_stm32f10x.cpp	151;"	d	file:
+USB_LP_CAN1_RX0_IRQHandler	Bsp/startup_stm32f10x.cpp	152;"	d	file:
+USE_CRIT_SECT	Lib/Timer.cpp	241;"	d	file:
+UsageFault_Handler	Bsp/startup_stm32f10x.cpp	127;"	d	file:
+VectorTableEntry	Bsp/startup_stm32f10x.cpp	/^} VectorTableEntry;$/;"	t	typeref:union:__anon7	file:
+WARNINGS	Tests/Makefile	/^WARNINGS = -Wall -Wextra$/;"	m
+WWDG_IRQHandler	Bsp/startup_stm32f10x.cpp	132;"	d	file:
+__STM32F10x_CONF_H	Bsp/stm32f10x_conf.h	2;"	d
+assert_failed	Bsp/Bsp.cpp	/^extern "C" void assert_failed(uint8_t* file , uint32_t line)$/;"	f
+assert_param	Bsp/stm32f10x_conf.h	14;"	d
+assert_param	Bsp/stm32f10x_conf.h	18;"	d
+g_pfnVectors	Bsp/startup_stm32f10x.cpp	/^VectorTableEntry const g_pfnVectors[] = {$/;"	v
+g_sysTick	Bsp/Interrupts.cpp	/^volatile uint32_t g_sysTick = 0;$/;"	m	namespace:App	file:
+handler	Bsp/startup_stm32f10x.cpp	/^    ExceptionHandler handler;$/;"	m	union:__anon7	file:
+m_currThreadID	Lib/CriticalSection.h	/^    volatile int m_currThreadID;$/;"	m	class:CriticalSection
+m_lockedState	Lib/CriticalSection.h	/^    volatile App::CSStatus_t m_lockedState;$/;"	m	class:CriticalSection
+m_nLocks	Lib/CriticalSection.h	/^    volatile int m_nLocks;$/;"	m	class:CriticalSection
+main	App/main.cpp	/^int main(void)$/;"	f
+main	Tests/RunAllTests.cpp	/^int main(int ac, char** av)$/;"	f
+pointer	Bsp/startup_stm32f10x.cpp	/^    void            *pointer;$/;"	m	union:__anon7	file:
+s_isErrorState	Lib/Timer.cpp	/^volatile bool Timer::s_isErrorState = false; \/\/ TODO: CMB - Remove after testing$/;"	m	class:Timer	file:
+s_isErrorState	Lib/Timer.h	/^    static volatile bool s_isErrorState; \/\/ TODO: CMB - Remove after testing$/;"	m	class:Timer
+s_pUart	Bsp/Bsp.cpp	/^static DUart* s_pUart = NULL;$/;"	v	file:
+s_sharedCounter	Lib/Timer.cpp	/^static volatile uint32_t s_sharedCounter;$/;"	v	file:
+s_sysTick	Lib/Timer.cpp	/^static uint32_t s_sysTick = 0;$/;"	v	file:
+s_threadID1	Tests/TestCriticalSectionAPI.cpp	/^static const int s_threadID1 = 0xC0DE;$/;"	v	file:
+s_threadID2	Tests/TestCriticalSectionAPI.cpp	/^static const int s_threadID2 = 0xCAFE;$/;"	v	file:
+s_timer1TicksPerSec	Lib/Timer.cpp	/^static uint32_t s_timer1TicksPerSec = 0;$/;"	v	file:
+s_timers	Lib/Timer.cpp	/^Timer_t* const Timer::s_timers[] = { TIMER0, TIMER1 };$/;"	m	class:Timer	file:
+s_timers	Lib/Timer.h	/^    static Timer_t* const s_timers[];$/;"	m	class:Timer
+~CriticalSection	Lib/CriticalSection.cpp	/^CriticalSection::~CriticalSection()$/;"	f	class:CriticalSection
+~DUart	Lib/DUart.cpp	/^DUart::~DUart()$/;"	f	class:DUart
+~Timer	Lib/Timer.cpp	/^Timer::~Timer()$/;"	f	class:Timer
