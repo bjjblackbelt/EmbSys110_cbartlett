@@ -19,6 +19,9 @@ Bsp/    -
         |- startup_stm32f10x.cpp
         |- stm32f100.ld
         |- stm32f10x_conf.h
+Doc/    -
+        |- Assignment1_Design_cbartlett.doc
+        |- Assignment1_Design_cbartlett.pdf
 Lib/    -
         |- CriticalSection.cpp
         |- CriticalSection.h
