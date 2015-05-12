@@ -3,4 +3,7 @@
 *.bin
 *.o
 *.d
+*.map
 *.tags*
+*.sh
+libopencm3/
