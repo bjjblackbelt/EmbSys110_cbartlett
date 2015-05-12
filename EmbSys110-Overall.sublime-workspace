@@ -1,0 +1,996 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"uint",
+				"uint8_t"
+			],
+			[
+				"OB",
+				"OBJSDIR"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "STM32-Template/Makefile",
+			"settings":
+			{
+				"buffer_size": 1377,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "STM32-Template/Bsp/Bsp.h",
+			"settings":
+			{
+				"buffer_size": 2656,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "STM32-Template/Bsp/Bsp.cpp",
+			"settings":
+			{
+				"buffer_size": 3907,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "stm32vldiscover_package/Libraries/CMSIS/CM3/CoreSupport/core_cm3.h",
+			"settings":
+			{
+				"buffer_size": 83896,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "stm32vldiscover_package/Libraries/CMSIS/CM3/DeviceSupport/ST/STM32F10x/system_stm32f10x.c",
+			"settings":
+			{
+				"buffer_size": 30020,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "stm32vldiscover_package/Libraries/CMSIS/CM3/DeviceSupport/ST/STM32F10x/system_stm32f10x.h",
+			"settings":
+			{
+				"buffer_size": 2358,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"proedi",
+				"Project: Edit Project"
+			],
+			[
+				"pack",
+				"PackageResourceViewer: Extract Package"
+			],
+			[
+				"list",
+				"Package Control: List Packages"
+			],
+			[
+				":w",
+				":w - Save"
+			],
+			[
+				"reshel",
+				"SublimeREPL: Shell"
+			],
+			[
+				"synmake",
+				"Set Syntax: Makefile"
+			],
+			[
+				"sublsh",
+				"SublimeREPL: Shell"
+			],
+			[
+				"prosav",
+				"Project: Save As"
+			],
+			[
+				"add",
+				"Project: Add Folder"
+			],
+			[
+				"ad",
+				"Project: Add Folder"
+			],
+			[
+				"sav",
+				"Project: Save As"
+			],
+			[
+				"clo",
+				"Project: Close"
+			],
+			[
+				"sublrsh",
+				"SublimeREPL: Shell"
+			],
+			[
+				"prosave",
+				"Project: Save As"
+			],
+			[
+				"add ",
+				"Project: Add Folder"
+			]
+		],
+		"width": 593.0
+	},
+	"console":
+	{
+		"height": 139.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = 'eb2297e1a458f27d836c04bb0cbaf282' + 'd0e7a3098092775ccb37ca9d6b2e4b7d'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by) "
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/home/ubu/Projects/EmbSys110_cbartlett",
+		"/home/ubu/Projects/EmbSys110_cbartlett/CriticalSectionUsingSWP",
+		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-Template",
+		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-Template/Bsp",
+		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-Template/Tests",
+		"/home/ubu/Projects/EmbSys110_cbartlett/stm32vldiscover_package",
+		"/home/ubu/Projects/EmbSys110_cbartlett/stm32vldiscover_package/Libraries",
+		"/home/ubu/Projects/EmbSys110_cbartlett/stm32vldiscover_package/Libraries/CMSIS",
+		"/home/ubu/Projects/EmbSys110_cbartlett/stm32vldiscover_package/Libraries/CMSIS/CM3",
+		"/home/ubu/Projects/EmbSys110_cbartlett/stm32vldiscover_package/Libraries/CMSIS/CM3/DeviceSupport",
+		"/home/ubu/Projects/EmbSys110_cbartlett/stm32vldiscover_package/Libraries/CMSIS/CM3/DeviceSupport/ST",
+		"/home/ubu/Projects/EmbSys110_cbartlett/stm32vldiscover_package/Libraries/CMSIS/CM3/DeviceSupport/ST/STM32F10x",
+		"/home/ubu/Projects/EmbSys110_cbartlett/stm32vldiscover_package/Libraries/STM32F10x_StdPeriph_Driver"
+	],
+	"file_history":
+	[
+		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-CriticalSection/Makefile.common",
+		"/home/ubu/Projects/EmbSys110_cbartlett/stm32vldiscover_package/Libraries/STM32F10x_StdPeriph_Driver/src/stm32f10x_gpio.c",
+		"/home/ubu/Projects/EmbSys110_cbartlett/stm32vldiscover_package/Libraries/STM32F10x_StdPeriph_Driver/inc/stm32f10x_usart.h",
+		"/home/ubu/Projects/EmbSys110_cbartlett/stm32vldiscover_package/Libraries/STM32F10x_StdPeriph_Driver/inc/stm32f10x_gpio.h",
+		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-CriticalSection/Bsp/stm32f10x_conf.h",
+		"/home/ubu/Projects/EmbSys110_cbartlett/CriticalSectionUsingSWP/bsp/bsp.h",
+		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-Template/Demo/main.cpp",
+		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-Template/Demo/main.c",
+		"/home/ubu/Projects/EmbSys110_cbartlett/EmbSys110-Overall.sublime-project",
+		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-Template/Demo/.gdbinit",
+		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-Template/Bsp/startup_stm32f10x.c",
+		"/home/ubu/Projects/EmbSys110_cbartlett/CriticalSectionUsingSWP/Makefile",
+		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-Template/Tests/Makefile",
+		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-Template/Makefile.common",
+		"/home/ubu/Projects/EmbSys110_cbartlett/CppUTest/src/CppUTest/MemoryLeakDetector.cpp",
+		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-Template/Demo/Makefile",
+		"/home/ubu/Projects/EmbSys110_cbartlett/stm32vldiscover_package/Libraries/CMSIS/CM3/DeviceSupport/ST/STM32F10x/system_stm32f10x.c",
+		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-Template/startup_stm32f10x.c",
+		"/home/ubu/.config/sublime-text-3/Packages/User/CTags.sublime-settings",
+		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-Template/.gdbinit",
+		"/home/ubu/.gdbinit",
+		"/home/ubu/Projects/EmbSys110_cbartlett/stm32vldiscover_package/Libraries/CMSIS/CM3/DeviceSupport/ST/STM32F10x/stm32f10x.h",
+		"/home/ubu/Projects/EmbSys110_cbartlett/STM32-Template/README.md",
+		"/home/ubu/.vimrc"
+	],
+	"find":
+	{
+		"height": 22.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+			"<project>,-*.htm,-*.html,",
+			"<project>,",
+			"/home/ubu/Projects/EmbSys110_cbartlett/",
+			"/home/ubu/Projects/EmbSys110_cbartlett/STM32-Template",
+			"./**",
+			"+${folder:${project_path}}/**,",
+			"+${project_path}/**,",
+			"${project_path}/**,",
+			"./**,",
+			"+./**,",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"SYSCLK_FREQ_HSE",
+			"SystemInit",
+			"extern",
+			"SystemCoreClock",
+			"extern SystemCoreClock",
+			"SystemCore",
+			"Delay",
+			"nTime",
+			"CLEANOTHER",
+			"obj",
+			"OBJS",
+			"Bsp/",
+			"$(TEMPLATEROOT)/",
+			"clean",
+			"OBJ",
+			"OBJS",
+			"gcc",
+			"TEMPLATEROOT",
+			"WORKSPACEROOT",
+			"TEMPLATEROOT",
+			"PROJECTROOT",
+			"TEMPLATEROOT",
+			"PROJECTROOT",
+			"s120",
+			"SystemInit",
+			"SystemInit.*",
+			"SystemInit",
+			"SystemCoreClock",
+			"SYSCLK_FREQ_HSE",
+			"STM32F10X_MD_VL",
+			"SystemInit",
+			"BIN",
+			"OBJCOPY",
+			"objcopy",
+			"OBJCOPY",
+			"objcopy",
+			"OBJCOPY",
+			"ELF"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": true,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 2,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "STM32-Template/Makefile",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1377,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content"
+							],
+							"rulers":
+							[
+								80,
+								100,
+								-0.1,
+								0.2
+							],
+							"syntax": "Packages/Makefile/Makefile.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "STM32-Template/Bsp/Bsp.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2656,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content"
+							],
+							"easy_motion_mode": false,
+							"rulers":
+							[
+								80,
+								100,
+								-0.1,
+								0.2
+							],
+							"syntax": "Packages/C Improved/C Improved.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "STM32-Template/Bsp/Bsp.cpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3907,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content"
+							],
+							"easy_motion_mode": false,
+							"rulers":
+							[
+								80,
+								100
+							],
+							"syntax": "Packages/C++/C++.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 13.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "stm32vldiscover_package/Libraries/CMSIS/CM3/CoreSupport/core_cm3.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 83896,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								79549,
+								79535
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content"
+							],
+							"rulers":
+							[
+								80,
+								100,
+								24.9,
+								25.2
+							],
+							"syntax": "Packages/C Improved/C Improved.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 21232.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "stm32vldiscover_package/Libraries/CMSIS/CM3/DeviceSupport/ST/STM32F10x/system_stm32f10x.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 30020,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2308,
+								2308
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content"
+							],
+							"rulers":
+							[
+								80,
+								100,
+								-0.1,
+								0.2
+							],
+							"syntax": "Packages/C Improved/C Improved.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "stm32vldiscover_package/Libraries/CMSIS/CM3/DeviceSupport/ST/STM32F10x/system_stm32f10x.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2358,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1763,
+								1763
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content"
+							],
+							"rulers":
+							[
+								80,
+								100,
+								-0.1,
+								0.2
+							],
+							"syntax": "Packages/C Improved/C Improved.tmLanguage",
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 21.0
+	},
+	"input":
+	{
+		"height": 33.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.astyle_error_message":
+	{
+		"height": 0.0
+	},
+	"output.clang":
+	{
+		"height": 112.0
+	},
+	"output.exec":
+	{
+		"height": 356.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "EmbSys110-Overall.sublime-project",
+	"replace":
+	{
+		"height": 40.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"make.com",
+				"STM32-CriticalSection/Makefile.common"
+			],
+			[
+				"sysste.h",
+				"stm32vldiscover_package/Libraries/CMSIS/CM3/DeviceSupport/ST/STM32F10x/system_stm32f10x.h"
+			],
+			[
+				"stmconf",
+				"STM32-CriticalSection/Bsp/stm32f10x_conf.h"
+			],
+			[
+				"bsp.h",
+				"STM32-Template/Bsp/Bsp.h"
+			],
+			[
+				"main.cp",
+				"STM32-Template/Demo/main.cpp"
+			],
+			[
+				"bsp.cp",
+				"STM32-Template/Bsp/Bsp.cpp"
+			],
+			[
+				"memleakde",
+				"CppUTest/src/CppUTest/MemoryLeakDetector.cpp"
+			],
+			[
+				"main",
+				"STM32-Template/Demo/main.c"
+			],
+			[
+				"system_s.c",
+				"stm32vldiscover_package/Libraries/CMSIS/CM3/DeviceSupport/ST/STM32F10x/system_stm32f10x.c"
+			],
+			[
+				"start",
+				"STM32-Template/startup_stm32f10x.c"
+			],
+			[
+				"ma",
+				"Makefile.common"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"~/Projects/EmbSys110_cbartlett/Assignment1_cbartlett/Assignment1_cbartlett.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 287.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
