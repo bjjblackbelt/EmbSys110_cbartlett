@@ -114,12 +114,6 @@ void PrintStr(char const * const string);
 void PrintHex(uint32_t hex);
 
 /**
- * Print a number in decimal formal.
- * @param hex The number to be printed.
- */
-void PrintDec(uint32_t dec);
-
-/**
  * Blocking delay function in milliseconds.
  *
  * @param nTime The number of milliseconds to delay.

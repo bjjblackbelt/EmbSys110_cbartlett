@@ -20,12 +20,6 @@ static const uint16_t USART1_RX_PIN    = GPIO_Pin_10;
 static const uint16_t USART1_TX_PIN    = GPIO_Pin_9;
 static const uint32_t USART1_BAUD_RATE = 115200;
 
-// For printing numeric values
-static const uint8_t NIBBLES_IN_WORD = 8;
-static const uint8_t BITS_IN_NIBBLE  = 4;
-#define LEADING_NIBBLE_MASK(nibble)         (0xF << (28 - (BITS_IN_NIBBLE*(nibble))))
-#define SHIFT_TO_FIRST_NIBBLE_POS(nibble)   (28 - (BITS_IN_NIBBLE*(nibble)))
-
 DUart::DUart()
 {
 }
@@ -82,6 +76,11 @@ void DUart::PrintStr(char const * const string)
 
 void DUart::PrintHex(uint32_t hex)
 {
+    static const uint8_t NIBBLES_IN_WORD = 8;
+    static const uint8_t BITS_IN_NIBBLE  = 4;
+    #define LEADING_NIBBLE_MASK(nibble)         (0xF << (28 - (BITS_IN_NIBBLE*(nibble))))
+    #define SHIFT_TO_FIRST_NIBBLE_POS(nibble)   (28 - (BITS_IN_NIBBLE*(nibble)))
+
     //!< Print the leading characters '0x'
     PrintHexCharacter(static_cast<uint8_t>(0));
     PutC(static_cast<uint8_t>('x'));
@@ -102,28 +101,6 @@ void DUart::PrintHex(uint32_t hex)
     {
         uint8_t character = static_cast<uint8_t>((hex >> SHIFT_TO_FIRST_NIBBLE_POS(nibble)) & 0xF);
         PrintHexCharacter(character);
-    }
-}
-
-void DUart::PrintDec(uint32_t dec)
-{
-    //!< Determine the number of leading nibbles that are zero
-    uint8_t leadingZeroNibbles = 0;
-    //!< Start with the most significant nibble and decrement until the nibble
-    //!< just before the least significant.
-    while (((dec & LEADING_NIBBLE_MASK(leadingZeroNibbles)) < 1)
-           && (leadingZeroNibbles < (NIBBLES_IN_WORD - 1)))
-    {
-        ++leadingZeroNibbles;
-    }
-
-    //!< Print the word starting at the first non-zero nibble.
-    //!< Always print at least the least significant nibble.
-    for (int nibble = leadingZeroNibbles; nibble < NIBBLES_IN_WORD; ++nibble)
-    {
-        uint8_t character = static_cast<uint8_t>((dec >> SHIFT_TO_FIRST_NIBBLE_POS(nibble)) & 0xF);
-
-        PrintDecimalCharacter(character);
     }
 }
 
@@ -152,21 +129,5 @@ void DUart::PrintHexCharacter(uint8_t byte)
     else //!< the number is in the range 10-15 so convert to ascii hex A-F
     {
         PutC(byte + HEX_DIGIT_ASCII_CONVERSION);
-    }
-}
-
-void DUart::PrintDecimalCharacter(uint8_t byte)
-{
-    const uint8_t SINGLE_DIGIT_ASCII_CONVERSION = 48;
-
-    //!< If the byte to be converted is in the range 0-9
-    if (byte < 10)
-    {
-        PutC(byte + SINGLE_DIGIT_ASCII_CONVERSION);
-    }
-    else //!< the number is in the range 10-15 so convert to ascii decimal
-    {
-        PutC((byte/10) + SINGLE_DIGIT_ASCII_CONVERSION);
-        PutC((byte%10) + SINGLE_DIGIT_ASCII_CONVERSION);
     }
 }

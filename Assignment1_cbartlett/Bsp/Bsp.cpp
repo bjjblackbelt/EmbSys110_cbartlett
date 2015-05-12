@@ -105,11 +105,6 @@ void PrintHex(uint32_t hex)
     s_pUart->PrintHex(hex);
 }
 
-void PrintDec(uint32_t dec)
-{
-    s_pUart->PrintDec(dec);
-}
-
 CSStatus_t CSLock(int* lock)
 {
 	CSStatus_t lockStatus;

@@ -8,8 +8,7 @@ int main(void)
 
     App::PrintStr("> Chad Bartlett's Assignment 1.\n\n");
     App::PrintStr("> Hardware initialization took: ");
-    // App::PrintDec(App::GetSysTick());
-    App::PrintDec(32);
+    App::PrintHex(App::GetSysTick());
     App::PrintStr("-milliseconds\n");
 
     // Main loop

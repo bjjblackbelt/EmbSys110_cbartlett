@@ -44,12 +44,6 @@ class DUart
      */
     void PrintHex(uint32_t hex);
 
-    /**
-     * Print a number in decimal formal.
-     * @param hex The number to be printed.
-     */
-    void PrintDec(uint32_t dec);
-
   private:
     DUart(const DUart&);            //!< Intentionally not implemented
     DUart& operator=(const DUart&); //!< Intentionally not implemented
