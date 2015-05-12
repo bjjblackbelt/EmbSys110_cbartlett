@@ -9,14 +9,14 @@
 #include <stdint.h>
 #include <stddef.h>
 #include "Bsp.h"
-#include "DUartInFc.h"
+#include "DUartIF.h"
 
 extern "C" {
 #include <stm32f10x_rcc.h>
 }
 
 // Global objects
-extern DUartInFc* g_pUart;
+extern DUartIF* g_pUart;
 
 // Prototypes
 /** Initialize the board LEDs */
@@ -93,16 +93,6 @@ void DelayMs(uint32_t nTime)
     while (GetSysTick() < nTicks);
 }
 
-void PrintStr(char const * const string)
-{
-    g_pUart->PrintStr(string);
-}
-
-void PrintHex(uint32_t hex)
-{
-    g_pUart->PrintHex(hex);
-}
-
 CSStatus_t CSLock(int* lock)
 {
 	CSStatus_t lockStatus;
@@ -153,11 +143,14 @@ static void Button_Init()
 #ifdef USE_FULL_ASSERT
 extern "C" void assert_failed(uint8_t* file , uint32_t line)
 {
-    App::PrintStr("ASSERT: ");
-    App::PrintStr((char const * const)file);
-    App::PrintStr(" Line: ");
-    App::PrintHex(line);
-    App::PrintStr("\n");
+    if (g_pUart != NULL)
+    {
+        g_pUart->PrintStr("ASSERT: ");
+        g_pUart->PrintStr((char const * const)file);
+        g_pUart->PrintStr(" Line: ");
+        g_pUart->PrintHex(line);
+        g_pUart->PrintStr("\n");
+    }
 
     App::SetLed(App::PIN_LED_BLUE);
     App::SetLed(App::PIN_LED_GREEN);

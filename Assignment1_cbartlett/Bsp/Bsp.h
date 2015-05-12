@@ -102,18 +102,6 @@ uint32_t GetSysTick();
 void ResetSysTick();
 
 /**
- * Prints a string.
- * @param string The string to be printed
- */
-void PrintStr(char const * const string);
-
-/**
- * Print a number in hexadecimal formal.
- * @param hex The number to be printed.
- */
-void PrintHex(uint32_t hex);
-
-/**
  * Blocking delay function in milliseconds.
  *
  * @param nTime The number of milliseconds to delay.

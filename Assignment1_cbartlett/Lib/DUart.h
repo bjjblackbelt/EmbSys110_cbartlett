@@ -8,15 +8,15 @@
 #ifndef DUART_H
 #define DUART_H
 
-#include "DUartInFc.h"
+#include "DUartIF.h"
 #include <stdint.h>
 
 /**
  * @class DUart
  * @brief An interface for a UART peripheral.
- * @see DUartInFc.h
+ * @see DUartIF.h
  */
-class DUart : public DUartInFc
+class DUart : public DUartIF
 {
   public:
     /**

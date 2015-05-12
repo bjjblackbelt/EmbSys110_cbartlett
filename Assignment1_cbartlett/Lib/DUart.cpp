@@ -21,7 +21,7 @@ static const uint16_t USART1_TX_PIN    = GPIO_Pin_9;
 static const uint32_t USART1_BAUD_RATE = 115200;
 
 DUart::DUart()
-: DUartInFc()
+: DUartIF()
 {
 }
 
@@ -57,9 +57,8 @@ void DUart::Init()
     USART_InitTypeDef USART_InitStructure;
     USART_StructInit(& USART_InitStructure);
 
-    // Modify USART_InitStructure for non -default values , e.g.
-    //  USART_InitStructure.USART_BaudRate = 38400;
-
+    // Modify USART_InitStructure for non -default values,
+    //  e.g. USART_InitStructure.USART_BaudRate = 38400;
     USART_InitStructure.USART_BaudRate = USART1_BAUD_RATE;
     USART_InitStructure.USART_Mode     = USART_Mode_Rx | USART_Mode_Tx;
     USART_Init(USART1 , &USART_InitStructure);

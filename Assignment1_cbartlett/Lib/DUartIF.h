@@ -1,6 +1,6 @@
 /**
  *******************************************************************************
- *  @file   DUartInFc.h
+ *  @file   DUartIF.h
  *  @brief  Declares an interface for a UART peripheral.
  *  @author Chad Bartlett   <cbartlet@uw.com>
  *******************************************************************************
@@ -11,26 +11,26 @@
 #include <stdint.h>
 
 /**
- * @class DUartInFc
+ * @class DUartIF
  * @brief An interface for a UART peripheral.
  */
-class DUartInFc
+class DUartIF
 {
   public:
     /**
      * Constructor
      */
-    DUartInFc();
+    DUartIF();
 
     /**
      * Destructor
      */
-    virtual ~DUartInFc();
+    virtual ~DUartIF();
 
     /**
      * Initialize the Uart peripheral.
      */
-    virtual void Init(){;};
+    virtual void Init() {;};
 
     /**
      * Prints a string.
@@ -44,34 +44,52 @@ class DUartInFc
      */
     void PrintHex(uint32_t hex);
 
+    /**
+     * Print an unsigned integer in decimal formal.
+     * @param dec The number to be printed.
+     */
+    void PrintUInt(uint32_t dec);
+
   protected:
-    DUartInFc(const DUartInFc&);            //!< Intentionally not implemented
-    DUartInFc& operator=(const DUartInFc&); //!< Intentionally not implemented
+    DUartIF(const DUartIF&);            //!< Intentionally not implemented
+    DUartIF& operator=(const DUartIF&); //!< Intentionally not implemented
 
     /**
      * Uart put char function
      * @param  c Character to be printed.
      */
-    virtual void PutC(uint8_t c){(void)c;}
+    virtual void PutC(uint8_t c) {(void)c;}
 
     /**
      * Reads a character from the Uart RX line.
      * @return Character read.
      */
-    virtual uint8_t GetC(){return 0;}
+    virtual uint8_t GetC() {return 0;}
 
     /**
-     * Convert number to ascii character in hexadecimal format and print.
-     * @param  byte  The number to be converted.
+     * Gets the position of the first non-zero nibble.
+     *
+     * The most significant nibble is in position 0. For example, given a number
+     * 0x0000CODE, this function will return 4 (i.e. '0xC' is in position 4).
+     *
+     * @param number The number to examine.
+     * @return The position (indexed from 0) of the first non-zero nibble.
      */
-    void PrintHexCharacter(uint8_t byte);
+    uint8_t GetPosOfFirstNonZeroNibble(uint32_t number);
+
+    /**
+     * Convert nibble to ascii character and print.
+     * @param  nibble  The number to be converted.
+     * @param  printDecimal  Flag to indicate whether to print in decimal format
+     */
+    void PrintNibble(uint8_t nibble);
 
     /**
      * Convert number to ascii character in decimal format and print.
      * @param  byte  The number to be converted.
      * @return       Returns the number as an ascii character.
      */
-    void PrintDecimalCharacter(uint8_t byte);
+    void PrintUIntimalCharacter(uint8_t byte);
 };
 
 #endif // #ifndef DUARTINFC_H

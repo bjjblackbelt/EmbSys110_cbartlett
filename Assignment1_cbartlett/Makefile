@@ -11,7 +11,7 @@ LIBOBJS = \
 	stm32f10x_usart.o \
     CriticalSection.o \
 	Interrupts.o \
-    DUartInFc.o \
+    DUartIF.o \
 	mini_cpp.o \
 	no_heap.o \
 	DUart.o \
