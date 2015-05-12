@@ -63,7 +63,7 @@ typedef enum
 /**
  * Configures the base peripherals used in this application.
  */
-void InitHardware(DUart& uart);
+void InitHardware();
 
 /**
  * Reads the state of the user button.

@@ -8,13 +8,15 @@
 #ifndef DUART_H
 #define DUART_H
 
+#include "DUartInFc.h"
 #include <stdint.h>
 
 /**
  * @class DUart
  * @brief An interface for a UART peripheral.
+ * @see DUartInFc.h
  */
-class DUart
+class DUart : public DUartInFc
 {
   public:
     /**
@@ -25,26 +27,14 @@ class DUart
     /**
      * Destructor
      */
-    ~DUart();
+    virtual ~DUart();
 
     /**
      * Initialize the Uart peripheral.
      */
-    void Init();
+    virtual void Init();
 
-    /**
-     * Prints a string.
-     * @param string The string to be printed
-     */
-    void PrintStr(char const * const string);
-
-    /**
-     * Print a number in hexadecimal formal.
-     * @param hex The number to be printed.
-     */
-    void PrintHex(uint32_t hex);
-
-  private:
+  protected:
     DUart(const DUart&);            //!< Intentionally not implemented
     DUart& operator=(const DUart&); //!< Intentionally not implemented
 
@@ -52,26 +42,13 @@ class DUart
      * Uart put char function
      * @param  c Character to be printed.
      */
-    void PutC(uint8_t c);
+    virtual void PutC(uint8_t c);
 
     /**
      * Reads a character from the Uart RX line.
      * @return Character read.
      */
-    uint8_t GetC();
-
-    /**
-     * Convert number to ascii character in hexadecimal format and print.
-     * @param  byte  The number to be converted.
-     */
-    void PrintHexCharacter(uint8_t byte);
-
-    /**
-     * Convert number to ascii character in decimal format and print.
-     * @param  byte  The number to be converted.
-     * @return       Returns the number as an ascii character.
-     */
-    void PrintDecimalCharacter(uint8_t byte);
+    virtual uint8_t GetC();
 };
 
 #endif // #ifndef DUART_H

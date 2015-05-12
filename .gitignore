@@ -7,3 +7,4 @@
 *.tags*
 *.sh
 libopencm3/
+*.sublime-workspace

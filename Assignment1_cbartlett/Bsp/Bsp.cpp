@@ -9,11 +9,14 @@
 #include <stdint.h>
 #include <stddef.h>
 #include "Bsp.h"
-#include "DUart.h"
+#include "DUartInFc.h"
 
 extern "C" {
 #include <stm32f10x_rcc.h>
 }
+
+// Global objects
+extern DUartInFc* g_pUart;
 
 // Prototypes
 /** Initialize the board LEDs */
@@ -21,17 +24,12 @@ static void Led_Init();
 /** Initialize the USER button */
 static void Button_Init();
 
-static DUart* s_pUart = NULL;
-
 namespace App {
 
-void InitHardware(DUart& uart)
+void InitHardware()
 {
-    s_pUart = &uart;
-
     Led_Init();
     Button_Init();
-    s_pUart->Init();
 
     // Configure SysTick Timer
     if (SysTick_Config(App::SYS_TICKS_BETWEEN_SYSTICK_IRQ)) while (1);
@@ -97,12 +95,12 @@ void DelayMs(uint32_t nTime)
 
 void PrintStr(char const * const string)
 {
-    s_pUart->PrintStr(string);
+    g_pUart->PrintStr(string);
 }
 
 void PrintHex(uint32_t hex)
 {
-    s_pUart->PrintHex(hex);
+    g_pUart->PrintHex(hex);
 }
 
 CSStatus_t CSLock(int* lock)
