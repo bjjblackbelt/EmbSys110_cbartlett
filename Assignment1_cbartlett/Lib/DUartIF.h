@@ -51,9 +51,6 @@ class DUartIF
     void PrintUInt(uint32_t dec);
 
   protected:
-    DUartIF(const DUartIF&);            //!< Intentionally not implemented
-    DUartIF& operator=(const DUartIF&); //!< Intentionally not implemented
-
     /**
      * Uart put char function
      * @param  c Character to be printed.
@@ -65,6 +62,10 @@ class DUartIF
      * @return Character read.
      */
     virtual uint8_t GetC() {return 0;}
+
+  private:
+    DUartIF(const DUartIF&);            //!< Intentionally not implemented
+    DUartIF& operator=(const DUartIF&); //!< Intentionally not implemented
 
     /**
      * Gets the position of the first non-zero nibble.
@@ -80,16 +81,8 @@ class DUartIF
     /**
      * Convert nibble to ascii character and print.
      * @param  nibble  The number to be converted.
-     * @param  printDecimal  Flag to indicate whether to print in decimal format
      */
     void PrintNibble(uint8_t nibble);
-
-    /**
-     * Convert number to ascii character in decimal format and print.
-     * @param  byte  The number to be converted.
-     * @return       Returns the number as an ascii character.
-     */
-    void PrintUIntimalCharacter(uint8_t byte);
 };
 
 #endif // #ifndef DUARTINFC_H
