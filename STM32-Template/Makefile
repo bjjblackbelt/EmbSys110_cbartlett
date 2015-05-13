@@ -9,7 +9,14 @@ LIBOBJS = \
 	stm32f10x_gpio.o \
 	stm32f10x_rcc.o \
 	stm32f10x_usart.o \
-	CriticalSection.o
+    CriticalSection.o \
+	Interrupts.o \
+    DUartIF.o \
+	mini_cpp.o \
+	no_heap.o \
+	DUart.o \
+	Bsp.o
+
 
 SRCOBJS= \
 	main.o

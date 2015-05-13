@@ -21,13 +21,15 @@ UDEFS = \
 
 # List Application source files here
 SRC  = \
-	../Lib/CriticalSection.cpp
+	../Lib/CriticalSection.cpp \
+	../Lib/DUartIF.cpp
 
 # List Test source files here
 TSRC  = \
 	Stubs/StubBsp.cpp \
 	RunAllTests.cpp \
-	Test_Template.cpp \
+	TestTemplate.cpp \
+	TestDUartIF.cpp \
 	TestCriticalSectionAPI.cpp
 
 # List all user directories here

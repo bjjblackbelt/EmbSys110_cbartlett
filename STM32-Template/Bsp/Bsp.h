@@ -34,6 +34,9 @@ typedef enum
 {
     SYS_TICKS_BETWEEN_SYSTICK_IRQ = SYSCLK_FREQ_24MHz / 1000, //!< Hz
     SYS_SYSTICK_PER_SEC           = (SYSCLK_FREQ_24MHz / SYS_TICKS_BETWEEN_SYSTICK_IRQ),
+    SYS_TICKS_100_MS              = SYS_SYSTICK_PER_SEC / 10,
+    SYS_TICKS_250_MS              = SYS_SYSTICK_PER_SEC / 4,
+    SYS_TICKS_10_SEC              = 10 * SYS_SYSTICK_PER_SEC,
 } SystemConstant_t;
 
 typedef enum
@@ -60,7 +63,7 @@ typedef enum
 /**
  * Configures the base peripherals used in this application.
  */
-void InitHardware(DUart& uart);
+void InitHardware();
 
 /**
  * Reads the state of the user button.
@@ -97,18 +100,6 @@ uint32_t GetSysTick();
  * Resets the value of the system tick counter to zero.
  */
 void ResetSysTick();
-
-/**
- * Prints a string.
- * @param string The string to be printed
- */
-void PrintStr(char const * const string);
-
-/**
- * Print a hex number.
- * @param hex The number to be printed.
- */
-void PrintHex(uint32_t hex);
 
 /**
  * Blocking delay function in milliseconds.

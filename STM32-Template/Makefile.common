@@ -41,10 +41,7 @@ PTYPE = STM32F10X_MD_VL
 LDSCRIPT = $(TEMPLATEROOT)/Bsp/stm32f100.ld
 STARTUP= \
 	startup_stm32f10x.o \
-	system_stm32f10x.o \
-	Interrupts.o \
-	DUart.o \
-	Bsp.o
+	system_stm32f10x.o
 
 # Compilation Flags
 
@@ -106,6 +103,7 @@ print:
 .PHONY: clean
 clean:
 	rm -fr $(OBJSDIR) $(BIN) $(ELF) $(CLEANOTHER)
+	$(MAKE) -C Tests clean
 
 .PHONY: test
 test:

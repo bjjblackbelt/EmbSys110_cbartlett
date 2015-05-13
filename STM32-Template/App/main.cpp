@@ -1,25 +1,32 @@
+#include <stddef.h>
 #include "Bsp.h"
+#include "DUartIF.h"
 #include "DUart.h"
+
+DUartIF* g_pUart = NULL;
 
 int main(void)
 {
     DUart uart;
+    uart.Init();
 
-    App::InitHardware(uart);
+    // Initialize global objects
+    g_pUart = &uart;
 
-    App::ClrLed(App::PIN_LED_BLUE);
+    App::InitHardware();
+
     App::ClrLed(App::PIN_LED_GREEN);
 
     //TODO: CMB - Remove
     int temp = App::UNLOCKED_STATE;
-    App::PrintStr("Temp A: ");
-    App::PrintHex(temp);
+    g_pUart->PrintStr("Temp A: ");
+    g_pUart->PrintUInt(temp);
     App::CSStatus_t state = App::CSLock(&temp);
-    App::PrintStr(" Temp B: ");
-    App::PrintHex(temp);
-    App::PrintStr(" State: ");
-    App::PrintHex(state);
-    App::PrintStr("\n");
+    g_pUart->PrintStr(" Temp B: ");
+    g_pUart->PrintUInt(temp);
+    g_pUart->PrintStr(" State: ");
+    g_pUart->PrintUInt(state);
+    g_pUart->PrintStr("\n");
 
     if ((temp != App::LOCKED_STATE) || (state != App::UNLOCKED_STATE))
     {
@@ -33,7 +40,6 @@ int main(void)
         {
             case App::BTN_PRESSED:
             {
-                App::TglLed(App::PIN_LED_BLUE);
                 App::TglLed(App::PIN_LED_GREEN);
                 break;
             }
@@ -45,9 +51,9 @@ int main(void)
             }
         }
 
-        App::PrintStr("Hello World. Number: ");
-        App::PrintHex(0xC0DE);
-        App::PrintStr("\n");
+        g_pUart->PrintStr("Hello World. Number: ");
+        g_pUart->PrintHex(0xC0DE);
+        g_pUart->PrintStr("\n");
 
         App::DelayMs(250);  // wait 250ms
     }

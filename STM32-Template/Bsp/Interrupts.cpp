@@ -12,6 +12,7 @@ extern "C" {
 
 #include <stdint.h>
 #include <stm32f10x_conf.h>
+#include "Bsp.h"
 
 namespace App {
 volatile uint32_t g_sysTick = 0;
@@ -46,6 +47,7 @@ extern "C" void Reset_Handler(void)
 
     /* Use the STM32 Libraries to initialize system */
     SystemInit();
+    App::ResetSysTick();
 
     /* call all static constructors in C++ (harmless in C programs) */
     __libc_init_array();
@@ -62,7 +64,13 @@ extern "C" void Reset_Handler(void)
 
 extern "C" void SysTick_Handler(void)
 {
-    ++App::g_sysTick;
+    static volatile uint32_t nextLedToggle = App::SYS_TICKS_100_MS;
+
+    if (nextLedToggle == App::g_sysTick++)
+    {
+        App::TglLed(App::PIN_LED_BLUE);
+        nextLedToggle += App::SYS_TICKS_100_MS;
+    }
 }
 
 

@@ -9,11 +9,14 @@
 #include <stdint.h>
 #include <stddef.h>
 #include "Bsp.h"
-#include "DUart.h"
+#include "DUartIF.h"
 
 extern "C" {
 #include <stm32f10x_rcc.h>
 }
+
+// Global objects
+extern DUartIF* g_pUart;
 
 // Prototypes
 /** Initialize the board LEDs */
@@ -21,17 +24,12 @@ static void Led_Init();
 /** Initialize the USER button */
 static void Button_Init();
 
-static DUart* s_pUart = NULL;
-
 namespace App {
 
-void InitHardware(DUart& uart)
+void InitHardware()
 {
-    s_pUart = &uart;
-
     Led_Init();
     Button_Init();
-    s_pUart->Init();
 
     // Configure SysTick Timer
     if (SysTick_Config(App::SYS_TICKS_BETWEEN_SYSTICK_IRQ)) while (1);
@@ -95,16 +93,6 @@ void DelayMs(uint32_t nTime)
     while (GetSysTick() < nTicks);
 }
 
-void PrintStr(char const * const string)
-{
-    s_pUart->PrintStr(string);
-}
-
-void PrintHex(uint32_t hex)
-{
-    s_pUart->PrintHex(hex);
-}
-
 CSStatus_t CSLock(int* lock)
 {
 	CSStatus_t lockStatus;
@@ -155,7 +143,18 @@ static void Button_Init()
 #ifdef USE_FULL_ASSERT
 extern "C" void assert_failed(uint8_t* file , uint32_t line)
 {
-    (void)file; (void)line;
+    if (g_pUart != NULL)
+    {
+        g_pUart->PrintStr("ASSERT: ");
+        g_pUart->PrintStr((char const * const)file);
+        g_pUart->PrintStr(" Line: ");
+        g_pUart->PrintHex(line);
+        g_pUart->PrintStr("\n");
+    }
+
+    App::SetLed(App::PIN_LED_BLUE);
+    App::SetLed(App::PIN_LED_GREEN);
+
     /* Infinite loop */
     /* Use GDB to find out why we're here */
     while (1);
