@@ -37,7 +37,7 @@ class CriticalSection
     static const int THREAD_ID_RESET = -1;
 
     volatile App::CSStatus_t m_lockedState;
-    volatile int m_nLocks;
+    volatile unsigned int m_nLocks;
     volatile int m_currThreadID;
 };
 

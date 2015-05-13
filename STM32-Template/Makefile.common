@@ -28,7 +28,7 @@ vpath %.cpp $(TEMPLATEROOT)/Bsp
 # Search path for perpheral library
 
 vpath %.c $(CORE)
-vpath %.c $(PERIPH)/src
+# vpath %.c $(PERIPH)/src
 vpath %.c $(DEVICE)
 
 # Search path for Library
@@ -47,7 +47,8 @@ STARTUP= \
 
 FULLASSERT = -DUSE_FULL_ASSERT
 
-LDFLAGS+= -T$(LDSCRIPT) -mthumb -mcpu=cortex-m3 -Wl,-Map=$(PROJECT).map
+LDLIBS = -static -L$(PERIPH)/lib -lstm32_std_periph
+LDFLAGS+= -T$(LDSCRIPT) -I$(TEMPLATEROOT)/Bsp -mthumb -mcpu=cortex-m3 -Wl,-Map=$(PROJECT).map
 # CFLAGS+= -mcpu=cortex-m3 -mthumb -Wa,-adhln
 CFLAGS+= -mcpu=cortex-m3 -mthumb
 CFLAGS+= -I$(TEMPLATEROOT)/Bsp -I. $(STDINCS)
