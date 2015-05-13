@@ -24,7 +24,7 @@ static void Led_Init();
 /** Initialize the USER button */
 static void Button_Init();
 
-namespace App {
+namespace Bsp {
 
 void InitHardware()
 {
@@ -32,12 +32,12 @@ void InitHardware()
     Button_Init();
 
     // Configure SysTick Timer
-    if (SysTick_Config(App::SYS_TICKS_BETWEEN_SYSTICK_IRQ)) while (1);
+    if (SysTick_Config(Bsp::SYS_TICKS_BETWEEN_SYSTICK_IRQ)) while (1);
 }
 
 ButtonState_t ReadUserBtn()
 {
-    return static_cast<ButtonState_t>(GPIO_ReadInputDataBit(GPIOA, App::PIN_BTN_USER));
+    return static_cast<ButtonState_t>(GPIO_ReadInputDataBit(GPIOA, Bsp::PIN_BTN_USER));
 }
 
 void SetLed(PinConfiguration_t led)
@@ -102,14 +102,14 @@ CSStatus_t CSLock(int* lock)
                   "STREX    r0, r1, [%[lockAddr]];"                            /* r0 = lock -> lock = LOCKED_STATE */
                   "MOV      %[lockStatus], r0;"                                /* lockedStatus = r0 */
 			      : [lockAddr] "=r" (lock), [lockStatus] "=r" (lockStatus)     /* Outputs: %0, %1 */
-				  : "[lockAddr]" (lock), [lockedState] "I" (App::LOCKED_STATE) /* Inputs:  %2, %3 */
+				  : "[lockAddr]" (lock), [lockedState] "I" (Bsp::LOCKED_STATE) /* Inputs:  %2, %3 */
                   : "r0", "r1"                                                 /* Clobbered Regs  */
 				  );
 
     return lockStatus;
 }
 
-} // namespace App
+} // namespace Bsp
 
 
 static void Led_Init()
@@ -120,7 +120,7 @@ static void Led_Init()
     // Configure Pins used for LEDs
     GPIO_InitTypeDef GPIO_InitStructure;
     GPIO_StructInit(& GPIO_InitStructure);
-    GPIO_InitStructure.GPIO_Pin   = App::PIN_LED_GREEN | App::PIN_LED_BLUE;
+    GPIO_InitStructure.GPIO_Pin   = Bsp::PIN_LED_GREEN | Bsp::PIN_LED_BLUE;
     GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_Out_PP;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
     GPIO_Init(GPIOC , &GPIO_InitStructure);
@@ -134,7 +134,7 @@ static void Button_Init()
     // Configure user button
     GPIO_InitTypeDef GPIO_InitStructure;
     GPIO_StructInit(& GPIO_InitStructure);
-    GPIO_InitStructure.GPIO_Pin   = App::PIN_BTN_USER;
+    GPIO_InitStructure.GPIO_Pin   = Bsp::PIN_BTN_USER;
     GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_IN_FLOATING ;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
     GPIO_Init(GPIOA , &GPIO_InitStructure);
@@ -152,8 +152,8 @@ extern "C" void assert_failed(uint8_t* file , uint32_t line)
         g_pUart->PrintStr("\n");
     }
 
-    App::SetLed(App::PIN_LED_BLUE);
-    App::SetLed(App::PIN_LED_GREEN);
+    Bsp::SetLed(Bsp::PIN_LED_BLUE);
+    Bsp::SetLed(Bsp::PIN_LED_GREEN);
 
     /* Infinite loop */
     /* Use GDB to find out why we're here */

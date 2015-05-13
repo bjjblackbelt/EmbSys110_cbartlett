@@ -14,11 +14,11 @@ int main(void)
     // Initialize global objects
     g_pUart = &uart;
 
-    App::InitHardware();
+    Bsp::InitHardware();
 
     g_pUart->PrintStr("> Chad Bartlett's Assignment 1.\n\n");
     g_pUart->PrintStr("> Hardware initialization took: ");
-    g_pUart->PrintUInt(App::GetSysTick());
+    g_pUart->PrintUInt(Bsp::GetSysTick());
     g_pUart->PrintStr("-milliseconds\n");
 
     // Main loop

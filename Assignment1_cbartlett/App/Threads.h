@@ -18,7 +18,7 @@ typedef void (*ThreadEntryFunct)(void* data);
 
 
 /**
- * @enum ThreadState_t
+ * @enum State_t
  * @brief A thread can be in one of these states.
  */
 typedef enum
@@ -27,10 +27,10 @@ typedef enum
     STATE_ACTIVE,
     STATE_READY,
     STATE_BLOCKED,
-} ThreadState_t;
+} State_t;
 
 /**
- * @enum ThreadUid_t
+ * @enum Uid_t
  * @brief Each thread must have a unique ID.
  */
 typedef enum
@@ -39,7 +39,7 @@ typedef enum
     UID_THREAD_1,
     UID_THREAD_2,
     UID_THREAD_3,
-} ThreadUid_t;
+} Uid_t;
 
 /**
  * @struct Thread_t
@@ -58,11 +58,11 @@ typedef enum
 struct ThreadStr
 {
     static const uint8_t MAX_NAME_LENGTH = 12;
-    ThreadEntryFunct entry;
+    Thread::ThreadEntryFunct entry;
     void* data;
-    Thread::ThreadUid_t uid;
+    Thread::Uid_t uid;
     uint8_t priority;
-    Thread::ThreadState_t state;
+    Thread::State_t state;
     char name[MAX_NAME_LENGTH + 1];
 };
 typedef ThreadStr Thread_t;
