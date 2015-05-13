@@ -30,7 +30,7 @@ int main(void)
 
     if ((temp != App::LOCKED_STATE) || (state != App::UNLOCKED_STATE))
     {
-        App::PrintStr(" > !!!FAILED!!! \n");
+        g_pUart->PrintStr(" > !!!FAILED!!! \n");
     }
 
     // Main loop
