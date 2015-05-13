@@ -14,8 +14,6 @@
 // Forward declarations
 
 namespace Thread {
-typedef void (*ThreadEntryFunct)(void* data);
-
 
 /**
  * @enum State_t
@@ -42,6 +40,18 @@ typedef enum
 } Uid_t;
 
 /**
+ * @enum Error_t
+ * @brief Indications for potential errors of this namespace.
+ */
+typedef enum
+{
+    ERROR_NONE,     //!< Success
+} Error_t;
+
+/** A function pointer defining a thread. */
+typedef Error_t (*ThreadEntryFunct)(void* pData);
+
+/**
  * @struct Thread_t
  * @brief This structure defines a thread for this application.
  * @var Thread_t::entry
@@ -66,6 +76,34 @@ struct ThreadStr
     char name[MAX_NAME_LENGTH + 1];
 };
 typedef ThreadStr Thread_t;
+
+/**
+ * This thread puts the application to sleep for 10-seconds and toggles a LED.
+ * @param  pData An optional parameter.
+ * @return      Returns Thread::ERROR_NONE if successful, else another error code.
+ */
+Thread::Error_t Idle(void* pData);
+
+/**
+ * This thread increments a shared counter.
+ * @param  pData A pointer to a shared data structure.
+ * @return      Returns Thread::ERROR_NONE if successful, else another error code.
+ */
+Thread::Error_t Thread1(void* pData);
+
+/**
+ * This thread decrements a shared counter.
+ * @param  pData A pointer to a shared data structure.
+ * @return      Returns Thread::ERROR_NONE if successful, else another error code.
+ */
+Thread::Error_t Thread2(void* pData);
+
+/**
+ * This thread monitors the shared counter.
+ * @param  pData A pointer to a shared data structure.
+ * @return      Returns Thread::ERROR_NONE if successful, else another error code.
+ */
+Thread::Error_t Thread3(void* pData);
 
 } // namespace Thread
 #endif // #ifndef THREADS_H

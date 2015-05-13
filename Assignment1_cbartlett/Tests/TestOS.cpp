@@ -37,6 +37,17 @@ TEST(OS, RegistrationFailsIfEntryFunctionNull)
     CHECK_EQUAL(OS::ERROR_NULL, status);
 }
 
+TEST(OS, RegistrationFailsIfAThreadHasAlreadyBeenCreatedWithTheUID)
+{
+    Thread::Thread_t th1 = {&Thread::Idle, NULL, Thread::UID_THREAD_1, 0, Thread::STATE_INITIAL, "Thread1"};
+    OS::Error_t status = p_os->RegisterThread(th1);
+    CHECK_EQUAL(OS::ERROR_NONE, status);
+
+    Thread::Thread_t th2 = {&Thread::Idle, NULL, Thread::UID_THREAD_1, 0, Thread::STATE_INITIAL, "Thread2"};
+    status = p_os->RegisterThread(th2);
+    CHECK_EQUAL(OS::ERROR_UID, status);
+}
+
 #if 0
 TEST(OS, start)
 {

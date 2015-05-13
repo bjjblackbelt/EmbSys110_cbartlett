@@ -42,9 +42,11 @@
 
         "sublimeclang_options":
         [
+            "-I${project_path}/App",
             "-I${project_path}/Bsp",
-            "-I${project_path}/Demo",
             "-I${project_path}/Lib",
+            "-I${project_path}/Tests",
+            "-I${project_path}/Tests/Stubs",
             "-I${project_path}/../stm32vldiscover_package/Libraries/STM32F10x_StdPeriph_Driver/inc",
             "-I${project_path}/../stm32vldiscover_package/Libraries/CMSIS/CM3/DeviceSupport/ST/STM32F10x",
             "-I${project_path}/../stm32vldiscover_package/Libraries/CMSIS/CM3/CoreSupport",

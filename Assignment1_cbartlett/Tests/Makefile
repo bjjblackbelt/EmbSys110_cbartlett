@@ -23,6 +23,7 @@ UDEFS = \
 SRC  = \
 	../Lib/CriticalSection.cpp \
 	../Lib/DUartIF.cpp \
+	../App/Threads.cpp \
 	../App/OS.cpp
 
 # List Test source files here

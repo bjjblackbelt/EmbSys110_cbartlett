@@ -11,6 +11,7 @@ LIBOBJS = \
     DUartIF.o \
 	mini_cpp.o \
 	no_heap.o \
+	Threads.o \
 	DUart.o \
 	Bsp.o \
 	OS.o

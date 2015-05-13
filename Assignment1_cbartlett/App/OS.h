@@ -25,6 +25,8 @@ typedef ThreadStr Thread_t;
 class OS
 {
   public:
+    static const uint8_t MAX_THREAD_COUNT = 4;
+
     /**
      * @enum Error_t
      * @brief Indications for potential errors of this class.
@@ -33,7 +35,6 @@ class OS
     {
         ERROR_NONE,     //!< Success
         ERROR_NULL,     //!< Thread function, stack, or data is NULL
-        ERROR_NAME,     //!< Name length beyond MAX_NAME_LENGTH characters
         ERROR_UID,      //!< Thread with this aID is already registered
     } Error_t;
 
@@ -59,7 +60,8 @@ class OS
     OS(const OS&);            //!< Intentionally not implemented
     OS& operator=(const OS&); //!< Intentionally not implemented
 
-    DUartIF* m_uart;            //!< A pointer to UART instance
+    DUartIF* m_uart;                                //!< A pointer to UART instance
+    Thread::Thread_t* m_threads[MAX_THREAD_COUNT];  //!< Container for the threads of this app
 };
 
 #endif // #ifndef OS_H
