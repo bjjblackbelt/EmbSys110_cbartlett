@@ -2,6 +2,7 @@
 #include "Bsp.h"
 #include "DUartIF.h"
 #include "DUart.h"
+#include "OS.h"
 
 DUartIF* g_pUart = NULL;
 

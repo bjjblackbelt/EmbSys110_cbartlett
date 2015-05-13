@@ -12,7 +12,8 @@ LIBOBJS = \
 	mini_cpp.o \
 	no_heap.o \
 	DUart.o \
-	Bsp.o
+	Bsp.o \
+	OS.o
 
 
 SRCOBJS= \
