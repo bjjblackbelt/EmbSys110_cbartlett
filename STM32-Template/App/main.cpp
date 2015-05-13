@@ -13,22 +13,22 @@ int main(void)
     // Initialize global objects
     g_pUart = &uart;
 
-    App::InitHardware();
+    Bsp::InitHardware();
 
-    App::ClrLed(App::PIN_LED_GREEN);
+    Bsp::ClrLed(Bsp::PIN_LED_GREEN);
 
     //TODO: CMB - Remove
-    int temp = App::UNLOCKED_STATE;
+    int temp = Bsp::UNLOCKED_STATE;
     g_pUart->PrintStr("Temp A: ");
     g_pUart->PrintUInt(temp);
-    App::CSStatus_t state = App::CSLock(&temp);
+    Bsp::CSStatus_t state = Bsp::CSLock(&temp);
     g_pUart->PrintStr(" Temp B: ");
     g_pUart->PrintUInt(temp);
     g_pUart->PrintStr(" State: ");
     g_pUart->PrintUInt(state);
     g_pUart->PrintStr("\n");
 
-    if ((temp != App::LOCKED_STATE) || (state != App::UNLOCKED_STATE))
+    if ((temp != Bsp::LOCKED_STATE) || (state != Bsp::UNLOCKED_STATE))
     {
         g_pUart->PrintStr(" > !!!FAILED!!! \n");
     }
@@ -36,14 +36,14 @@ int main(void)
     // Main loop
     while (1)
     {
-        switch (App::ReadUserBtn())
+        switch (Bsp::ReadUserBtn())
         {
-            case App::BTN_PRESSED:
+            case Bsp::BTN_PRESSED:
             {
-                App::TglLed(App::PIN_LED_GREEN);
+                Bsp::TglLed(Bsp::PIN_LED_GREEN);
                 break;
             }
-            case App::BTN_RELEASED:
+            case Bsp::BTN_RELEASED:
             default :
             {
                 //!< Do nothing
@@ -55,7 +55,7 @@ int main(void)
         g_pUart->PrintHex(0xC0DE);
         g_pUart->PrintStr("\n");
 
-        App::DelayMs(250);  // wait 250ms
+        Bsp::DelayMs(250);  // wait 250ms
     }
 }
 

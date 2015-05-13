@@ -19,11 +19,11 @@ extern "C" {
 // Forward declarations
 class DUart;
 
-#define TIME_MS_TO_TICK(ms)     (((ms)*App::SYS_SYSTICK_PER_SEC)/1000)
+#define TIME_MS_TO_TICK(ms)     (((ms)*Bsp::SYS_SYSTICK_PER_SEC)/1000)
 
-namespace App {
+namespace Bsp {
 /**
- * @defgroup APP_CONSTANTS App Constants
+ * @defgroup APP_CONSTANTS Bsp Constants
  * @brief Global constants used within this application.
  * @{
  */
@@ -112,9 +112,9 @@ void DelayMs(uint32_t nTime);
  * Uses LDREX and STREX instructions to set the lock for a critical section.
  *
  * @param lock - A reference to the lock variable
- * @returns Returns the value of App::LOCKED_STATE if the lock was NOT acquired.
+ * @returns Returns the value of Bsp::LOCKED_STATE if the lock was NOT acquired.
 */
 CSStatus_t CSLock(int* lock);
 
-} // namespace App
+} // namespace Bsp
 #endif // #ifndef BSP_H
