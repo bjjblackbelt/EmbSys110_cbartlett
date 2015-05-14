@@ -90,8 +90,7 @@ void ResetSysTick()
 
 void DelayMs(uint32_t nTime)
 {
-    uint32_t nTicks = TIME_MS_TO_TICK(nTime);
-    ResetSysTick();
+    uint32_t nTicks = GetSysTick() + TIME_MS_TO_TICK(nTime);
     while (GetSysTick() < nTicks);
 }
 

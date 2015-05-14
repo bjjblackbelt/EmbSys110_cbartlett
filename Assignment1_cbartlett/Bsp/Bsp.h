@@ -36,6 +36,7 @@ typedef enum
     SYS_SYSTICK_PER_SEC           = (SYSCLK_FREQ_24MHz / SYS_TICKS_BETWEEN_SYSTICK_IRQ),
     SYS_TICKS_100_MS              = SYS_SYSTICK_PER_SEC / 10,
     SYS_TICKS_250_MS              = SYS_SYSTICK_PER_SEC / 4,
+    SYS_TICKS_01_SEC              = 1 * SYS_SYSTICK_PER_SEC,
     SYS_TICKS_10_SEC              = 10 * SYS_SYSTICK_PER_SEC,
 } SystemConstant_t;
 

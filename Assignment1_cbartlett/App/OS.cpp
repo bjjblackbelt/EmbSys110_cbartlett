@@ -151,7 +151,16 @@ void OS::Start()
         m_currThread = 0;
         m_threadQueue[m_currThread]->entry(m_threadQueue[m_currThread]->data);
 
-        while (1) {;}
+        uint_fast32_t nextThreadTicks = Bsp::GetSysTick() + Bsp::SYS_TICKS_01_SEC;
+        while (1)
+        {
+            uint_fast32_t ticks = Bsp::GetSysTick();
+            if (ticks > nextThreadTicks)
+            {
+                Scheduler();
+                nextThreadTicks = ticks + Bsp::SYS_TICKS_01_SEC;
+            }
+        }
     }
 }
 

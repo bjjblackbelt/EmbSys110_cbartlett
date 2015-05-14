@@ -10,6 +10,7 @@ extern "C" {
 #include <stm32f10x.h>
 }
 
+#include <stddef.h>
 #include <stdint.h>
 #include <stm32f10x_conf.h>
 #include "Bsp.h"
@@ -66,15 +67,13 @@ extern "C" void Reset_Handler(void)
 
 extern "C" void SysTick_Handler(void)
 {
-    static volatile uint32_t nextLedToggle = Bsp::SYS_TICKS_100_MS;
+    static volatile uint_fast32_t nextLedToggle = Bsp::GetSysTick() + Bsp::SYS_TICKS_100_MS;
 
     if (nextLedToggle == Bsp::g_sysTick++)
     {
         Bsp::TglLed(Bsp::PIN_LED_BLUE);
-        nextLedToggle += Bsp::SYS_TICKS_100_MS;
+        nextLedToggle = Bsp::GetSysTick() + Bsp::SYS_TICKS_100_MS;
     }
-
-    Bsp::g_pOS->Scheduler();
 }
 
 
