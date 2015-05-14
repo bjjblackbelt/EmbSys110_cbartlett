@@ -51,7 +51,8 @@ typedef enum
  */
 typedef enum
 {
-    ERROR_NONE,     //!< Success
+    ERROR_NONE,         //!< Success
+    ERROR_NULL_DATA,    //!< Data passed to thread is NULL
 } Error_t;
 
 /** A function pointer defining a thread. */
@@ -76,7 +77,7 @@ struct GlobalDataStr
     uint32_t nT1;
     uint32_t nT2;
 };
-typedef ThreadStr GlobalData_t;
+typedef GlobalDataStr GlobalData_t;
 
 /**
  * @struct Thread_t

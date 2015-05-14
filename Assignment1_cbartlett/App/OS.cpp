@@ -22,7 +22,6 @@ OS::OS(IUart& uart)
     : m_uart(&uart),
       m_threadQueue(),
       m_currThread(0),
-      m_nextThread(0),
       m_nThreads(0)
 {
     for (int i = 0; i < OS::MAX_THREAD_COUNT; ++i)
@@ -144,6 +143,9 @@ void OS::Start()
             m_threadQueue[i]->state = Thread::STATE_READY;
             DEBUG_PRINT_STATE_CHANGE();
         }
+
+        // Start task timer
+        // Execute Idle task
     }
 }
 

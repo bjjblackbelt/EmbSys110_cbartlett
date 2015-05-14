@@ -6,7 +6,6 @@
 
 namespace Bsp {
 IUart* g_pUart = NULL;
-OS* g_pOS = NULL;
 }
 
 int main(void)

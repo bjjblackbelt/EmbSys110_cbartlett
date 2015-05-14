@@ -6,9 +6,44 @@
  *******************************************************************************
  */
 #include "Bsp.h"
+#include "StubDUart.h"
 
  #define SYSCLK_FREQ_24MHz  24000000
 uint32_t SystemCoreClock = SYSCLK_FREQ_24MHz;
+
+namespace Bsp {
+static StubDUart s_stubUart;
+IUart* g_pUart = &s_stubUart;
+}
+
+Bsp::ButtonState_t Bsp::ReadUserBtn()
+{
+    return Bsp::BTN_RELEASED;
+}
+
+void Bsp::SetLed(Bsp::PinConfiguration_t led)
+{
+    (void)led;
+}
+
+void Bsp::ClrLed(Bsp::PinConfiguration_t led)
+{
+    (void)led;
+}
+
+void Bsp::TglLed(Bsp::PinConfiguration_t led)
+{
+    (void)led;
+}
+
+uint32_t Bsp::GetSysTick()
+{
+    return 0;
+}
+
+void Bsp::ResetSysTick()
+{
+}
 
 Bsp::CSStatus_t Bsp::CSLock(int* lock)
 {
