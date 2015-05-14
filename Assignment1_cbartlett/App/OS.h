@@ -124,8 +124,8 @@ class OS
 
     IUart* m_uart;                                      //!< A pointer to UART instance
     Thread::Thread_t* m_threadQueue[MAX_THREAD_COUNT];  //!< Container for the threads of this app
-    uint_fast8_t m_currThread;                          //!< The current thread queue index
-    uint_fast8_t m_nThreads;                            //!< The number of registered threads
+    volatile uint_fast8_t m_currThread;                 //!< The current thread queue index
+    volatile uint_fast8_t m_nThreads;                   //!< The number of registered threads
 };
 
 #endif // #ifndef OS_H

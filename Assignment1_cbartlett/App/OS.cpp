@@ -28,6 +28,8 @@ OS::OS(IUart& uart)
     {
         m_threadQueue[i] = NULL;
     }
+
+    m_uart->Init();
 }
 
 OS::~OS()
@@ -145,7 +147,11 @@ void OS::Start()
         }
 
         // Start task timer
-        // Execute Idle task
+        // Execute the first task
+        m_currThread = 0;
+        m_threadQueue[m_currThread]->entry(m_threadQueue[m_currThread]->data);
+
+        while (1) {;}
     }
 }
 

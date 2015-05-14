@@ -76,6 +76,13 @@ struct GlobalDataStr
     uint32_t inc;
     uint32_t nT1;
     uint32_t nT2;
+
+    GlobalDataStr()
+        : guard(),
+          inc(0),
+          nT1(0),
+          nT2(0)
+    {}
 };
 typedef GlobalDataStr GlobalData_t;
 

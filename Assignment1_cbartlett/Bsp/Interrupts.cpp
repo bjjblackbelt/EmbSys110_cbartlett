@@ -13,9 +13,11 @@ extern "C" {
 #include <stdint.h>
 #include <stm32f10x_conf.h>
 #include "Bsp.h"
+#include "OS.h"
 
 namespace Bsp {
 volatile uint32_t g_sysTick = 0;
+extern OS* g_pOS;
 }
 
 
@@ -71,6 +73,8 @@ extern "C" void SysTick_Handler(void)
         Bsp::TglLed(Bsp::PIN_LED_BLUE);
         nextLedToggle += Bsp::SYS_TICKS_100_MS;
     }
+
+    Bsp::g_pOS->Scheduler();
 }
 
 
