@@ -30,6 +30,11 @@ typedef enum
 /**
  * @enum Uid_t
  * @brief Each thread must have a unique ID.
+ *
+ * There is some coupling here with the constant OS::MAX_THREAD_COUNT. The
+ * fields in this enum are used as array accessors into an array defined in the
+ * OS class. Therefore, the numbering must start at '0' and sequentially
+ * progress until OS::MAX_THREAD_COUNT is reached.
  */
 typedef enum
 {
