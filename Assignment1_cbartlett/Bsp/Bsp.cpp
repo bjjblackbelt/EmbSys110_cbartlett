@@ -16,7 +16,9 @@ extern "C" {
 }
 
 // Global objects
+namespace Bsp {
 extern IUart* g_pUart;
+}
 
 // Prototypes
 /** Initialize the board LEDs */
@@ -143,13 +145,13 @@ static void Button_Init()
 #ifdef USE_FULL_ASSERT
 extern "C" void assert_failed(uint8_t* file , uint32_t line)
 {
-    if (g_pUart != NULL)
+    if (Bsp::g_pUart != NULL)
     {
-        g_pUart->PrintStr("ASSERT: ");
-        g_pUart->PrintStr((char const * const)file);
-        g_pUart->PrintStr(" Line: ");
-        g_pUart->PrintHex(line);
-        g_pUart->PrintStr("\n");
+        Bsp::g_pUart->PrintStr("ASSERT: ");
+        Bsp::g_pUart->PrintStr((char const * const)file);
+        Bsp::g_pUart->PrintStr(" Line: ");
+        Bsp::g_pUart->PrintHex(line);
+        Bsp::g_pUart->PrintStr("\n");
     }
 
     Bsp::SetLed(Bsp::PIN_LED_BLUE);

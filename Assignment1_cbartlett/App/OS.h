@@ -9,6 +9,7 @@
 #define OS_H
 
 #include <stdint.h>
+#include "CriticalSection.h"
 
 // Forward declarations
 class IUart;
@@ -78,6 +79,32 @@ class OS
      * Starts the OS. The first thread is executed.
      */
     void Start();
+
+    /**
+     * Prints the state of the currently running thread.
+     */
+    void PrintThreadInfo();
+
+    /**
+     * A wrapper function to enter a critical section.
+     * @param  cs A CriticalSection instance.
+     * @return    Returns the status of the critical seciton.
+     */
+    CriticalSection::Status_t EnterCS(CriticalSection& cs);
+
+    /**
+     * A wrapper function to leave a critical section.
+     * @param  cs A CriticalSection instance.
+     * @return    Returns the status of the critical seciton.
+     */
+    CriticalSection::Status_t LeaveCS(CriticalSection& cs);
+
+    /**
+     * A wrapper function to query a critical section.
+     * @param  cs A CriticalSection instance.
+     * @return    Returns the status of the critical seciton.
+     */
+    CriticalSection::Status_t QueryCS(CriticalSection& cs);
 
   private:
     OS(const OS&);            //!< Intentionally not implemented

@@ -12,6 +12,7 @@
 #include "OS.h"
 
 // Forward declarations
+class CriticalSection;
 
 namespace Thread {
 
@@ -55,6 +56,27 @@ typedef enum
 
 /** A function pointer defining a thread. */
 typedef Error_t (*ThreadEntryFunct)(void* pData);
+
+/**
+ * @struct GlobalData_t
+ * @brief This structure defines shared data between threads.
+ * @var GlobalData_t::guard
+ * Memnber 'guard' provides a lock for the manipulation of the shared counter.
+ * @var GlobalData_t::inc
+ * Memnber 'inc' is a shared counter.
+ * @var GlobalData_t::nT1
+ * Memnber 'nT1' is the number of times thread 1 has been entered.
+ * @var GlobalData_t::nT2
+ * Memnber 'nT2' is the number of times thread 2 has been entered.
+ */
+struct GlobalDataStr
+{
+    CriticalSection guard;
+    uint32_t inc;
+    uint32_t nT1;
+    uint32_t nT2;
+};
+typedef ThreadStr GlobalData_t;
 
 /**
  * @struct Thread_t

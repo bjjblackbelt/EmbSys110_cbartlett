@@ -17,3 +17,8 @@ Bsp::CSStatus_t Bsp::CSLock(int* lock)
 
     return temp;
 }
+
+void Bsp::DelayMs(uint32_t nTime)
+{
+    (void)nTime;
+}

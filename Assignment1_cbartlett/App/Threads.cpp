@@ -6,10 +6,17 @@
  *******************************************************************************
  */
 #include "Threads.h"
+#include "Bsp.h"
+
+// Global objects
+namespace Bsp {
+extern IUart* g_pUart;
+}
 
 Thread::Error_t Thread::Idle(void* pData)
 {
     (void)pData;
+    Bsp::DelayMs(10000);
     return Thread::ERROR_NONE;
 }
 
