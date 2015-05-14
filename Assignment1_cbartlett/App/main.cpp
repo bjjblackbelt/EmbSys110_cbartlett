@@ -1,10 +1,10 @@
 #include <stddef.h>
 #include "Bsp.h"
-#include "DUartIF.h"
+#include "IUart.h"
 #include "DUart.h"
 #include "OS.h"
 
-DUartIF* g_pUart = NULL;
+IUart* g_pUart = NULL;
 
 int main(void)
 {

@@ -1,17 +1,19 @@
-#include "DUartIF.h"
+#include "IUart.h"
 #include <string.h>
 
 //!< Create stub to test DUart interface
-class StubDUart : public DUartIF
+class StubDUart : public IUart
 {
   public:
     StubDUart()
-        : DUartIF(),
+        : IUart(),
         m_buffer(),
         m_index(0)
     {
         ResetBuffer();
     }
+
+    virtual void Init() {;}
 
     void ResetBuffer()
     {
@@ -24,6 +26,8 @@ class StubDUart : public DUartIF
     uint8_t m_index;
 
   protected:
+    virtual uint8_t GetC() { return 0;}
+
     virtual void PutC(uint8_t ch)
     {
         if (m_index < MAX_STRING_LENGTH)

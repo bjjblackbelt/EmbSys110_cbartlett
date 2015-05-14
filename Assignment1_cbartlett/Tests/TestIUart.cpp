@@ -1,11 +1,11 @@
 #include <TestHarness.h>
 
 #include <string.h>
-#include "DUartIF.h"
+#include "IUart.h"
 #include "StubDUart.h"
 
 //!< Begin tests
-TEST_GROUP(DUartIF)
+TEST_GROUP(IUart)
 {
     StubDUart* m_pUart;
 
@@ -20,32 +20,32 @@ TEST_GROUP(DUartIF)
     }
 };
 
-TEST(DUartIF, Initialize)
+TEST(IUart, Initialize)
 {
     CHECK(m_pUart != NULL);
 }
 
-TEST(DUartIF, PrintsCorrectString)
+TEST(IUart, PrintsCorrectString)
 {
     char msg[] = "Hello World.";
     m_pUart->PrintStr(&msg[0]);
     CHECK(strcmp(&msg[0], &m_pUart->m_buffer[0]) == 0);
 }
 
-TEST(DUartIF, PrintingNullHasNoEffect)
+TEST(IUart, PrintingNullHasNoEffect)
 {
     m_pUart->PrintStr(NULL);
     CHECK(m_pUart->m_buffer[0] == '\0');
 }
 
-TEST(DUartIF, PrintsASingleCharacterSuccessfully)
+TEST(IUart, PrintsASingleCharacterSuccessfully)
 {
     char msg[] = "?";
     m_pUart->PrintStr(&msg[0]);
     CHECK(strcmp(&msg[0], &m_pUart->m_buffer[0]) == 0);
 }
 
-TEST(DUartIF, PrintsSingleNumberInHex)
+TEST(IUart, PrintsSingleNumberInHex)
 {
     uint32_t numberIn = 8;
     char charOut[] = "0x8";
@@ -53,7 +53,7 @@ TEST(DUartIF, PrintsSingleNumberInHex)
     CHECK(strcmp(&charOut[0], &m_pUart->m_buffer[0]) == 0);
 }
 
-TEST(DUartIF, PrintsZeroInHex)
+TEST(IUart, PrintsZeroInHex)
 {
     uint32_t numberIn = 0;
     char charOut[] = "0x0";
@@ -61,7 +61,7 @@ TEST(DUartIF, PrintsZeroInHex)
     CHECK(strcmp(&charOut[0], &m_pUart->m_buffer[0]) == 0);
 }
 
-TEST(DUartIF, DoesNotPrintLeadingZerosInHex)
+TEST(IUart, DoesNotPrintLeadingZerosInHex)
 {
     uint32_t numberIn = 0x00000008;
     char charOut[] = "0x8";
@@ -69,7 +69,7 @@ TEST(DUartIF, DoesNotPrintLeadingZerosInHex)
     CHECK(strcmp(&charOut[0], &m_pUart->m_buffer[0]) == 0);
 }
 
-TEST(DUartIF, PrintsEveryNibbleInHex)
+TEST(IUart, PrintsEveryNibbleInHex)
 {
     uint32_t numberIn = 0xFFFFFFFF;
     char charOut[] = "0xFFFFFFFF";
@@ -77,7 +77,7 @@ TEST(DUartIF, PrintsEveryNibbleInHex)
     CHECK(strcmp(&charOut[0], &m_pUart->m_buffer[0]) == 0);
 }
 
-TEST(DUartIF, PrintsSingleNumberInDecimal)
+TEST(IUart, PrintsSingleNumberInDecimal)
 {
     uint32_t numberIn = 8;
     char charOut[] = "8";
@@ -85,7 +85,7 @@ TEST(DUartIF, PrintsSingleNumberInDecimal)
     CHECK(strcmp(&charOut[0], &m_pUart->m_buffer[0]) == 0);
 }
 
-TEST(DUartIF, PrintsZeroInDecimalUInt)
+TEST(IUart, PrintsZeroInDecimalUInt)
 {
     uint32_t numberIn = 0;
     char charOut[] = "0";
@@ -93,7 +93,7 @@ TEST(DUartIF, PrintsZeroInDecimalUInt)
     CHECK(strcmp(&charOut[0], &m_pUart->m_buffer[0]) == 0);
 }
 
-TEST(DUartIF, PrintsMultipleDigitNumberInDecimalUInt)
+TEST(IUart, PrintsMultipleDigitNumberInDecimalUInt)
 {
     uint32_t numberIn = 123456;
     char charOut[] = "123456";

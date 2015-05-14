@@ -22,7 +22,7 @@ UDEFS = \
 # List Application source files here
 SRC  = \
 	../Lib/CriticalSection.cpp \
-	../Lib/DUartIF.cpp \
+	../Lib/IUart.cpp \
 	../App/Threads.cpp \
 	../App/OS.cpp
 
@@ -31,7 +31,7 @@ TSRC  = \
 	Stubs/StubBsp.cpp \
 	RunAllTests.cpp \
 	TestTemplate.cpp \
-	TestDUartIF.cpp \
+	TestIUart.cpp \
 	TestCriticalSectionAPI.cpp \
 	TestOS.cpp
 

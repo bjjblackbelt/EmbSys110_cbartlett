@@ -9,14 +9,14 @@
 #include <stdint.h>
 #include <stddef.h>
 #include "Bsp.h"
-#include "DUartIF.h"
+#include "IUart.h"
 
 extern "C" {
 #include <stm32f10x_rcc.h>
 }
 
 // Global objects
-extern DUartIF* g_pUart;
+extern IUart* g_pUart;
 
 // Prototypes
 /** Initialize the board LEDs */
