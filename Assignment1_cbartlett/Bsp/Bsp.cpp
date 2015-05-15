@@ -83,11 +83,6 @@ uint32_t GetSysTick()
     return g_sysTick;
 }
 
-void ResetSysTick()
-{
-    g_sysTick = 0;
-}
-
 void DelayMs(uint32_t nTime)
 {
     uint32_t nTicks = GetSysTick() + TIME_MS_TO_TICK(nTime);

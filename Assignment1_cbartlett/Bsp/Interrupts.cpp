@@ -48,8 +48,8 @@ extern "C" void Reset_Handler(void)
     }
 
     /* Use the STM32 Libraries to initialize system */
+    Bsp::g_sysTick = 0;
     SystemInit();
-    Bsp::ResetSysTick();
 
     /* call all static constructors in C++ (harmless in C programs) */
     __libc_init_array();

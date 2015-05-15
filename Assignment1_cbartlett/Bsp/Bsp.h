@@ -100,11 +100,6 @@ void TglLed(PinConfiguration_t led);
 uint32_t GetSysTick();
 
 /**
- * Resets the value of the system tick counter to zero.
- */
-void ResetSysTick();
-
-/**
  * Blocking delay function in milliseconds.
  *
  * @param nTime The number of milliseconds to delay.

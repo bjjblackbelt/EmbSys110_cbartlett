@@ -104,11 +104,11 @@ typedef GlobalDataStr GlobalData_t;
 struct ThreadStr
 {
     static const uint8_t MAX_NAME_LENGTH = 12;
-    Thread::ThreadEntryFunct entry;
+    ThreadEntryFunct entry;
     void* data;
-    Thread::Uid_t uid;
+    Uid_t uid;
     uint8_t priority;
-    Thread::State_t state;
+    State_t state;
     char name[MAX_NAME_LENGTH + 1];
 };
 typedef ThreadStr Thread_t;
@@ -118,28 +118,28 @@ typedef ThreadStr Thread_t;
  * @param  pData An optional parameter.
  * @return      Returns Thread::ERROR_NONE if successful, else another error code.
  */
-Thread::Error_t Idle(void* pData);
+Error_t Idle(void* pData);
 
 /**
  * This thread increments a shared counter.
  * @param  pData A pointer to a shared data structure.
  * @return      Returns Thread::ERROR_NONE if successful, else another error code.
  */
-Thread::Error_t Thread1(void* pData);
+Error_t Thread1(void* pData);
 
 /**
  * This thread decrements a shared counter.
  * @param  pData A pointer to a shared data structure.
  * @return      Returns Thread::ERROR_NONE if successful, else another error code.
  */
-Thread::Error_t Thread2(void* pData);
+Error_t Thread2(void* pData);
 
 /**
  * This thread monitors the shared counter.
  * @param  pData A pointer to a shared data structure.
  * @return      Returns Thread::ERROR_NONE if successful, else another error code.
  */
-Thread::Error_t Thread3(void* pData);
+Error_t Thread3(void* pData);
 
 } // namespace Thread
 #endif // #ifndef THREADS_H

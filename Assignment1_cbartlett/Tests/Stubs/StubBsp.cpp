@@ -41,10 +41,6 @@ uint32_t Bsp::GetSysTick()
     return 0;
 }
 
-void Bsp::ResetSysTick()
-{
-}
-
 Bsp::CSStatus_t Bsp::CSLock(int* lock)
 {
 	Bsp::CSStatus_t temp = static_cast<Bsp::CSStatus_t>(*lock);

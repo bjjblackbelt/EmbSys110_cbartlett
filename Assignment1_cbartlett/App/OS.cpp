@@ -77,7 +77,7 @@ OS::Error_t OS::Scheduler()
 
         ContexSwitch();
 
-        if (m_threadQueue[m_currThread]->state != Thread::STATE_BLOCKED)
+        if (m_threadQueue[m_currThread]->state == Thread::STATE_READY)
         {
             m_threadQueue[m_currThread]->state = Thread::STATE_ACTIVE;
             DEBUG_PRINT_STATE_CHANGE();
@@ -114,9 +114,9 @@ CriticalSection::Status_t OS::EnterCS(CriticalSection& cs)
     {
         m_threadQueue[m_currThread]->state = Thread::STATE_BLOCKED;
         DEBUG_PRINT_STATE_CHANGE();
-    }
 
-    status = cs.Enter(m_threadQueue[m_currThread]->uid);
+        status = cs.Enter(m_threadQueue[m_currThread]->uid);
+    }
 
     m_threadQueue[m_currThread]->state = Thread::STATE_READY;
     DEBUG_PRINT_STATE_CHANGE();
@@ -150,17 +150,13 @@ void OS::Start()
         // Start task timer
         // Execute the first task
         m_currThread = 0;
+        m_threadQueue[m_currThread]->state = Thread::STATE_ACTIVE;
+        DEBUG_PRINT_STATE_CHANGE();
         m_threadQueue[m_currThread]->entry(m_threadQueue[m_currThread]->data);
 
-        uint_fast32_t nextThreadTicks = Bsp::GetSysTick() + Bsp::SYS_TICKS_01_SEC;
         while (1)
         {
-            uint_fast32_t ticks = Bsp::GetSysTick();
-            if (ticks > nextThreadTicks)
-            {
-                Scheduler();
-                nextThreadTicks = ticks + Bsp::SYS_TICKS_01_SEC;
-            }
+            Scheduler();
         }
     }
 }
