@@ -142,7 +142,8 @@ void OS::Start()
     {
         for (uint_fast8_t i = 0; i < m_nThreads; ++i)
         {
-            m_threadQueue[i]->state = Thread::STATE_READY;
+            m_currThread = i;
+            m_threadQueue[m_currThread]->state = Thread::STATE_READY;
             DEBUG_PRINT_STATE_CHANGE();
         }
 

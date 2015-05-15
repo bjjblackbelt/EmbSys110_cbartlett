@@ -6,6 +6,10 @@
 
 #define F()      FAIL("OS Start here")
 
+namespace Bsp {
+OS* g_pOS;
+}
+
 TEST_GROUP(OS)
 {
     OS* p_os;
@@ -15,6 +19,7 @@ TEST_GROUP(OS)
     {
         p_stubUart = new StubDUart();
         p_os = new OS(*p_stubUart);
+        Bsp::g_pOS = p_os;
     }
 
     void teardown()

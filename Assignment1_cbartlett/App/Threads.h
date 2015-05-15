@@ -52,6 +52,7 @@ typedef enum
 typedef enum
 {
     ERROR_NONE,         //!< Success
+    ERROR_COUNTER,      //!< Shared counter error from "monitor" thread
     ERROR_NULL_DATA,    //!< Data passed to thread is NULL
 } Error_t;
 

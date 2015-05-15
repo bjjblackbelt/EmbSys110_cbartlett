@@ -18,7 +18,6 @@ extern "C" {
 
 namespace Bsp {
 volatile uint32_t g_sysTick = 0;
-extern OS* g_pOS;
 }
 
 
@@ -67,12 +66,12 @@ extern "C" void Reset_Handler(void)
 
 extern "C" void SysTick_Handler(void)
 {
-    static volatile uint_fast32_t nextLedToggle = Bsp::GetSysTick() + Bsp::SYS_TICKS_100_MS;
+    static volatile uint_fast32_t nextLedToggle = Bsp::SYS_TICKS_100_MS;
 
-    if (nextLedToggle == Bsp::g_sysTick++)
+    if (nextLedToggle < Bsp::g_sysTick++)
     {
         Bsp::TglLed(Bsp::PIN_LED_BLUE);
-        nextLedToggle = Bsp::GetSysTick() + Bsp::SYS_TICKS_100_MS;
+        nextLedToggle = Bsp::g_sysTick + Bsp::SYS_TICKS_100_MS;
     }
 }
 

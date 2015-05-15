@@ -34,12 +34,12 @@ void InitHardware()
     Button_Init();
 
     // Configure SysTick Timer
-    if (SysTick_Config(Bsp::SYS_TICKS_BETWEEN_SYSTICK_IRQ)) while (1);
+    if (SysTick_Config(SYS_TICKS_BETWEEN_SYSTICK_IRQ)) while (1);
 }
 
 ButtonState_t ReadUserBtn()
 {
-    return static_cast<ButtonState_t>(GPIO_ReadInputDataBit(GPIOA, Bsp::PIN_BTN_USER));
+    return static_cast<ButtonState_t>(GPIO_ReadInputDataBit(GPIOA, PIN_BTN_USER));
 }
 
 void SetLed(PinConfiguration_t led)
@@ -103,7 +103,7 @@ CSStatus_t CSLock(int* lock)
                   "STREX    r0, r1, [%[lockAddr]];"                            /* r0 = lock -> lock = LOCKED_STATE */
                   "MOV      %[lockStatus], r0;"                                /* lockedStatus = r0 */
 			      : [lockAddr] "=r" (lock), [lockStatus] "=r" (lockStatus)     /* Outputs: %0, %1 */
-				  : "[lockAddr]" (lock), [lockedState] "I" (Bsp::LOCKED_STATE) /* Inputs:  %2, %3 */
+				  : "[lockAddr]" (lock), [lockedState] "I" (LOCKED_STATE) /* Inputs:  %2, %3 */
                   : "r0", "r1"                                                 /* Clobbered Regs  */
 				  );
 
