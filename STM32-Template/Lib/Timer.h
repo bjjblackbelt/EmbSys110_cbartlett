@@ -9,7 +9,6 @@
 #define TIMER_H
 
 #include <stdint.h>
-#include "lpc2378.h"
 
 /**
  * This macro is used to compute the compare register value for setting the

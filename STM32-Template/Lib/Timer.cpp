@@ -17,13 +17,6 @@ static volatile uint32_t s_sharedCounter;
 extern CriticalSection* g_pCritSect;
 // TODO: CMB - Remove after testing
 
-// Prototypes
-extern "C"
-{
-extern void led_set(void);
-extern void led_clr(void);
-}
-
 // Initialize statics
 Timer_t* const Timer::s_timers[] = { TIMER0, TIMER1 };
 static uint32_t s_sysTick = 0;
