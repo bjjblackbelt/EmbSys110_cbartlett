@@ -13,7 +13,14 @@
 class CriticalSection
 {
   public:
+    /**
+     * Constructor
+     */
     CriticalSection();
+
+    /**
+     * Reset data members
+     */
     ~CriticalSection();
 
     typedef enum
@@ -23,15 +30,47 @@ class CriticalSection
         RESOURCES
     } Status_t;
 
+    /**
+    * Take the critical section for this thread. If it is not available then
+    * block until it is.
+    *
+    * This may be entered multiple times within the same thread. The critical
+    * section will not be released until the corresponding number of
+    * LeavecriticalSection() calls have been made within the same thread.
+    *
+    * @param threadID - ID of currently running thread
+    *
+    * @return SUCCESS - Critical section was taken
+    */
     Status_t Enter(int threadID);
+
+    /**
+    * Release the critical section for this thread.
+    *
+    * @param threadID - ID of currently running thread
+    * @return SUCCESS - Critical section was released
+    * @return RESOURCES - No critical sections held for any threads
+    * @return BUSY - Critical section is held by another thread
+    */
     Status_t Leave(int threadID);
+
+    /**
+    * Take the critical section for this thread if it is available. The call
+    * will return immediately if critical section is unavailable.
+    *
+    * @param threadID - ID of currently running thread
+    * @return SUCCESS - Critical section was taken
+    * @return BUSY - Critical section is held by another thread
+    */
     Status_t Query(int threadID);
 
   private:
     CriticalSection(const CriticalSection&);            //!< Intentionally not implemented
     CriticalSection& operator=(const CriticalSection&); //!< Intentionally not implemented
 
-    // Helper functions
+    /**
+     * Reset data members
+     */
     void ResetDataMembers();
 
     static const int THREAD_ID_RESET = -1;

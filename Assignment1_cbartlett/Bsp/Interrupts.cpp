@@ -10,11 +10,9 @@ extern "C" {
 #include <stm32f10x.h>
 }
 
-#include <stddef.h>
 #include <stdint.h>
 #include <stm32f10x_conf.h>
 #include "Bsp.h"
-#include "OS.h"
 
 namespace Bsp {
 volatile uint32_t g_sysTick = 0;

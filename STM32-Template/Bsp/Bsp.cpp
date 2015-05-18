@@ -9,14 +9,16 @@
 #include <stdint.h>
 #include <stddef.h>
 #include "Bsp.h"
-#include "DUartIF.h"
+#include "IUart.h"
 
 extern "C" {
 #include <stm32f10x_rcc.h>
 }
 
 // Global objects
-extern DUartIF* g_pUart;
+namespace Bsp {
+extern IUart* g_pUart;
+}
 
 // Prototypes
 /** Initialize the board LEDs */
@@ -32,12 +34,12 @@ void InitHardware()
     Button_Init();
 
     // Configure SysTick Timer
-    if (SysTick_Config(Bsp::SYS_TICKS_BETWEEN_SYSTICK_IRQ)) while (1);
+    if (SysTick_Config(SYS_TICKS_BETWEEN_SYSTICK_IRQ)) while (1);
 }
 
 ButtonState_t ReadUserBtn()
 {
-    return static_cast<ButtonState_t>(GPIO_ReadInputDataBit(GPIOA, Bsp::PIN_BTN_USER));
+    return static_cast<ButtonState_t>(GPIO_ReadInputDataBit(GPIOA, PIN_BTN_USER));
 }
 
 void SetLed(PinConfiguration_t led)
@@ -81,15 +83,9 @@ uint32_t GetSysTick()
     return g_sysTick;
 }
 
-void ResetSysTick()
-{
-    g_sysTick = 0;
-}
-
 void DelayMs(uint32_t nTime)
 {
-    uint32_t nTicks = TIME_MS_TO_TICK(nTime);
-    ResetSysTick();
+    uint32_t nTicks = GetSysTick() + TIME_MS_TO_TICK(nTime);
     while (GetSysTick() < nTicks);
 }
 
@@ -102,7 +98,7 @@ CSStatus_t CSLock(int* lock)
                   "STREX    r0, r1, [%[lockAddr]];"                            /* r0 = lock -> lock = LOCKED_STATE */
                   "MOV      %[lockStatus], r0;"                                /* lockedStatus = r0 */
 			      : [lockAddr] "=r" (lock), [lockStatus] "=r" (lockStatus)     /* Outputs: %0, %1 */
-				  : "[lockAddr]" (lock), [lockedState] "I" (Bsp::LOCKED_STATE) /* Inputs:  %2, %3 */
+				  : "[lockAddr]" (lock), [lockedState] "I" (LOCKED_STATE) /* Inputs:  %2, %3 */
                   : "r0", "r1"                                                 /* Clobbered Regs  */
 				  );
 
@@ -143,13 +139,13 @@ static void Button_Init()
 #ifdef USE_FULL_ASSERT
 extern "C" void assert_failed(uint8_t* file , uint32_t line)
 {
-    if (g_pUart != NULL)
+    if (Bsp::g_pUart != NULL)
     {
-        g_pUart->PrintStr("ASSERT: ");
-        g_pUart->PrintStr((char const * const)file);
-        g_pUart->PrintStr(" Line: ");
-        g_pUart->PrintHex(line);
-        g_pUart->PrintStr("\n");
+        Bsp::g_pUart->PrintStr("ASSERT: ");
+        Bsp::g_pUart->PrintStr((char const * const)file);
+        Bsp::g_pUart->PrintStr(" Line: ");
+        Bsp::g_pUart->PrintHex(line);
+        Bsp::g_pUart->PrintStr("\n");
     }
 
     Bsp::SetLed(Bsp::PIN_LED_BLUE);

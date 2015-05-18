@@ -21,7 +21,7 @@ static const uint16_t USART1_TX_PIN    = GPIO_Pin_9;
 static const uint32_t USART1_BAUD_RATE = 115200;
 
 DUart::DUart()
-: DUartIF()
+: IUart()
 {
 }
 

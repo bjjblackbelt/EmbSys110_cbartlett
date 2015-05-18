@@ -22,20 +22,21 @@ UDEFS = \
 # List Application source files here
 SRC  = \
 	../Lib/CriticalSection.cpp \
-	../Lib/DUartIF.cpp
+	../Lib/IUart.cpp
 
 # List Test source files here
 TSRC  = \
 	Stubs/StubBsp.cpp \
 	RunAllTests.cpp \
 	TestTemplate.cpp \
-	TestDUartIF.cpp \
-	TestCriticalSectionAPI.cpp
+	TestIUart.cpp \
+	TestCriticalSectionAPI.cpp 
 
 # List all user directories here
 UINCDIR = \
 	${CPPUTEST_HOME}/include/CppUTest \
 	$(STDINCDIR) \
+	./Stubs \
 	./ \
 	../Lib \
 	../App \

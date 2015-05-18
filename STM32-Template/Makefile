@@ -8,7 +8,7 @@ vpath %.cpp $(TEMPLATEROOT)/Lib
 LIBOBJS = \
     CriticalSection.o \
 	Interrupts.o \
-    DUartIF.o \
+    IUart.o \
 	mini_cpp.o \
 	no_heap.o \
 	DUart.o \
@@ -22,11 +22,12 @@ OBJS = $(LIBOBJS) $(SRCOBJS)
 
 # compilation flags for gdb
 
-CFLAGS  = -O0 -g
+CFLAGS  = \
+	-O0 -g \
+	-fno-exceptions
 
 CPPFLAGS = \
 	-fno-rtti \
-	-fno-exceptions \
 	-fmessage-length=0 \
 	-mthumb-interwork \
 	-mlong-calls \

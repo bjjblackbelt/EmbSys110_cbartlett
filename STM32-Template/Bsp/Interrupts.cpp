@@ -46,8 +46,8 @@ extern "C" void Reset_Handler(void)
     }
 
     /* Use the STM32 Libraries to initialize system */
+    Bsp::g_sysTick = 0;
     SystemInit();
-    Bsp::ResetSysTick();
 
     /* call all static constructors in C++ (harmless in C programs) */
     __libc_init_array();
@@ -64,12 +64,12 @@ extern "C" void Reset_Handler(void)
 
 extern "C" void SysTick_Handler(void)
 {
-    static volatile uint32_t nextLedToggle = Bsp::SYS_TICKS_100_MS;
+    static volatile uint_fast32_t nextLedToggle = Bsp::SYS_TICKS_100_MS;
 
-    if (nextLedToggle == Bsp::g_sysTick++)
+    if (nextLedToggle < Bsp::g_sysTick++)
     {
         Bsp::TglLed(Bsp::PIN_LED_BLUE);
-        nextLedToggle += Bsp::SYS_TICKS_100_MS;
+        nextLedToggle = Bsp::g_sysTick + Bsp::SYS_TICKS_100_MS;
     }
 }
 

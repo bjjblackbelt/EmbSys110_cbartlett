@@ -45,3 +45,13 @@ extern "C" {
     //............................................................................
 
 }                                                                // extern "C"
+
+/**
+ * This is an error handler that is invoked by the C++ runtime when a pure virtual function is called.
+ * If anywhere in the runtime of your program an object is created with a virtual function pointer not
+ * filled in, and when the corresponding function is called, you will be calling a 'pure virtual function'.
+ * The handler you describe should be defined in the default libraries that come with your development environment.
+ */
+extern "C" void __cxa_pure_virtual() {
+        while (1) ;
+}

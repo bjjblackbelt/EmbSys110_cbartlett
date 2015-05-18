@@ -1,6 +1,6 @@
 /**
  *******************************************************************************
- *  @file   DUartIF.h
+ *  @file   IUart.h
  *  @brief  Declares an interface for a UART peripheral.
  *  @author Chad Bartlett   <cbartlet@uw.com>
  *******************************************************************************
@@ -11,26 +11,26 @@
 #include <stdint.h>
 
 /**
- * @class DUartIF
+ * @class IUart
  * @brief An interface for a UART peripheral.
  */
-class DUartIF
+class IUart
 {
   public:
     /**
      * Constructor
      */
-    DUartIF();
+    IUart();
 
     /**
      * Destructor
      */
-    virtual ~DUartIF();
+    virtual ~IUart();
 
     /**
      * Initialize the Uart peripheral.
      */
-    virtual void Init() {;};
+    virtual void Init() = 0;
 
     /**
      * Prints a string.
@@ -55,17 +55,17 @@ class DUartIF
      * Uart put char function
      * @param  c Character to be printed.
      */
-    virtual void PutC(uint8_t c) {(void)c;}
+    virtual void PutC(uint8_t c) = 0;
 
     /**
      * Reads a character from the Uart RX line.
      * @return Character read.
      */
-    virtual uint8_t GetC() {return 0;}
+    virtual uint8_t GetC() = 0;
 
   private:
-    DUartIF(const DUartIF&);            //!< Intentionally not implemented
-    DUartIF& operator=(const DUartIF&); //!< Intentionally not implemented
+    IUart(const IUart&);            //!< Intentionally not implemented
+    IUart& operator=(const IUart&); //!< Intentionally not implemented
 
     /**
      * Gets the position of the first non-zero nibble.

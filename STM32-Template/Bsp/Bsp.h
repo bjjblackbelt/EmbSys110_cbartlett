@@ -20,6 +20,7 @@ extern "C" {
 class DUart;
 
 #define TIME_MS_TO_TICK(ms)     (((ms)*Bsp::SYS_SYSTICK_PER_SEC)/1000)
+#define TIME_TICK_TO_MS(tick)   ((1000*(tick))/Bsp::SYS_SYSTICK_PER_SEC)
 
 namespace Bsp {
 /**
@@ -30,12 +31,14 @@ namespace Bsp {
 //
 
 //!< The number of clock cycles between calls to SysTick_Handler
+static const uint32_t SYS_TICKS_BETWEEN_SYSTICK_IRQ = SYSCLK_FREQ_24MHz / 1000;
+static const uint32_t SYS_SYSTICK_PER_SEC           = (SYSCLK_FREQ_24MHz / SYS_TICKS_BETWEEN_SYSTICK_IRQ);
+
 typedef enum
 {
-    SYS_TICKS_BETWEEN_SYSTICK_IRQ = SYSCLK_FREQ_24MHz / 1000, //!< Hz
-    SYS_SYSTICK_PER_SEC           = (SYSCLK_FREQ_24MHz / SYS_TICKS_BETWEEN_SYSTICK_IRQ),
     SYS_TICKS_100_MS              = SYS_SYSTICK_PER_SEC / 10,
     SYS_TICKS_250_MS              = SYS_SYSTICK_PER_SEC / 4,
+    SYS_TICKS_01_SEC              = 1 * SYS_SYSTICK_PER_SEC,
     SYS_TICKS_10_SEC              = 10 * SYS_SYSTICK_PER_SEC,
 } SystemConstant_t;
 
@@ -95,11 +98,6 @@ void TglLed(PinConfiguration_t led);
  * @return Returns the system tick value.
  */
 uint32_t GetSysTick();
-
-/**
- * Resets the value of the system tick counter to zero.
- */
-void ResetSysTick();
 
 /**
  * Blocking delay function in milliseconds.
