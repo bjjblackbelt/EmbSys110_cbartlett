@@ -13,9 +13,28 @@
             "folder_exclude_patterns":
             [
                 ".settings",
+                "Doc",
+                "obj",
+                "Bin",
             ],
             "follow_symlinks": true,
-            "path": "/home/ubu/Projects/EmbSys110_cbartlett/STM32-Template",
+
+            "path": "/home/ubu/Projects/EmbSys110_cbartlett/STM32-Template/",
+        },
+        {
+            "file_exclude_patterns":
+            [
+            ],
+
+            "folder_exclude_patterns":
+            [
+                "Documentation",
+                "doc",
+                "lib",
+            ],
+            "follow_symlinks": true,
+
+            "path": "/home/ubu/Projects/EmbSys110_cbartlett/stm32vldiscover_package/Libraries/",
         }
     ],
 
@@ -42,14 +61,18 @@
 
         "sublimeclang_options":
         [
+            "-I${project_path}/App",
             "-I${project_path}/Bsp",
-            "-I${project_path}/Demo",
             "-I${project_path}/Lib",
+            "-I${project_path}/Tests",
+            "-I${project_path}/Tests/Stubs",
             "-I${project_path}/../stm32vldiscover_package/Libraries/STM32F10x_StdPeriph_Driver/inc",
             "-I${project_path}/../stm32vldiscover_package/Libraries/CMSIS/CM3/DeviceSupport/ST/STM32F10x",
             "-I${project_path}/../stm32vldiscover_package/Libraries/CMSIS/CM3/CoreSupport",
+            "-I${project_path}/../CppUTest/include/CppUTest",
             "-isystem", "/usr/lib/arm-none-eabi/include",
             "-isystem", "/usr/lib/gcc/arm-none-eabi/4.9.3/include",
+            "-isystem", "/usr/arm-none-eabi/include/c++/4.9.3/arm-none-eabi/armv7-m",
             "-Wall",
             "-Wno-deprecated-declarations",
             "-Wno-unknown-pragmas",

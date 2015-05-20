@@ -30,7 +30,7 @@ TSRC  = \
 	RunAllTests.cpp \
 	TestTemplate.cpp \
 	TestIUart.cpp \
-	TestCriticalSectionAPI.cpp 
+	TestCriticalSectionAPI.cpp
 
 # List all user directories here
 UINCDIR = \

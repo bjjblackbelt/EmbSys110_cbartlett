@@ -29,6 +29,8 @@ extern "C" {
 #include <stm32f10x.h>
 }
 
+#include "DTimer.h"
+
 extern "C" {
 
 void __attribute__ ((weak)) Reset_Handler(void);
@@ -97,7 +99,7 @@ void __attribute__ ((weak)) TIM5_IRQHandler(void);
 void __attribute__ ((weak)) SPI3_IRQHandler(void);
 void __attribute__ ((weak)) UART4_IRQHandler(void);
 void __attribute__ ((weak)) UART5_IRQHandler(void);
-void __attribute__ ((weak)) TIM6_IRQHandler(void);
+void __attribute__ ((weak)) TIM6_DAC_IRQHandler(void);
 void __attribute__ ((weak)) TIM7_IRQHandler(void);
 void __attribute__ ((weak)) DMA2_Channel1_IRQHandler(void);
 void __attribute__ ((weak)) DMA2_Channel2_IRQHandler(void);
@@ -183,7 +185,7 @@ void __attribute__ ((weak)) Spurious_Handler(void);
 #pragma weak SPI3_IRQHandler            = Spurious_Handler
 #pragma weak UART4_IRQHandler           = Spurious_Handler
 #pragma weak UART5_IRQHandler           = Spurious_Handler
-#pragma weak TIM6_IRQHandler            = Spurious_Handler
+#pragma weak TIM6_DAC_IRQHandler            = Spurious_Handler
 #pragma weak TIM7_IRQHandler            = Spurious_Handler
 #pragma weak DMA2_Channel1_IRQHandler   = Spurious_Handler
 #pragma weak DMA2_Channel2_IRQHandler   = Spurious_Handler
@@ -282,7 +284,7 @@ VectorTableEntry const g_pfnVectors[] = {
     { .handler = &SPI3_IRQHandler           }, /* SPI3                      */
     { .handler = &UART4_IRQHandler          }, /* UART4                     */
     { .handler = &UART5_IRQHandler          }, /* UART5                     */
-    { .handler = &TIM6_IRQHandler           }, /* TIM6                      */
+    { .handler = &DTimer::TIM6_DAC_IRQHandler           }, /* TIM6                      */
     { .handler = &TIM7_IRQHandler           }, /* TIM7                      */
     { .handler = &DMA2_Channel1_IRQHandler  }, /* DMA2 Channel 1            */
     { .handler = &DMA2_Channel2_IRQHandler  }, /* DMA2 Channel 2            */

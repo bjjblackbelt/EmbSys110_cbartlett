@@ -12,6 +12,7 @@ LIBOBJS = \
 	mini_cpp.o \
 	no_heap.o \
 	DUart.o \
+	DTimer.o \
 	Bsp.o
 
 

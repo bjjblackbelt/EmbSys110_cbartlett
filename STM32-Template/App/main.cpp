@@ -2,6 +2,7 @@
 #include "Bsp.h"
 #include "IUart.h"
 #include "DUart.h"
+#include "DTimer.h"
 
 namespace Bsp {
 IUart* g_pUart = NULL;
@@ -34,6 +35,10 @@ int main(void)
     {
         Bsp::g_pUart->PrintStr(" > !!!FAILED!!! \n");
     }
+
+    DTimer timer;
+    timer.Open();
+    timer.Start();
 
     // Main loop
     while (1)
