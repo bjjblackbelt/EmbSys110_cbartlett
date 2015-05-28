@@ -1,0 +1,66 @@
+This directory contains Chad Bartlett's version of Assignment 1 for EMBSYS110:
+    UW Tiny Kernel - Assignment 1
+
+AUTHOR
+------
+20150430 - Chad Bartlett
+
+Project Directory Tree
+----------------------
+App/    -
+        |- OS.cpp
+        |- OS.h
+        |- Threads.cpp
+        |- Threads.h
+        |- main.cpp
+        |- mini_cpp.cpp
+        |- no_heap.cpp
+Bin/    -
+        |- Assignment1_cbartlett.hex
+        |- Assignment1_cbartlett.bin
+Bsp/    -
+        |- Bsp.cpp
+        |- Bsp.h
+        |- Interrupts.cpp
+        |- startup_stm32f10x.cpp
+        |- stm32f100.ld
+        |- stm32f10x_conf.h
+Doc/    -
+        |- Assignment1_Design_cbartlett.doc
+        |- Assignment1_Design_cbartlett.pdf
+Lib/    -
+        |- CriticalSection.cpp
+        |- CriticalSection.h
+        |- DUart.cpp
+        |- DUart.h
+        |- IDUart.cpp
+        |- IDUart.h
+Tests/  -
+        |- stubs/   -
+                    |- StubBsp.cpp
+                    |- StubDUart.cpp
+        |- Makefile
+        |- RunAllTests.cpp
+        |- TestCriticalSectionAPI.cpp
+        |- TestIUart.cpp
+        |- TestOS.cpp
+        |- TestTemplate.cpp
+./      -
+        |- .ddd_gdb
+        |- .nemiver_gdb
+        |- README
+        |- Makefile
+        |- Makefile.Includes
+        |- Makefile.Common
+
+
+Design
+------
+The purpose of this project is to implement a thread queue with three serialized
+threads (including one additional idle thread) and a shared variable. The
+application created for this project takes no inputs, but does output serial
+debug information. In addition, LEDs are toggled to indicate the state of the
+running application. Threads are executed forever using a round-robin schedule.
+The first two threads manipulate the globally shared variable and the third
+thread monitors the shared variable for errors. If an error occurs, a message is
+output through the serial-port and the LEDs enter an error pattern state.

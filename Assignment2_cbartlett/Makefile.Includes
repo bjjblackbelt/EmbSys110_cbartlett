@@ -1,0 +1,16 @@
+# Workspace path
+WORKSPACEROOT=/home/ubu/Projects/EmbSys110_cbartlett
+
+# Library path
+
+LIBROOT=$(WORKSPACEROOT)/stm32vldiscover_package
+
+# Code Paths
+
+DEVICE=$(LIBROOT)/Libraries/CMSIS/CM3/DeviceSupport/ST/STM32F10x
+CORE=$(LIBROOT)/Libraries/CMSIS/CM3/CoreSupport
+PERIPH=$(LIBROOT)/Libraries/STM32F10x_StdPeriph_Driver
+LIBRARY=/usr/arm-none-eabi/include
+
+STDINCDIR = $(DEVICE) $(CORE) $(PERIPH)/inc
+STDINCS  = $(patsubst %,-I%,$(STDINCDIR))
