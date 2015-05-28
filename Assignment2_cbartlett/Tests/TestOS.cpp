@@ -1,6 +1,7 @@
 #include <TestHarness.h>
 #include <stddef.h>
 #include "StubDUart.h"
+#include "DTimer.h"
 #include "OS.h"
 #include "Threads.h"
 
@@ -12,13 +13,16 @@ OS* g_pOS;
 
 TEST_GROUP(OS)
 {
+    static const uint32_t dummySP = 0;
     OS* p_os;
     StubDUart* p_stubUart;
+    DTimer* p_stubTimer;
 
     void setup()
     {
         p_stubUart = new StubDUart();
-        p_os = new OS(*p_stubUart);
+        p_stubTimer = new DTimer();
+        p_os = new OS(*p_stubUart, *p_stubTimer);
         Bsp::g_pOS = p_os;
     }
 
@@ -26,6 +30,7 @@ TEST_GROUP(OS)
     {
         delete p_os;
         delete p_stubUart;
+        delete p_stubTimer;
     }
 };
 
@@ -66,57 +71,6 @@ TEST(OS, RegistrationFailsIfMaxNumberOfAllowedThreadsReached)
 
     OS::Error_t status = p_os->RegisterThread(th5);
     CHECK_EQUAL(OS::ERROR_MAX_THREADS_REGISTERED, status);
-}
-
-TEST(OS, SchedulerIncrementsOneThreadUponCall)
-{
-    Thread::Thread_t th1 = {&Thread::Idle, NULL, Thread::UID_THREAD_IDLE, 0, Thread::STATE_INITIAL, "Idle"};
-    Thread::Thread_t th2 = {&Thread::Idle, NULL, Thread::UID_THREAD_1, 0, Thread::STATE_INITIAL, "Thread1"};
-    p_os->RegisterThread(th1);
-    p_os->RegisterThread(th2);
-
-    OS::Error_t status = p_os->Scheduler();
-    CHECK_EQUAL(OS::ERROR_NONE, status);
-    CHECK_EQUAL(Thread::UID_THREAD_1, p_os->GetCurrentThreadID());
-
-    status = p_os->Scheduler();
-    CHECK_EQUAL(Thread::UID_THREAD_IDLE, p_os->GetCurrentThreadID());
-}
-
-TEST(OS, SchedulerFailsIfNoThreadsHaveBeenRegistered)
-{
-    OS::Error_t status = p_os->Scheduler();
-    CHECK_EQUAL(OS::ERROR_NULL, status);
-}
-
-
-TEST(OS, SchedulerExecutesTheFirstNonNullThread)
-{
-    Thread::Thread_t th2 = {&Thread::Idle, NULL, Thread::UID_THREAD_1, 0, Thread::STATE_INITIAL, "Thread1"};
-    p_os->RegisterThread(th2);
-
-    OS::Error_t status = p_os->Scheduler();
-    CHECK_EQUAL(OS::ERROR_NONE, status);
-    CHECK_EQUAL(Thread::UID_THREAD_1, p_os->GetCurrentThreadID());
-}
-
-TEST(OS, SchedulerLoopsBackToIdleAfterReachingEndOfThreadQueue)
-{
-    Thread::Thread_t th1 = {&Thread::Idle, NULL, Thread::UID_THREAD_IDLE, 0, Thread::STATE_INITIAL, "Idle"};
-    Thread::Thread_t th2 = {&Thread::Thread1, NULL, Thread::UID_THREAD_1, 0, Thread::STATE_INITIAL, "Thread1"};
-    Thread::Thread_t th3 = {&Thread::Thread2, NULL, Thread::UID_THREAD_2, 0, Thread::STATE_INITIAL, "Thread2"};
-    Thread::Thread_t th4 = {&Thread::Thread3, NULL, Thread::UID_THREAD_3, 0, Thread::STATE_INITIAL, "Thread3"};
-    p_os->RegisterThread(th1); /* Idle */
-    p_os->RegisterThread(th2); /* Thread 1 */
-    p_os->RegisterThread(th3); /* Thread 2 */
-    p_os->RegisterThread(th4); /* Thread 3 */
-
-    p_os->Scheduler(); /* Thread 1 */
-    p_os->Scheduler(); /* Thread 2 */
-    p_os->Scheduler(); /* Thread 3 */
-
-    p_os->Scheduler(); /* Idle */
-    CHECK_EQUAL(Thread::UID_THREAD_IDLE, p_os->GetCurrentThreadID());
 }
 
 #if 0

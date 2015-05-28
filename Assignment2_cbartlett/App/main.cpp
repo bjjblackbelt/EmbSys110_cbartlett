@@ -2,6 +2,7 @@
 #include "Bsp.h"
 #include "IUart.h"
 #include "DUart.h"
+#include "DTimer.h"
 #include "Threads.h"
 #include "OS.h"
 
@@ -24,7 +25,7 @@ int main(void)
     Bsp::InitHardware();
 
     // Print initialization time
-    Bsp::g_pUart->PrintStr("> Chad Bartlett's Assignment 1.\n\n");
+    Bsp::g_pUart->PrintStr("> Chad Bartlett's Assignment 2.\n\n");
     Bsp::g_pUart->PrintStr("> Hardware initialization took: ");
     Bsp::g_pUart->PrintUInt(TIME_TICK_TO_MS(Bsp::GetSysTick()));
     Bsp::g_pUart->PrintStr("-milliseconds\n");
@@ -36,8 +37,11 @@ int main(void)
     Thread::Thread_t th3 = {&Thread::Thread2, &data, Thread::UID_THREAD_2, 0, Thread::STATE_INITIAL, "Consumer"};
     Thread::Thread_t th4 = {&Thread::Thread3, &data, Thread::UID_THREAD_3, 0, Thread::STATE_INITIAL, "Monitor "};
 
+    // Create an instance of a timer
+    DTimer timer;
+
     // Initialize OS
-    OS os(uart);
+    OS os(uart, timer);
     Bsp::g_pOS = &os;
 
     // Register Threads

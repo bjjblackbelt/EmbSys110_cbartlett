@@ -7,11 +7,16 @@
  */
 #include "DTimer.h"
 #include "Bsp.h"
+#include "OS.h"
 #include <stddef.h>
 #include <stm32f10x.h>
 
 extern "C" {
 #include <misc.h>
+}
+
+namespace Bsp {
+extern OS* g_pOS;
 }
 
 DTimer::DTimer()
@@ -89,10 +94,29 @@ extern "C" void DTimer::TIM6_DAC_IRQHandler()
 {
     if (TIM6->SR & TIM_SR_UIF)
     {
+        // Reset update flag
         TIM6->SR &= static_cast<uint16_t>(~TIM_SR_UIF);
+
+        /**
+         * Perform Contex Switch
+         */
+        // Set the current task's stack pointer
+        register uint32_t sp asm("sp");
+        Bsp::g_pOS->SetCurrentSP(sp);
+
+        // Switch to the next READY task
+        Bsp::g_pOS->SetNextReadyThread();
+
+        // Set the stack pointer to the current task's stack
+        asm volatile ("MOV sp, %[currentSP];"
+                      :                                                 /* Outputs */
+                      : [currentSP] "r" (Bsp::g_pOS->GetCurrentSP())    /* Inputs */
+                      :                                                 /* Clobbered Regs  */
+                      );
+
+        // TODO: Remove after debug
         Bsp::TglLed(Bsp::PIN_LED_GREEN);
     }
-
 }
 
 

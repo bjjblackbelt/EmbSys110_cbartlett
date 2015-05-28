@@ -4,7 +4,6 @@ CC = g++
 RM = rm -fr
 
 # List all default C defines here, like -D_DEBUG=1
-WARNINGS = -Wall -Wextra
 DDEFS = -g3 $(WARNINGS)
 
 # Define project name
@@ -17,7 +16,10 @@ CPPUTEST_HOME = $(WORKSPACEROOT)/CppUTest
 
 # List all user C define here, like -D_DEBUG=1
 UDEFS = \
-	-DSTM32F10X_MD_VL
+	-DSTM32F10X_MD_VL \
+	-fno-permissive \
+	-Wno-attributes \
+	-Wno-int-to-pointer-cast
 
 # List Application source files here
 SRC  = \
@@ -29,6 +31,7 @@ SRC  = \
 # List Test source files here
 TSRC  = \
 	Stubs/StubBsp.cpp \
+	Stubs/StubDTimer.cpp \
 	RunAllTests.cpp \
 	TestTemplate.cpp \
 	TestIUart.cpp \

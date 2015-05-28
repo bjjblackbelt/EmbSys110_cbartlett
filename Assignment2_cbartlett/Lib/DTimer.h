@@ -29,7 +29,15 @@ class DTimer
      * Configures
      */
     void Open();
+
+    /**
+     * Start the timer and enable the timer interrupt.
+     */
     void Start();
+
+    /**
+     * Stop the timer and disable the timer interrupt.
+     */
     void Stop();
 
     /**
@@ -37,6 +45,9 @@ class DTimer
      */
     void Close();
 
+    /**
+     * The timer interrupt service routine.
+     */
     static void TIM6_DAC_IRQHandler();
 
   private:

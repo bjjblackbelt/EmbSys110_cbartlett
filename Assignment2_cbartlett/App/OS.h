@@ -13,6 +13,7 @@
 
 // Forward declarations
 class IUart;
+class DTimer;
 
 namespace Thread {
 struct ThreadStr;
@@ -43,7 +44,7 @@ class OS
     /**
      * Constructor
      */
-    OS(IUart& uart);
+    OS(IUart& uart, DTimer& timer);
 
     /**
      * Destructor
@@ -58,10 +59,10 @@ class OS
     Error_t RegisterThread(Thread::Thread_t& thread);
 
     /**
-     * Switches to the next task to be executed.
-     * @return        Returns ERROR_NONE upon success, else an error code.
+     * Determines the next thread to execute.
+     * @pre The number of registered threads has to be at least 1.
      */
-    Error_t Scheduler();
+    void SetNextReadyThread();
 
     /**
      * Gets the currently running thread UID.
@@ -106,26 +107,53 @@ class OS
      */
     CriticalSection::Status_t QueryCS(CriticalSection& cs);
 
+    /**
+     * Sets the current stack pointer (SP) from the ISR.
+     * @param sp The current stack pointer.
+     */
+    inline void SetCurrentSP(uint32_t sp){m_threadStacks[m_currThread].cur = (uint32_t*)sp;}
+
+    /**
+     * Gets the current stack pointer.
+     * @return The current task's stack pointer
+     */
+    inline uint32_t GetCurrentSP(){return ((uint32_t)(m_threadStacks[m_currThread].cur));}
+
   private:
     OS(const OS&);            //!< Intentionally not implemented
     OS& operator=(const OS&); //!< Intentionally not implemented
 
-    /**
-     * Switch to the next thread.
-     * @pre The number of registered threads has to be at least 1.
-     */
-    void ContexSwitch();
 
     /**
-     * Determines the next thread to execute.
-     * @pre The number of registered threads has to be at least 1.
+     * @struct Stack_t
+     * @brief This structure defines shared data between threads.
+     * @var Stack_t::THREAD_STACK_SIZE_WORDS
+     * Memnber 'THREAD_STACK_SIZE_WORDS' is the size of the stack in words
+     * @var Stack_t::stack
+     * Memnber 'stack' provides storage for the stack of an individual thread.
+     * @var Stack_t::top
+     * Memnber 'top' is the address of the top of stack
+     * @var Stack_t::bot
+     * Memnber 'bot'* is the address of the bottom of stack
+     * @var Stack_t::cur
+     * Memnber 'cur'* is the address of the next slot in the stack to be written.
      */
-    void SetNextThread();
+    struct StackStr
+    {
+        static const uint32_t THREAD_STACK_SIZE_WORDS = 64;
+        uint32_t stack[THREAD_STACK_SIZE_WORDS];
+        uint32_t* top;
+        uint32_t* bot;
+        uint32_t* cur;
+    };
+    typedef StackStr Stack_t;
 
-    IUart* m_uart;                                      //!< A pointer to UART instance
+    IUart* m_uart;                                      //!< A pointer to a UART instance
+    DTimer* m_timer;                                    //!< A pointer to a timer instance
     Thread::Thread_t* m_threadQueue[MAX_THREAD_COUNT];  //!< Container for the threads of this app
+    Stack_t m_threadStacks[MAX_THREAD_COUNT];           //!< Storage for the thread stacks
     volatile uint_fast8_t m_currThread;                 //!< The current thread queue index
-    volatile uint_fast8_t m_nThreads;                   //!< The number of registered threads
+    uint_fast8_t m_nThreads;                            //!< The number of registered threads
 };
 
 #endif // #ifndef OS_H

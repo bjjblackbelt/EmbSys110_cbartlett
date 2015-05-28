@@ -19,6 +19,7 @@ CXX=$(TOOLROOT)/arm-none-eabi-g++
 LD=$(TOOLROOT)/arm-none-eabi-g++
 AR=$(TOOLROOT)/arm-none-eabi-ar
 AS=$(TOOLROOT)/arm-none-eabi-as
+OBJDUMP=$(TOOLROOT)/arm-none-eabi-objdump
 OBJCOPY=$(TOOLROOT)/arm-none-eabi-objcopy
 
 # Search path for standard files
@@ -69,6 +70,7 @@ OBJS := $(patsubst %.o,$(OBJSDIR)/%.o,$(OBJS))
 # Build executable
 
 all: $(ELF) $(BIN) test
+	@$(OBJDUMP) -Sd $(ELF) > objdump.txt
 
 $(ELF) : $(OBJS)
 	$(CXX) $(LDFLAGS) -o $@ $(OBJS) $(LDLIBS)

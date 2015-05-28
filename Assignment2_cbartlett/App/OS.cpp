@@ -10,6 +10,7 @@
 #include "OS.h"
 #include "Threads.h"
 #include "IUart.h"
+#include "DTimer.h"
 
 #define ENABLE_STATE_CHANGE_PRINTING 1
 #if ENABLE_STATE_CHANGE_PRINTING
@@ -18,15 +19,32 @@
 #define DEBUG_PRINT_STATE_CHANGE()
 #endif
 
-OS::OS(IUart& uart)
+// We know what we're doing here!!!
+#pragma GCC diagnostic push
+#pragma GCC diagnostic warning "-fpermissive"
+
+OS::OS(IUart& uart, DTimer& timer)
     : m_uart(&uart),
+      m_timer(&timer),
       m_threadQueue(),
+      m_threadStacks(),
       m_currThread(0),
       m_nThreads(0)
 {
+    uint32_t* addr = (uint32_t*)&DTimer::TIM6_DAC_IRQHandler;
+    (void)addr;
     for (int i = 0; i < OS::MAX_THREAD_COUNT; ++i)
     {
         m_threadQueue[i] = NULL;
+
+        for (uint32_t word = 0; word < OS::Stack_t::THREAD_STACK_SIZE_WORDS; word++)
+        {
+            m_threadStacks[i].stack[word] = 0xC0DE;
+        }
+
+        m_threadStacks[i].bot = &m_threadStacks[i].stack[0];
+        m_threadStacks[i].top = &m_threadStacks[i].stack[OS::Stack_t::THREAD_STACK_SIZE_WORDS-1];
+        m_threadStacks[i].cur = m_threadStacks[i].top;
     }
 
     m_uart->Init();
@@ -67,26 +85,38 @@ RegisterCleanup:
     return status;
 }
 
-OS::Error_t OS::Scheduler()
+void OS::SetNextReadyThread()
 {
-    OS::Error_t status = OS::ERROR_NULL;
-
-    if (m_nThreads > 0)
+    // Find the next READY thread; start at the current thread + 1.
+    bool isReadyThread = false;     //!< Indicates if any threads were READY
+    uint_fast8_t nThreadCnt = 1;    //!< Start at thread 1; do not count Idle thread.
+    while ((nThreadCnt < m_nThreads) && (isReadyThread == false))
     {
-        SetNextThread();
+        nThreadCnt++;
 
-        ContexSwitch();
+        // If at the end of the thread queue, wrap to beginning.
+        if (m_currThread == (m_nThreads - 1))
+        {
+            m_currThread = 1;
+        }
+        else
+        {
+            m_currThread++;
+        }
 
         if (m_threadQueue[m_currThread]->state == Thread::STATE_READY)
         {
             m_threadQueue[m_currThread]->state = Thread::STATE_ACTIVE;
             DEBUG_PRINT_STATE_CHANGE();
+            isReadyThread = true;
         }
-
-        status = OS::ERROR_NONE;
     }
 
-    return status;
+    // If no threads were READY, then set the next thread to the Idle thread.
+    if (isReadyThread == false)
+    {
+        m_currThread = 0;
+    }
 }
 
 void OS::PrintThreadInfo()
@@ -145,6 +175,11 @@ void OS::Start()
             m_currThread = i;
             m_threadQueue[m_currThread]->state = Thread::STATE_READY;
             DEBUG_PRINT_STATE_CHANGE();
+
+            // Initialize the individual thread stacks
+            uint32_t addr = (uint32_t)(m_threadQueue[i]->entry);
+            (void)addr;
+            *m_threadStacks[i].cur-- = (uint32_t)(m_threadQueue[i]->entry);
         }
 
         // Start task timer
@@ -152,36 +187,23 @@ void OS::Start()
         m_currThread = 0;
         m_threadQueue[m_currThread]->state = Thread::STATE_ACTIVE;
         DEBUG_PRINT_STATE_CHANGE();
+
+        // Change the current stack pointer to that of the Idle task
+        uint32_t* sp = m_threadStacks[m_currThread].cur;
+        asm volatile ("MOV      sp, %[currentSP];"
+                      :                        /* Outputs */
+                      : [currentSP] "r" (sp)   /* Inputs */
+                      :                        /* Clobbered Regs  */
+                      );
+
+        // Start OS timer
+        m_timer->Open();
+        m_timer->Start();
         m_threadQueue[m_currThread]->entry(m_threadQueue[m_currThread]->data);
 
         while (1)
         {
-            Scheduler();
         }
-    }
-}
-
-void OS::ContexSwitch()
-{
-    //!< Execute next thread
-    if (m_currThread < OS::MAX_THREAD_COUNT)
-    {
-        Thread::Thread_t* nextThread = m_threadQueue[m_currThread];
-        nextThread->entry(nextThread->data);
-    }
-
-}
-
-void OS::SetNextThread()
-{
-    // If at the end of the thread queue, wrap to beginning.
-    if (m_currThread == (m_nThreads - 1))
-    {
-        m_currThread = 0;
-    }
-    else
-    {
-        m_currThread++;
     }
 }
 
@@ -201,3 +223,5 @@ uint_fast8_t OS::GetNumberOfThreads()
 {
     return m_nThreads;
 }
+
+#pragma GCC diagnostic pop
