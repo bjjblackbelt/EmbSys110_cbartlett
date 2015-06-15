@@ -13,7 +13,6 @@ LIBOBJS = \
 	no_heap.o \
 	Threads.o \
 	DUart.o \
-    DTimer.o \
 	Bsp.o \
 	OS.o
 

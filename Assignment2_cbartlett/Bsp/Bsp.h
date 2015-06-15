@@ -31,7 +31,7 @@ namespace Bsp {
 //
 
 //!< The number of clock cycles between calls to SysTick_Handler
-static const uint32_t SYS_TICKS_BETWEEN_SYSTICK_IRQ = SYSCLK_FREQ_24MHz / 1000;
+static const uint32_t SYS_TICKS_BETWEEN_SYSTICK_IRQ = SYSCLK_FREQ_24MHz / 2000;
 static const uint32_t SYS_SYSTICK_PER_SEC           = (SYSCLK_FREQ_24MHz / SYS_TICKS_BETWEEN_SYSTICK_IRQ);
 
 typedef enum

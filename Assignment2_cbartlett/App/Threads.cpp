@@ -8,148 +8,105 @@
 #include <stddef.h>
 #include "Threads.h"
 #include "Bsp.h"
+#include "OS.h"
 #include "IUart.h"
 
 // Global objects
 namespace Bsp {
 extern IUart* g_pUart;
-extern OS* g_pOS;
 }
 
-// Prototypes
-static void PrintExecutionTime(char const * const msg, uint_fast32_t time);
-static void PrintSharedDataState(Thread::GlobalData_t& s);
-
-#define ENABLE_THREAD_EXECUTION_TIME_PRINT 1
-#ifdef ENABLE_THREAD_EXECUTION_TIME_PRINT
-#define PRINT_EXEC_TIME(msg,time)       PrintExecutionTime((msg),(time))
-#else
-#define PRINT_EXEC_TIME(msg,time)
-#endif
-
-Thread::Error_t Thread::Idle(void* pData)
+void Thread::Idle(void* pData)
 {
-    if (pData == NULL) return (Thread::ERROR_NULL_DATA);
+    if (pData == NULL) { return; }
 
-    uint_fast32_t ticks = Bsp::GetSysTick();
-
-    Bsp::ClrLed(Bsp::PIN_LED_GREEN);
-
-    GlobalData_t* s = static_cast<GlobalData_t*>(pData);
-
-    Bsp::DelayMs(10000);
-
-    //!< Print state of shared data
-    PrintSharedDataState(*s);
-
-    //!< Print Execution Time
-    PRINT_EXEC_TIME("> Idle exec time: ", TIME_TICK_TO_MS(Bsp::GetSysTick() - ticks));
-
-    Bsp::SetLed(Bsp::PIN_LED_GREEN);
-
-    return Thread::ERROR_NONE;
-}
-
-Thread::Error_t Thread::Thread1(void* pData)
-{
-    if (pData == NULL) return (Thread::ERROR_NULL_DATA);
-
-    uint_fast32_t ticks = Bsp::GetSysTick();
-
-    GlobalData_t* s = static_cast<GlobalData_t*>(pData);
-
-    s->nT1++;
-
-    //!< Obtain critical section lock and increment shared counter
-    if (Bsp::g_pOS->EnterCS(s->guard) == CriticalSection::SUCCESS)
+    while (1)
     {
-        s->inc++;
-        Bsp::g_pOS->LeaveCS(s->guard);
+
     }
-
-    Bsp::DelayMs(1000);
-
-    //!< Print Execution Time
-    PRINT_EXEC_TIME("> Thread1 exec time: ", TIME_TICK_TO_MS(Bsp::GetSysTick() - ticks));
-
-    return Thread::ERROR_NONE;
 }
 
-Thread::Error_t Thread::Thread2(void* pData)
+void Thread::Thread1(void* pData)
 {
-    if (pData == NULL) return (Thread::ERROR_NULL_DATA);
+    if (pData == NULL) { return; }
 
-    uint_fast32_t ticks = Bsp::GetSysTick();
-
-    GlobalData_t* s = static_cast<GlobalData_t*>(pData);
-
-    s->nT2++;
-
-    //!< Obtain critical section lock and decrement shared counter
-    if (Bsp::g_pOS->EnterCS(s->guard) == CriticalSection::SUCCESS)
+    while (1)
     {
-        s->inc--;
-        Bsp::g_pOS->LeaveCS(s->guard);
-    }
+        GlobalData_t* s = static_cast<GlobalData_t*>(pData);
 
-    Bsp::DelayMs(1000);
+        s->nT1++;
 
-    //!< Print Execution Time
-    PRINT_EXEC_TIME("> Thread2 exec time: ", TIME_TICK_TO_MS(Bsp::GetSysTick() - ticks));
-
-    return Thread::ERROR_NONE;
-}
-
-Thread::Error_t Thread::Thread3(void* pData)
-{
-
-    if (pData == NULL) return (Thread::ERROR_NULL_DATA);
-
-
-    uint_fast32_t ticks = Bsp::GetSysTick();
-
-    GlobalData_t* s = static_cast<GlobalData_t*>(pData);
-
-    //!< Obtain critical section lock and check shared counter
-    Thread::Error_t status = Thread::ERROR_COUNTER;
-    if (Bsp::g_pOS->EnterCS(s->guard) == CriticalSection::SUCCESS)
-    {
-        if (s->inc < 3)
+        //!< Obtain critical section lock and increment shared counter
+        if (OS::EnterCS(s->guard) == CriticalSection::SUCCESS)
         {
-            status = Thread::ERROR_NONE;
+            s->inc++;
+            OS::LeaveCS(s->guard);
         }
-        else
-        {
-            // Reset the counter and continue
-            s->inc = 0;
-        }
-        Bsp::g_pOS->LeaveCS(s->guard);
+
+        Bsp::TglLed(Bsp::PIN_LED_GREEN);
+
+        OS::TimeDlyMs(333);
     }
-
-    Bsp::DelayMs(1000);
-
-    //!< Print Execution Time
-    PRINT_EXEC_TIME("> Thread3 exec time: ", TIME_TICK_TO_MS(Bsp::GetSysTick() - ticks));
-
-    return (status);
 }
 
-static void PrintExecutionTime(char const * const msg, uint_fast32_t time)
+void Thread::Thread2(void* pData)
 {
-    Bsp::g_pUart->PrintStr(msg);
-    Bsp::g_pUart->PrintUInt(time);
-    Bsp::g_pUart->PrintStr("-ms\n");
+    if (pData == NULL) { return; }
+
+    while (1)
+    {
+        GlobalData_t* s = static_cast<GlobalData_t*>(pData);
+
+        s->nT2++;
+
+        //!< Obtain critical section lock and decrement shared counter
+        if (OS::EnterCS(s->guard) == CriticalSection::SUCCESS)
+        {
+            s->inc--;
+            OS::LeaveCS(s->guard);
+        }
+
+        Bsp::TglLed(Bsp::PIN_LED_BLUE);
+
+        OS::TimeDlyMs(750);
+    }
 }
 
-static void PrintSharedDataState(Thread::GlobalData_t& s)
+void Thread::Thread3(void* pData)
 {
-    Bsp::g_pUart->PrintStr("Inc: ");
-    Bsp::g_pUart->PrintUInt(s.inc);
-    Bsp::g_pUart->PrintStr("\n");
-    Bsp::g_pUart->PrintStr("nT1: ");
-    Bsp::g_pUart->PrintUInt(s.nT1);
-    Bsp::g_pUart->PrintStr("\n");
-    Bsp::g_pUart->PrintStr("nT2: ");
-    Bsp::g_pUart->PrintUInt(s.nT2);
-    Bsp::g_pUart->PrintStr("\n");
+
+    if (pData == NULL) { return; }
+
+    while (1)
+    {
+        GlobalData_t* s = static_cast<GlobalData_t*>(pData);
+
+        //!< Obtain critical section lock and check shared counter
+        if (OS::EnterCS(s->guard) == CriticalSection::SUCCESS)
+        {
+            if (s->inc > 10)
+            {
+                __asm volatile("cpsid i");
+
+                // ERROR: Reset the counter and continue
+                s->inc = 0;
+
+                Bsp::SetLed(Bsp::PIN_LED_GREEN);
+                Bsp::SetLed(Bsp::PIN_LED_BLUE);
+
+                for (int i = 0; i < 30; i++)
+                {
+                    Bsp::TglLed(Bsp::PIN_LED_GREEN);
+                    Bsp::TglLed(Bsp::PIN_LED_BLUE);
+                    uint32_t cnt = 0;
+                    while (cnt++ < 100000);
+                }
+
+                __asm volatile("cpsie i");
+            }
+            OS::LeaveCS(s->guard);
+        }
+
+        OS::TimeDlyMs(1000);
+    }
 }

@@ -29,8 +29,6 @@ extern "C" {
 #include <stm32f10x.h>
 }
 
-#include "DTimer.h"
-
 extern "C" {
 
 void __attribute__ ((weak)) Reset_Handler(void);
@@ -284,7 +282,7 @@ VectorTableEntry const g_pfnVectors[] = {
     { .handler = &SPI3_IRQHandler           }, /* SPI3                      */
     { .handler = &UART4_IRQHandler          }, /* UART4                     */
     { .handler = &UART5_IRQHandler          }, /* UART5                     */
-    { .handler = &DTimer::TIM6_DAC_IRQHandler           }, /* TIM6                      */
+    { .handler = &TIM6_DAC_IRQHandler       }, /* TIM6                      */
     { .handler = &TIM7_IRQHandler           }, /* TIM7                      */
     { .handler = &DMA2_Channel1_IRQHandler  }, /* DMA2 Channel 1            */
     { .handler = &DMA2_Channel2_IRQHandler  }, /* DMA2 Channel 2            */

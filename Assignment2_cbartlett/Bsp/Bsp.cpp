@@ -32,9 +32,6 @@ void InitHardware()
 {
     Led_Init();
     Button_Init();
-
-    // Configure SysTick Timer
-    if (SysTick_Config(SYS_TICKS_BETWEEN_SYSTICK_IRQ)) while (1);
 }
 
 ButtonState_t ReadUserBtn()
@@ -81,12 +78,6 @@ extern volatile uint32_t g_sysTick;
 uint32_t GetSysTick()
 {
     return g_sysTick;
-}
-
-void DelayMs(uint32_t nTime)
-{
-    uint32_t nTicks = GetSysTick() + TIME_MS_TO_TICK(nTime);
-    while (GetSysTick() < nTicks);
 }
 
 CSStatus_t CSLock(int* lock)

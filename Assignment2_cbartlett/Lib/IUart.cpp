@@ -14,6 +14,15 @@ static const uint8_t BITS_IN_NIBBLE  = 4;
 #define LEADING_NIBBLE_MASK(nibble)         (0xF << (28 - (BITS_IN_NIBBLE*(nibble))))
 #define SHIFT_TO_FIRST_NIBBLE_POS(nibble)   (28 - (BITS_IN_NIBBLE*(nibble)))
 
+#define PRINT_DISABLE_INTERRUPTS (0U)
+#if PRINT_DISABLE_INTERRUPTS
+#define DISABLE_INTS()      do{__asm volatile ("cpsid i");}while(0)
+#define ENABLE_INTS()      do{__asm volatile ("cpsie i");}while(0)
+#else
+#define DISABLE_INTS()
+#define ENABLE_INTS()
+#endif
+
 IUart::IUart()
 {
 }
@@ -24,6 +33,8 @@ IUart::~IUart()
 
 void IUart::PrintStr(char const * const string)
 {
+    DISABLE_INTS();
+
     if (string != NULL)
     {
         const char* pString = string;
@@ -32,10 +43,14 @@ void IUart::PrintStr(char const * const string)
             PutC((uint8_t)*pString++);
         }
     }
+
+    ENABLE_INTS();
 }
 
 void IUart::PrintHex(uint32_t hex)
 {
+    DISABLE_INTS();
+
     //!< Print the leading characters '0x'
     PrintNibble(static_cast<uint8_t>(0));
     PutC(static_cast<uint8_t>('x'));
@@ -47,15 +62,20 @@ void IUart::PrintHex(uint32_t hex)
         uint8_t character = static_cast<uint8_t>((hex >> SHIFT_TO_FIRST_NIBBLE_POS(nibble)) & 0xF);
         PrintNibble(character);
     }
+
+    ENABLE_INTS();
 }
 
 void IUart::PrintUInt(uint32_t dec)
 {
+    DISABLE_INTS();
+
     const uint8_t SINGLE_DIGIT_ASCII_CONVERSION = 48;
 
     uint32_t numberIn = dec;
     uint32_t devisor = 1000000000;
     bool isFirstNonZero = false;
+
     do
     {
         uint32_t numberOut = numberIn/devisor;
@@ -77,6 +97,8 @@ void IUart::PrintUInt(uint32_t dec)
     } while (devisor >= 10);
 
     PutC(numberIn%10 + SINGLE_DIGIT_ASCII_CONVERSION);
+
+    ENABLE_INTS();
 }
 
 void IUart::PrintNibble(uint8_t nibble)

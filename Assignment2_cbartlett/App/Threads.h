@@ -9,13 +9,10 @@
 #define THREADS_H
 
 #include <stdint.h>
-#include "OS.h"
+#include "CriticalSection.h"
 
-// Forward declarations
-class CriticalSection;
 
 namespace Thread {
-
 /**
  * @enum State_t
  * @brief A thread can be in one of these states.
@@ -26,24 +23,8 @@ typedef enum
     STATE_ACTIVE,
     STATE_READY,
     STATE_BLOCKED,
+    STATE_DELAYED,
 } State_t;
-
-/**
- * @enum Uid_t
- * @brief Each thread must have a unique ID.
- *
- * There is some coupling here with the constant OS::MAX_THREAD_COUNT. The
- * fields in this enum are used as array accessors into an array defined in the
- * OS class. Therefore, the numbering must start at '0' and sequentially
- * progress until OS::MAX_THREAD_COUNT is reached.
- */
-typedef enum
-{
-    UID_THREAD_IDLE,
-    UID_THREAD_1,
-    UID_THREAD_2,
-    UID_THREAD_3,
-} Uid_t;
 
 /**
  * @enum Error_t
@@ -57,7 +38,7 @@ typedef enum
 } Error_t;
 
 /** A function pointer defining a thread. */
-typedef Error_t (*ThreadEntryFunct)(void* pData);
+typedef void (*ThreadEntryFunct)(void* pData);
 
 /**
  * @struct GlobalData_t
@@ -106,8 +87,7 @@ struct ThreadStr
     static const uint8_t MAX_NAME_LENGTH = 12;
     ThreadEntryFunct entry;
     void* data;
-    Uid_t uid;
-    uint8_t priority;
+    uint32_t* stack;
     State_t state;
     char name[MAX_NAME_LENGTH + 1];
 };
@@ -116,30 +96,26 @@ typedef ThreadStr Thread_t;
 /**
  * This thread puts the application to sleep for 10-seconds and toggles a LED.
  * @param  pData An optional parameter.
- * @return      Returns Thread::ERROR_NONE if successful, else another error code.
  */
-Error_t Idle(void* pData);
+void Idle(void* pData);
 
 /**
  * This thread increments a shared counter.
  * @param  pData A pointer to a shared data structure.
- * @return      Returns Thread::ERROR_NONE if successful, else another error code.
  */
-Error_t Thread1(void* pData);
+void Thread1(void* pData);
 
 /**
  * This thread decrements a shared counter.
  * @param  pData A pointer to a shared data structure.
- * @return      Returns Thread::ERROR_NONE if successful, else another error code.
  */
-Error_t Thread2(void* pData);
+void Thread2(void* pData);
 
 /**
  * This thread monitors the shared counter.
  * @param  pData A pointer to a shared data structure.
- * @return      Returns Thread::ERROR_NONE if successful, else another error code.
  */
-Error_t Thread3(void* pData);
+void Thread3(void* pData);
 
 } // namespace Thread
 #endif // #ifndef THREADS_H

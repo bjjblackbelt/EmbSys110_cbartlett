@@ -6,59 +6,34 @@
  *******************************************************************************
  */
 #include <stddef.h>
+#include <stdint.h>
 #include <string.h>
 #include "OS.h"
+#include "Bsp.h"
 #include "Threads.h"
+#include "TimingMeasurements.h"
 #include "IUart.h"
-#include "DTimer.h"
 
-#define ENABLE_STATE_CHANGE_PRINTING 1
-#if ENABLE_STATE_CHANGE_PRINTING
-#define DEBUG_PRINT_STATE_CHANGE()      PrintThreadInfo()
-#else
-#define DEBUG_PRINT_STATE_CHANGE()
-#endif
-
-// We know what we're doing here!!!
-#pragma GCC diagnostic push
-#pragma GCC diagnostic warning "-fpermissive"
-
-OS::OS(IUart& uart, DTimer& timer)
-    : m_uart(&uart),
-      m_timer(&timer),
-      m_threadQueue(),
-      m_threadStacks(),
-      m_currThread(0),
-      m_nThreads(0)
-{
-    uint32_t* addr = (uint32_t*)&DTimer::TIM6_DAC_IRQHandler;
-    (void)addr;
-    for (int i = 0; i < OS::MAX_THREAD_COUNT; ++i)
-    {
-        m_threadQueue[i] = NULL;
-
-        for (uint32_t word = 0; word < OS::Stack_t::THREAD_STACK_SIZE_WORDS; word++)
-        {
-            m_threadStacks[i].stack[word] = 0xC0DE;
-        }
-
-        m_threadStacks[i].bot = &m_threadStacks[i].stack[0];
-        m_threadStacks[i].top = &m_threadStacks[i].stack[OS::Stack_t::THREAD_STACK_SIZE_WORDS-1];
-        m_threadStacks[i].cur = m_threadStacks[i].top;
-    }
-
-    m_uart->Init();
+extern "C" {
+#include <stm32f10x_rcc.h>
 }
 
-OS::~OS()
-{
+// Initialize globals
+namespace OS {
+State_t g_os;
 }
 
-OS::Error_t OS::RegisterThread(Thread::Thread_t& thread)
+// Global objects
+namespace Bsp {
+extern IUart* g_pUart;
+}
+
+OS::Error_t OS::RegisterThread(Thread::Thread_t& thread, uint32_t stackSize)
 {
+    TIME_MEAS_CREATE_TASK_START();
     OS::Error_t status = OS::ERROR_NONE;
 
-    if (m_nThreads > (OS::MAX_THREAD_COUNT - 1))
+    if (OS::g_os.nThreads > (OS::MAX_THREAD_COUNT - 1))
     {
         status = OS::ERROR_MAX_THREADS_REGISTERED;
         goto RegisterCleanup;
@@ -70,158 +45,218 @@ OS::Error_t OS::RegisterThread(Thread::Thread_t& thread)
         goto RegisterCleanup;
     }
 
-    for (uint_fast8_t i = 0; i < m_nThreads; ++i)
+    if (thread.stack == NULL)
     {
-        if (m_threadQueue[i]->uid == thread.uid)
-        {
-            status = OS::ERROR_UID_NOT_UNIQUE;
-            goto RegisterCleanup;
-        }
+        status = OS::ERROR_NULL;
+        goto RegisterCleanup;
     }
 
-    m_threadQueue[m_nThreads++] = &thread;
+    // Initialize task stack
+    OS::InitializeThreadStack(thread, stackSize);
+
+    // Update OS State
+    OS::g_os.threadQueue[OS::g_os.nThreads]        = &thread;
+    OS::g_os.threadQueue[OS::g_os.nThreads]->state = Thread::STATE_READY;
+    OS::g_os.threadDelay[OS::g_os.nThreads][0]     = false;
+    OS::g_os.threadDelay[OS::g_os.nThreads][1]     = UINT32_MAX;
+
+    // Update thread count
+    OS::g_os.nThreads++;
 
 RegisterCleanup:
+    TIME_MEAS_CREATE_TASK_STOP();
     return status;
 }
 
 void OS::SetNextReadyThread()
 {
     // Find the next READY thread; start at the current thread + 1.
-    bool isReadyThread = false;     //!< Indicates if any threads were READY
-    uint_fast8_t nThreadCnt = 1;    //!< Start at thread 1; do not count Idle thread.
-    while ((nThreadCnt < m_nThreads) && (isReadyThread == false))
+    bool isReadyThread = false;                                         //!< Indicates if any threads were READY
+    uint_fast8_t nThreadCnt = 1;                                        //!< Go through every thread but Idle
+    uint_fast8_t nextThread = (uint_fast8_t)OS::g_os.currThread + 1U;   //!< Start at the current thread + 1
+    while ((nThreadCnt < OS::g_os.nThreads) && (isReadyThread == false))
     {
         nThreadCnt++;
 
         // If at the end of the thread queue, wrap to beginning.
-        if (m_currThread == (m_nThreads - 1))
+        if (nextThread >= (OS::g_os.nThreads))
         {
-            m_currThread = 1;
-        }
-        else
-        {
-            m_currThread++;
+            nextThread = 1;
         }
 
-        if (m_threadQueue[m_currThread]->state == Thread::STATE_READY)
+        if (OS::g_os.threadQueue[nextThread]->state == Thread::STATE_READY)
         {
-            m_threadQueue[m_currThread]->state = Thread::STATE_ACTIVE;
-            DEBUG_PRINT_STATE_CHANGE();
+            OS::g_os.threadQueue[nextThread]->state = Thread::STATE_ACTIVE;
             isReadyThread = true;
+            OS::g_os.nextThread = nextThread;
         }
+
+        nextThread++;
     }
 
     // If no threads were READY, then set the next thread to the Idle thread.
     if (isReadyThread == false)
     {
-        m_currThread = 0;
+        OS::g_os.nextThread = OS::UID_THREAD_IDLE;
     }
 }
 
 void OS::PrintThreadInfo()
 {
-    if (m_nThreads > 0)
+    if (OS::g_os.nThreads > 0)
     {
-        m_uart->PrintStr("Name: ");
-        m_uart->PrintStr(m_threadQueue[m_currThread]->name);
-        m_uart->PrintStr("\n");
-        m_uart->PrintStr("State: ");
-        m_uart->PrintHex(m_threadQueue[m_currThread]->state);
-        m_uart->PrintStr("\n");
+        Bsp::g_pUart->PrintStr("Name: ");
+        Bsp::g_pUart->PrintStr(OS::g_os.threadQueue[OS::g_os.currThread]->name);
+        Bsp::g_pUart->PrintStr("\n");
+        Bsp::g_pUart->PrintStr("State: ");
+        Bsp::g_pUart->PrintHex(OS::g_os.threadQueue[OS::g_os.currThread]->state);
+        Bsp::g_pUart->PrintStr("\n");
     }
     else
     {
-        m_uart->PrintStr("There are no registered threads.\n");
+        Bsp::g_pUart->PrintStr("There are no registered threads.\n");
     }
 }
 
 CriticalSection::Status_t OS::EnterCS(CriticalSection& cs)
 {
-    CriticalSection::Status_t status = cs.Query(m_threadQueue[m_currThread]->uid);
+    CriticalSection::Status_t status = cs.Query(OS::g_os.currThread);
 
     if (status == CriticalSection::BUSY)
     {
-        m_threadQueue[m_currThread]->state = Thread::STATE_BLOCKED;
-        DEBUG_PRINT_STATE_CHANGE();
+        OS::g_os.threadQueue[OS::g_os.currThread]->state = Thread::STATE_BLOCKED;
 
-        status = cs.Enter(m_threadQueue[m_currThread]->uid);
+        status = cs.Enter(OS::g_os.currThread);
     }
-
-    m_threadQueue[m_currThread]->state = Thread::STATE_READY;
-    DEBUG_PRINT_STATE_CHANGE();
+    OS::g_os.threadQueue[OS::g_os.currThread]->state = Thread::STATE_READY;
 
     return (status);
 }
 
 CriticalSection::Status_t OS::LeaveCS(CriticalSection& cs)
 {
-    CriticalSection::Status_t status = cs.Leave(m_threadQueue[m_currThread]->uid);
+    CriticalSection::Status_t status = cs.Leave(OS::g_os.currThread);
+#if 0
+    if (status == CriticalSection::SUCCESS)
+    {
+        for (uint8_t thread = 1; thread < OS::g_os.nThreads; thread++)
+        {
+            if (OS::g_os.threadQueue[thread]->state == Thread::STATE_BLOCKED)
+            {
+                OS::g_os.threadQueue[thread]->state = Thread::STATE_READY;
+            }
+        }
+    }
+#endif
+
     return (status);
 }
 
 CriticalSection::Status_t OS::QueryCS(CriticalSection& cs)
 {
-    CriticalSection::Status_t status = cs.Query(m_threadQueue[m_currThread]->uid);
+    CriticalSection::Status_t status = cs.Query(OS::g_os.currThread);
     return (status);
 }
 
-void OS::Start()
+void OS::Start(uint32_t* topOfIdleStack)
 {
-    if (m_nThreads > 0)
+    if (OS::g_os.nThreads > 0)
     {
-        for (uint_fast8_t i = 0; i < m_nThreads; ++i)
-        {
-            m_currThread = i;
-            m_threadQueue[m_currThread]->state = Thread::STATE_READY;
-            DEBUG_PRINT_STATE_CHANGE();
+        // Set current task to Idle
+        OS::g_os.currThread = OS::UID_THREAD_IDLE;
 
-            // Initialize the individual thread stacks
-            uint32_t addr = (uint32_t)(m_threadQueue[i]->entry);
-            (void)addr;
-            *m_threadStacks[i].cur-- = (uint32_t)(m_threadQueue[i]->entry);
-        }
+        // Update the process stack pointer
+        __asm volatile(
+            "msr psp, %0;"
+            :
+            : "r"((uint32_t)topOfIdleStack)
+        );
 
-        // Start task timer
-        // Execute the first task
-        m_currThread = 0;
-        m_threadQueue[m_currThread]->state = Thread::STATE_ACTIVE;
-        DEBUG_PRINT_STATE_CHANGE();
+        // set PendSV to the lowest priority
+        NVIC_SetPriority(PendSV_IRQn, 0xFF);
 
-        // Change the current stack pointer to that of the Idle task
-        uint32_t* sp = m_threadStacks[m_currThread].cur;
-        asm volatile ("MOV      sp, %[currentSP];"
-                      :                        /* Outputs */
-                      : [currentSP] "r" (sp)   /* Inputs */
-                      :                        /* Clobbered Regs  */
-                      );
+        // Configure SysTick Timer
+        if (SysTick_Config(Bsp::SYS_TICKS_BETWEEN_SYSTICK_IRQ)) while (1);
 
-        // Start OS timer
-        m_timer->Open();
-        m_timer->Start();
-        m_threadQueue[m_currThread]->entry(m_threadQueue[m_currThread]->data);
+        // Switch to the process stack and user mode
+        __asm volatile(
+            "msr control, %0"
+            :
+            : "r"(0x3)
+        );
+
+        // Flush the pipeline after changing CONTROL (recommended for Cortex-M3)
+        __asm volatile("isb");
+
+        // Start in idle
+        OS::g_os.threadQueue[OS::g_os.currThread]->entry(OS::g_os.threadQueue[OS::g_os.currThread]->data);
 
         while (1)
         {
+            /* Never reach this. */;
         }
     }
 }
 
-int_fast8_t OS::GetCurrentThreadID()
+void OS::InitializeThreadStack(Thread::Thread_t& thread, uint32_t stackSize)
 {
-    if (m_nThreads > 0)
+    //!< EXC_RETURN values
+    static const uint32_t PROC_RETURN = 0xFFFFFFFD;
+
+    // Fill task stack with pattern
+    for (uint32_t word = 0; word < (stackSize - 1); word++)
     {
-        return static_cast<int_fast8_t>(m_threadQueue[m_currThread]->uid);
+        *(thread.stack + word) = 0xDEADBEEF;
     }
-    else
-    {
-        return (-1);
-    }
+
+    //!< Initialize the default stack frame
+    uint32_t* defaultFrame = thread.stack + stackSize - 1;
+
+    /* Registers stacked as if saved on exception    */
+    *(defaultFrame)  = (uint32_t)0x01000000L;             /* xPSR                                          */
+    *(--defaultFrame)  = (uint32_t)thread.entry;            /* Entry Point                                   */
+    *(--defaultFrame)  = (uint32_t)PROC_RETURN;             /* LR                                           */
+    *(--defaultFrame)  = (uint32_t)0x12121212L;             /* R12                                           */
+    *(--defaultFrame)  = (uint32_t)0x03030303L;             /* R3                                            */
+    *(--defaultFrame)  = (uint32_t)0x02020202L;             /* R2                                            */
+    *(--defaultFrame)  = (uint32_t)0x01010101L;             /* R1                                            */
+    *(--defaultFrame)  = (uint32_t)thread.data;             /* R0 : argument                                 */
+
+    /* Remaining registers saved on process stack    */
+    *(--defaultFrame)  = (uint32_t)0x11111111L;             /* R11                                           */
+    *(--defaultFrame)  = (uint32_t)0x10101010L;             /* R10                                           */
+    *(--defaultFrame)  = (uint32_t)0x09090909L;             /* R9                                            */
+    *(--defaultFrame)  = (uint32_t)0x08080808L;             /* R8                                            */
+    *(--defaultFrame)  = (uint32_t)0x07070707L;             /* R7                                            */
+    *(--defaultFrame)  = (uint32_t)0x06060606L;             /* R6                                            */
+    *(--defaultFrame)  = (uint32_t)0x05050505L;             /* R5                                            */
+    *(--defaultFrame)  = (uint32_t)0x04040404L;             /* R4                                            */
+
+    thread.stack = defaultFrame;
 }
 
-uint_fast8_t OS::GetNumberOfThreads()
+void OS::TimeDlyMs(uint32_t timeMs)
 {
-    return m_nThreads;
+    OS::g_os.threadQueue[OS::g_os.currThread]->state = Thread::STATE_DELAYED;
+    OS::g_os.threadDelay[OS::g_os.currThread][1] = Bsp::GetSysTick() + TIME_MS_TO_TICK(timeMs);
+    OS::g_os.threadDelay[OS::g_os.currThread][0] = true;
+    while (OS::g_os.threadDelay[OS::g_os.currThread][0] == 1);
 }
 
-#pragma GCC diagnostic pop
+void OS::TimeTick()
+{
+    for (uint8_t thread = 1; thread < OS::g_os.nThreads; thread++)
+    {
+        if (OS::g_os.threadDelay[thread][1] <= Bsp::GetSysTick())
+        {
+            // Reset threadDelay
+            OS::g_os.threadDelay[thread][1] = UINT32_MAX;
+
+            // Reset delay indicator
+            OS::g_os.threadDelay[thread][0] = false;
+
+            // Change state
+            OS::g_os.threadQueue[thread]->state = Thread::STATE_READY;
+        }
+    }
+}

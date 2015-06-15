@@ -10,150 +10,116 @@
 
 #include <stdint.h>
 #include "CriticalSection.h"
+#include "Threads.h"
 
-// Forward declarations
-class IUart;
-class DTimer;
-
-namespace Thread {
-struct ThreadStr;
-typedef ThreadStr Thread_t;
-}
 
 /**
  * @class OS
  * @brief This class implements scheduling and contex switching duties.
  */
-class OS
+namespace OS {
+
+//!< The Idle task is in the first position of the thread queue
+static const uint32_t UID_THREAD_IDLE = 0;
+//!< Limit the number of tasks
+static const uint32_t MAX_THREAD_COUNT = 4;
+
+/**
+ * @enum Error_t
+ * @brief Indications for potential errors of this class.
+ */
+typedef enum
 {
-  public:
-    static const uint8_t MAX_THREAD_COUNT = 4;
+    ERROR_NONE,                         //!< Success
+    ERROR_NULL,                         //!< Thread function, stack, or data is NULL
+    ERROR_MAX_THREADS_REGISTERED,       //!< Thread accessor is out of bounds
+} Error_t;
 
-    /**
-     * @enum Error_t
-     * @brief Indications for potential errors of this class.
-     */
-    typedef enum
-    {
-        ERROR_NONE,                         //!< Success
-        ERROR_NULL,                         //!< Thread function, stack, or data is NULL
-        ERROR_UID_NOT_UNIQUE,               //!< Thread with this UID is already registered
-        ERROR_MAX_THREADS_REGISTERED,       //!< Thread accessor is out of bounds
-    } Error_t;
+/**
+ * @struct State_t
+ * @brief This structure defines the current state of the OS
+ * @var State_t::Thread_t*
+ * Memnber 'threadQueue' is an array of all registered threads
+ * @var State_t::currentThread
+ * Memnber 'currentThread' is the currently executing thread
+ * @var State_t::nextThread
+ * Memnber 'nextThread' is the next thread to execute
+ * @var State_t::nThreads
+ * Memnber 'nThreads' the total number of register threads
+ */
+struct StateStr
+{
+    Thread::Thread_t* threadQueue[MAX_THREAD_COUNT];
+    uint32_t threadDelay[MAX_THREAD_COUNT][2];      //!< [threadId][0] - delay?; [threadId][1] - delay until ticks
+    uint8_t currThread;
+    uint8_t nextThread;
+    uint8_t nThreads;
+};
+typedef StateStr State_t;
 
-    /**
-     * Constructor
-     */
-    OS(IUart& uart, DTimer& timer);
+/**
+ * Registers a thread within the OS.
+ * @param  thread An instance of the thread structure to be registered.
+ * @param  stackSize The size of the task stack (in words)
+ * @return        Returns ERROR_NONE upon success, else an error code.
+ */
+Error_t RegisterThread(Thread::Thread_t& thread, uint32_t stackSize);
 
-    /**
-     * Destructor
-     */
-    ~OS();
+/**
+ * Determines the next thread to execute.
+ * @pre The number of registered threads has to be at least 1.
+ */
+void SetNextReadyThread();
 
-    /**
-     * Registers a thread within the OS.
-     * @param  thread An instance of the thread structure to be registered.
-     * @return        Returns ERROR_NONE upon success, else an error code.
-     */
-    Error_t RegisterThread(Thread::Thread_t& thread);
+/**
+ * Starts the OS. The first thread is executed.
+ */
+void Start(uint32_t* topOfIdleStack);
 
-    /**
-     * Determines the next thread to execute.
-     * @pre The number of registered threads has to be at least 1.
-     */
-    void SetNextReadyThread();
+/**
+ * Prints the state of the currently running thread.
+ */
+void PrintThreadInfo();
 
-    /**
-     * Gets the currently running thread UID.
-     * @return Returns -1 if no threads are registered, else the current thread ID.
-     */
-    int_fast8_t GetCurrentThreadID();
+/**
+ * Blocking delay function in milliseconds.
+ *
+ * @param timeMs The number of milliseconds to delay.
+ */
+void TimeDlyMs(uint32_t timeMs);
 
-    /**
-     * Gets the total number of registered threads.
-     * @return Returns the total number of registered threads.
-     */
-    uint_fast8_t GetNumberOfThreads();
+/**
+ * Function to perform any OS duties every sys tick.
+ */
+void TimeTick();
 
-    /**
-     * Starts the OS. The first thread is executed.
-     */
-    void Start();
+/**
+ * A wrapper function to enter a critical section.
+ * @param  cs A CriticalSection instance.
+ * @return    Returns the status of the critical seciton.
+ */
+CriticalSection::Status_t EnterCS(CriticalSection& cs);
 
-    /**
-     * Prints the state of the currently running thread.
-     */
-    void PrintThreadInfo();
+/**
+ * A wrapper function to leave a critical section.
+ * @param  cs A CriticalSection instance.
+ * @return    Returns the status of the critical seciton.
+ */
+CriticalSection::Status_t LeaveCS(CriticalSection& cs);
 
-    /**
-     * A wrapper function to enter a critical section.
-     * @param  cs A CriticalSection instance.
-     * @return    Returns the status of the critical seciton.
-     */
-    CriticalSection::Status_t EnterCS(CriticalSection& cs);
+/**
+ * A wrapper function to query a critical section.
+ * @param  cs A CriticalSection instance.
+ * @return    Returns the status of the critical seciton.
+ */
+CriticalSection::Status_t QueryCS(CriticalSection& cs);
 
-    /**
-     * A wrapper function to leave a critical section.
-     * @param  cs A CriticalSection instance.
-     * @return    Returns the status of the critical seciton.
-     */
-    CriticalSection::Status_t LeaveCS(CriticalSection& cs);
-
-    /**
-     * A wrapper function to query a critical section.
-     * @param  cs A CriticalSection instance.
-     * @return    Returns the status of the critical seciton.
-     */
-    CriticalSection::Status_t QueryCS(CriticalSection& cs);
-
-    /**
-     * Sets the current stack pointer (SP) from the ISR.
-     * @param sp The current stack pointer.
-     */
-    inline void SetCurrentSP(uint32_t sp){m_threadStacks[m_currThread].cur = (uint32_t*)sp;}
-
-    /**
-     * Gets the current stack pointer.
-     * @return The current task's stack pointer
-     */
-    inline uint32_t GetCurrentSP(){return ((uint32_t)(m_threadStacks[m_currThread].cur));}
-
-  private:
-    OS(const OS&);            //!< Intentionally not implemented
-    OS& operator=(const OS&); //!< Intentionally not implemented
-
-
-    /**
-     * @struct Stack_t
-     * @brief This structure defines shared data between threads.
-     * @var Stack_t::THREAD_STACK_SIZE_WORDS
-     * Memnber 'THREAD_STACK_SIZE_WORDS' is the size of the stack in words
-     * @var Stack_t::stack
-     * Memnber 'stack' provides storage for the stack of an individual thread.
-     * @var Stack_t::top
-     * Memnber 'top' is the address of the top of stack
-     * @var Stack_t::bot
-     * Memnber 'bot'* is the address of the bottom of stack
-     * @var Stack_t::cur
-     * Memnber 'cur'* is the address of the next slot in the stack to be written.
-     */
-    struct StackStr
-    {
-        static const uint32_t THREAD_STACK_SIZE_WORDS = 64;
-        uint32_t stack[THREAD_STACK_SIZE_WORDS];
-        uint32_t* top;
-        uint32_t* bot;
-        uint32_t* cur;
-    };
-    typedef StackStr Stack_t;
-
-    IUart* m_uart;                                      //!< A pointer to a UART instance
-    DTimer* m_timer;                                    //!< A pointer to a timer instance
-    Thread::Thread_t* m_threadQueue[MAX_THREAD_COUNT];  //!< Container for the threads of this app
-    Stack_t m_threadStacks[MAX_THREAD_COUNT];           //!< Storage for the thread stacks
-    volatile uint_fast8_t m_currThread;                 //!< The current thread queue index
-    uint_fast8_t m_nThreads;                            //!< The number of registered threads
+/**
+ * Helper function to initialize the individual thread stacks.
+ * @param thread The current thread
+ * @param stackSize The size of the thread stack
+ */
+void InitializeThreadStack(Thread::Thread_t& thread, uint32_t stackSize);
 };
 
 #endif // #ifndef OS_H

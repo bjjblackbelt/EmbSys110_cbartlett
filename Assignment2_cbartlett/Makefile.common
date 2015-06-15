@@ -42,7 +42,8 @@ PTYPE = STM32F10X_MD_VL
 LDSCRIPT = $(TEMPLATEROOT)/Bsp/stm32f100.ld
 STARTUP= \
 	startup_stm32f10x.o \
-	system_stm32f10x.o
+	system_stm32f10x.o \
+	core_cm3.o
 
 # Compilation Flags
 
@@ -69,7 +70,8 @@ OBJS := $(patsubst %.o,$(OBJSDIR)/%.o,$(OBJS))
 
 # Build executable
 
-all: $(ELF) $(BIN) test
+# all: $(ELF) $(BIN) test
+all: $(ELF) $(BIN)
 	@$(OBJDUMP) -Sd $(ELF) > objdump.txt
 
 $(ELF) : $(OBJS)

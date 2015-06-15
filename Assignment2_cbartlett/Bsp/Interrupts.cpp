@@ -12,12 +12,24 @@ extern "C" {
 
 #include <stdint.h>
 #include <stm32f10x_conf.h>
+#include <core_cm3.h>
 #include "Bsp.h"
+#include "OS.h"
+#include "TimingMeasurements.h"
 
 namespace Bsp {
 volatile uint32_t g_sysTick = 0;
 }
 
+namespace OS {
+extern State_t g_os;
+}
+
+extern "C" {
+    void Reset_Handler() __attribute__((isr));
+    void SysTick_Handler() __attribute__((isr));
+    void PendSV_Handler()  __attribute__((isr, naked));
+}
 
 /*..........................................................................*/
 extern "C" void Reset_Handler(void)
@@ -45,8 +57,11 @@ extern "C" void Reset_Handler(void)
         *dst = 0;
     }
 
+    // Configure pins for timing measurements
+    CONFIG_TIME_MEAS_GPIOS();
+
     /* Use the STM32 Libraries to initialize system */
-    Bsp::g_sysTick = 0;
+    TIME_MEAS_SYS_INIT_START();
     SystemInit();
 
     /* call all static constructors in C++ (harmless in C programs) */
@@ -64,13 +79,55 @@ extern "C" void Reset_Handler(void)
 
 extern "C" void SysTick_Handler(void)
 {
-    static volatile uint_fast32_t nextLedToggle = Bsp::SYS_TICKS_100_MS;
+    Bsp::g_sysTick++;
 
-    if (nextLedToggle < Bsp::g_sysTick++)
+    TIME_MEAS_TIMETICK_START();
+    OS::TimeTick();
+    TIME_MEAS_TIMETICK_STOP();
+
+    TIME_MEAS_CREATE_SET_NEXT_TASK_START();
+    OS::SetNextReadyThread();
+    TIME_MEAS_CREATE_SET_NEXT_TASK_STOP();
+
+    if (OS::g_os.currThread != OS::g_os.nextThread)
     {
-        Bsp::TglLed(Bsp::PIN_LED_BLUE);
-        nextLedToggle = Bsp::g_sysTick + Bsp::SYS_TICKS_100_MS;
+        // Trigger PendSV exception
+        SCB->ICSR |= SCB_ICSR_PENDSVSET_Msk;
     }
 }
 
+extern "C" void PendSV_Handler(void)
+{
+    // save context
+    asm volatile(
+        "mrs    r0, psp;"
+        "stmdb  r0!, {r4 - r11};"
+    );
 
+    TIME_MEAS_CONTEXT_SWITCH_START();
+
+    // Update the current task's stack pointer
+    register uint32_t psp asm("r0");
+    OS::g_os.threadQueue[OS::g_os.currThread]->stack = (uint32_t*)psp;
+
+    // Get PSP value from next task
+    psp = (uint32_t)OS::g_os.threadQueue[OS::g_os.nextThread]->stack;
+
+    // Restore a previously ready state
+    if (OS::g_os.threadQueue[OS::g_os.currThread]->state == Thread::STATE_ACTIVE)
+    {
+        OS::g_os.threadQueue[OS::g_os.currThread]->state = Thread::STATE_READY;
+    }
+
+    // Set current thread id after context switch
+    OS::g_os.currThread = OS::g_os.nextThread;
+
+    TIME_MEAS_CONTEXT_SWITCH_STOP();
+
+    // Restore the context
+    asm volatile(
+        "ldmia  r0!, {r4 - r11};"
+        "msr    psp, r0;"
+        "bx     lr;"
+    );
+}

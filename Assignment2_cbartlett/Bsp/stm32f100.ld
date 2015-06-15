@@ -12,7 +12,7 @@ There will be a link error if there is not this amount of RAM free at the
 end.
 */
 
-_Minimum_Stack_Size = 6K;
+_Minimum_Stack_Size = 4K;
 
 ENTRY(Reset_Handler)
 
@@ -121,7 +121,7 @@ SECTIONS
         . = ALIGN(4);
         __no_init__ = . ;
 
-        . = . +  128; /* bytes */
+        . = . +  8; /* bytes */
 
         . = ALIGN(4);
         __no_init__ = . ;
