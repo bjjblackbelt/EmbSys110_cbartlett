@@ -12,6 +12,7 @@
 #include "CriticalSection.h"
 #include "Threads.h"
 
+#define ENABLE_CPU_USAGE_MEAS (0U)
 
 /**
  * @class OS
@@ -50,10 +51,17 @@ typedef enum
 struct StateStr
 {
     Thread::Thread_t* threadQueue[MAX_THREAD_COUNT];
-    uint32_t threadDelay[MAX_THREAD_COUNT][2];      //!< [threadId][0] - delay?; [threadId][1] - delay until ticks
+    uint32_t threadDelay[MAX_THREAD_COUNT][2];      //!< [threadId][0] - thread delayed: 0|1 ?;
+                                                    //!< [threadId][1] - delay until ticks
     uint8_t currThread;
     uint8_t nextThread;
     uint8_t nThreads;
+#if ENABLE_CPU_USAGE_MEAS
+    uint8_t idleCtrRdy;
+    uint32_t idleCtr;
+    uint32_t idleCtrMax;
+    int cpuUsage;
+#endif
 };
 typedef StateStr State_t;
 

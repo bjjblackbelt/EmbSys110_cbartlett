@@ -16,13 +16,21 @@ namespace Bsp {
 extern IUart* g_pUart;
 }
 
+#if ENABLE_CPU_USAGE_MEAS
+namespace OS {
+extern State_t g_os;
+}
+#endif
+
 void Thread::Idle(void* pData)
 {
     if (pData == NULL) { return; }
 
     while (1)
     {
-
+#if ENABLE_CPU_USAGE_MEAS
+        OS::g_os.idleCtr++;
+#endif
     }
 }
 
@@ -45,7 +53,7 @@ void Thread::Thread1(void* pData)
 
         Bsp::TglLed(Bsp::PIN_LED_GREEN);
 
-        OS::TimeDlyMs(333);
+        OS::TimeDlyMs(500);
     }
 }
 
@@ -68,7 +76,7 @@ void Thread::Thread2(void* pData)
 
         Bsp::TglLed(Bsp::PIN_LED_BLUE);
 
-        OS::TimeDlyMs(750);
+        OS::TimeDlyMs(500);
     }
 }
 
@@ -84,7 +92,7 @@ void Thread::Thread3(void* pData)
         //!< Obtain critical section lock and check shared counter
         if (OS::EnterCS(s->guard) == CriticalSection::SUCCESS)
         {
-            if (s->inc > 10)
+            if (s->inc > 2)
             {
                 __asm volatile("cpsid i");
 
@@ -107,6 +115,6 @@ void Thread::Thread3(void* pData)
             OS::LeaveCS(s->guard);
         }
 
-        OS::TimeDlyMs(1000);
+        OS::TimeDlyMs(777);
     }
 }

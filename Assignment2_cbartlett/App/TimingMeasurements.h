@@ -65,7 +65,6 @@
      || ENABLE_TIME_MEAS_TIMETICK
 
 extern "C" {
-#include <stm32f10x.h>
 #include <stm32f10x_gpio.h>
 #include <stm32f10x_rcc.h>
 }

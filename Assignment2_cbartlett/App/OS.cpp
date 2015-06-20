@@ -18,6 +18,10 @@ extern "C" {
 #include <stm32f10x_rcc.h>
 }
 
+#if ENABLE_CPU_USAGE_MEAS
+static uint32_t s_nextSys1Sec;
+#endif
+
 // Initialize globals
 namespace OS {
 State_t g_os;
@@ -72,32 +76,47 @@ void OS::SetNextReadyThread()
 {
     // Find the next READY thread; start at the current thread + 1.
     bool isReadyThread = false;                                         //!< Indicates if any threads were READY
-    uint_fast8_t nThreadCnt = 1;                                        //!< Go through every thread but Idle
-    uint_fast8_t nextThread = (uint_fast8_t)OS::g_os.currThread + 1U;   //!< Start at the current thread + 1
-    while ((nThreadCnt < OS::g_os.nThreads) && (isReadyThread == false))
+
+#if ENABLE_CPU_USAGE_MEAS
+    switch (OS::g_os.idleCtrRdy)
+#else
+    switch (1)
+#endif
     {
-        nThreadCnt++;
-
-        // If at the end of the thread queue, wrap to beginning.
-        if (nextThread >= (OS::g_os.nThreads))
+        case 1:
         {
-            nextThread = 1;
-        }
+            uint_fast8_t nThreadCnt = 1;                                        //!< Go through every thread but Idle
+            uint_fast8_t nextThread = (uint_fast8_t)OS::g_os.currThread + 1U;   //!< Start at the current thread + 1
+            while ((nThreadCnt < OS::g_os.nThreads) && (isReadyThread == false))
+            {
+                nThreadCnt++;
 
-        if (OS::g_os.threadQueue[nextThread]->state == Thread::STATE_READY)
+                // If at the end of the thread queue, wrap to beginning.
+                if (nextThread >= (OS::g_os.nThreads))
+                {
+                    nextThread = 1;
+                }
+
+                if (OS::g_os.threadQueue[nextThread]->state == Thread::STATE_READY)
+                {
+                    OS::g_os.threadQueue[nextThread]->state = Thread::STATE_ACTIVE;
+                    isReadyThread = true;
+                    OS::g_os.nextThread = nextThread;
+                }
+
+                nextThread++;
+            }
+        }
+        default : // Intentionally fall through
         {
-            OS::g_os.threadQueue[nextThread]->state = Thread::STATE_ACTIVE;
-            isReadyThread = true;
-            OS::g_os.nextThread = nextThread;
+
+            // If no threads were READY, then set the next thread to the Idle thread.
+            if (isReadyThread == false)
+            {
+                OS::g_os.nextThread = OS::UID_THREAD_IDLE;
+            }
+            break;
         }
-
-        nextThread++;
-    }
-
-    // If no threads were READY, then set the next thread to the Idle thread.
-    if (isReadyThread == false)
-    {
-        OS::g_os.nextThread = OS::UID_THREAD_IDLE;
     }
 }
 
@@ -136,7 +155,6 @@ CriticalSection::Status_t OS::EnterCS(CriticalSection& cs)
 CriticalSection::Status_t OS::LeaveCS(CriticalSection& cs)
 {
     CriticalSection::Status_t status = cs.Leave(OS::g_os.currThread);
-#if 0
     if (status == CriticalSection::SUCCESS)
     {
         for (uint8_t thread = 1; thread < OS::g_os.nThreads; thread++)
@@ -147,7 +165,6 @@ CriticalSection::Status_t OS::LeaveCS(CriticalSection& cs)
             }
         }
     }
-#endif
 
     return (status);
 }
@@ -162,6 +179,13 @@ void OS::Start(uint32_t* topOfIdleStack)
 {
     if (OS::g_os.nThreads > 0)
     {
+
+#if ENABLE_CPU_USAGE_MEAS
+        OS::g_os.idleCtr = 0;
+        OS::g_os.idleCtrRdy = 0;
+        s_nextSys1Sec = Bsp::GetSysTick() + Bsp::SYS_TICKS_01_SEC;
+#endif
+
         // Set current task to Idle
         OS::g_os.currThread = OS::UID_THREAD_IDLE;
 
@@ -245,6 +269,42 @@ void OS::TimeDlyMs(uint32_t timeMs)
 
 void OS::TimeTick()
 {
+#if ENABLE_CPU_USAGE_MEAS
+    uint32_t sysTick = Bsp::GetSysTick();
+    if (s_nextSys1Sec <= sysTick)
+    {
+        switch (OS::g_os.idleCtrRdy)
+        {
+            case 0:
+            {
+                // Set flag to indicate max idle measurement obtained, enable other tasks
+                OS::g_os.idleCtrRdy = 1;
+
+                // The idle counter max variable is only updated once when no other tasks are running
+                OS::g_os.idleCtrMax = OS::g_os.idleCtr;
+            }
+            default : // Intentionally fall through
+            {
+                // Every 1-second recalculate cpu usage %
+                int usage = 100L - (int)(OS::g_os.idleCtr / (OS::g_os.idleCtrMax / 100U));
+                if (usage >= 0)
+                {
+                    OS::g_os.cpuUsage = usage;
+                }
+                else
+                {
+                    OS::g_os.cpuUsage = 0;
+                }
+
+                // Reset variables
+                OS::g_os.idleCtr = 0;
+                s_nextSys1Sec = sysTick + Bsp::SYS_TICKS_01_SEC;
+                break;
+            }
+        }
+    }
+#endif
+
     for (uint8_t thread = 1; thread < OS::g_os.nThreads; thread++)
     {
         if (OS::g_os.threadDelay[thread][1] <= Bsp::GetSysTick())

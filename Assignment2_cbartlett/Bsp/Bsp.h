@@ -31,7 +31,7 @@ namespace Bsp {
 //
 
 //!< The number of clock cycles between calls to SysTick_Handler
-static const uint32_t SYS_TICKS_BETWEEN_SYSTICK_IRQ = SYSCLK_FREQ_24MHz / 2000;
+static const uint32_t SYS_TICKS_BETWEEN_SYSTICK_IRQ = SYSCLK_FREQ_24MHz / 500;
 static const uint32_t SYS_SYSTICK_PER_SEC           = (SYSCLK_FREQ_24MHz / SYS_TICKS_BETWEEN_SYSTICK_IRQ);
 
 typedef enum
@@ -98,13 +98,6 @@ void TglLed(PinConfiguration_t led);
  * @return Returns the system tick value.
  */
 uint32_t GetSysTick();
-
-/**
- * Blocking delay function in milliseconds.
- *
- * @param nTime The number of milliseconds to delay.
- */
-void DelayMs(uint32_t nTime);
 
 /**
  * Uses LDREX and STREX instructions to set the lock for a critical section.
