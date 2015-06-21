@@ -53,7 +53,7 @@ void Thread::Thread1(void* pData)
 
         Bsp::TglLed(Bsp::PIN_LED_GREEN);
 
-        OS::TimeDlyMs(500);
+        OS::TimeDlyMs(750);
     }
 }
 
@@ -76,7 +76,7 @@ void Thread::Thread2(void* pData)
 
         Bsp::TglLed(Bsp::PIN_LED_BLUE);
 
-        OS::TimeDlyMs(500);
+        OS::TimeDlyMs(750);
     }
 }
 
@@ -94,8 +94,6 @@ void Thread::Thread3(void* pData)
         {
             if (s->inc > 2)
             {
-                __asm volatile("cpsid i");
-
                 // ERROR: Reset the counter and continue
                 s->inc = 0;
 
@@ -109,12 +107,13 @@ void Thread::Thread3(void* pData)
                     uint32_t cnt = 0;
                     while (cnt++ < 100000);
                 }
-
-                __asm volatile("cpsie i");
             }
             OS::LeaveCS(s->guard);
         }
 
-        OS::TimeDlyMs(777);
+        Bsp::SetLed(Bsp::PIN_LED_GREEN);
+        Bsp::SetLed(Bsp::PIN_LED_BLUE);
+
+        OS::TimeDlyMs(1750);
     }
 }

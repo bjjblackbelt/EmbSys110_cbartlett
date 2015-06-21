@@ -19,9 +19,8 @@ namespace Thread {
  */
 typedef enum
 {
-    STATE_INITIAL,
-    STATE_ACTIVE,
     STATE_READY,
+    STATE_ACTIVE,
     STATE_BLOCKED,
     STATE_DELAYED,
 } State_t;
